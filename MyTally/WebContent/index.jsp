@@ -9,7 +9,7 @@
 <body>
 
 <p>
-Welcome To MyTally !
+Welcome To MyTally
 </p>
 
 <form class="form" id="loginform" method="post" action="<%=request.getContextPath()%>/loginform">
