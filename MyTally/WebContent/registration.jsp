@@ -12,9 +12,10 @@
 <p>Register Your Self</p>
 
 <form class="form" id="regform" method="post" action="<%=request.getContextPath()%>/registrationfrom">
-Business Name : <input type="text" name="busr" stackholder="Enter Name Of Your Business">	<br>
-Password : <input type="password" name="bpsw" stackholder="Choose Your Password">	<br>
-Email : <input type="text" name="bemail">	<br>
+Business Name : <input type="text" name="businessName" stackholder="Enter Name Of Your Business">	<br>
+Username : <input type="text" name="username" stackholder="Choose Username">	<br>
+Password : <input type="password" name="password" stackholder="Choose Password">	<br>
+Email : <input type="text" name="email">	<br>
 <input type="submit" value="Register">
 </form>
 

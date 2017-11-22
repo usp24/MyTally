@@ -8,5 +8,11 @@
 </head>
 <body>
 
+<form method="get" action="<%=request.getContextPath()%>/purchasebill">
+Date : <input type="date">
+
+<input type="submit" value="Generatre New Purchse Bill">
+</form>
+
 </body>
 </html>

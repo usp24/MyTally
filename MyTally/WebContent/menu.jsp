@@ -7,9 +7,12 @@
 <title>MyTally | Menu</title>
 </head>
 <body>
-<a href="items.jsp">Items</a>
+<a href="suppliers.jsp">Suppliers</a>
+<a href="customers.jsp">Customers</a>
 <a href="salesInvoices.jsp">Sales Invoices</a>
 <a href="purchaseInvoices.jsp">Purchase Invoices</a>
+<a href="viewStock.jsp">View Stock</a>
+<a href="managePayments.jsp">Manage Payments</a>
 <a href="other.jsp">Other</a>
 <a href="settings.jsp">Settings</a>
 </body>
