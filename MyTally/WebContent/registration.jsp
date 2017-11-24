@@ -11,11 +11,12 @@
 <p>Welcome To MyTally</p>
 <p>Register Your Self</p>
 
-<form class="form" id="regform" method="post" action="<%=request.getContextPath()%>/registrationfrom">
-Business Name : <input type="text" name="businessName" stackholder="Enter Name Of Your Business">	<br>
-Username : <input type="text" name="username" stackholder="Choose Username">	<br>
-Password : <input type="password" name="password" stackholder="Choose Password">	<br>
-Email : <input type="text" name="email">	<br>
+<form class="form" id="regform" method="post" action="<%=request.getContextPath()%>/userinfo">
+Business Name : <input type="text" name="businessName" placeholder="Enter Name Of Your Business">	<br>
+Username : <input type="text" name="username" placeholder="Choose Username">	<br>
+Password : <input type="password" name="password" placeholder="Choose Password">	<br>
+Email : <input type="text" name="email" placeholder="Enter Email" >	<br>
+<input type="hidden" name="choice" value="registration" >
 <input type="submit" value="Register">
 </form>
 

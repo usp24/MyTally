@@ -12,10 +12,11 @@
 Welcome To MyTally
 </p>
 
-<form class="form" id="loginform" method="post" action="<%=request.getContextPath()%>/loginform">
+<form class="form" id="loginform" method="post" action="<%=request.getContextPath()%>/userinfo">
 Username : <input type="text" name="username">	<br>
 Password : <input type="password" name="password">	<br>
 <input type="submit" value="Login">
+<input type="hidden" name="choice" value="login" >
 <p><a href="#">Forgot Password ?</a></p>
 <p><a href="registration.jsp">New User ? Register Your Self</a></p>
 </form>
