@@ -11,4 +11,7 @@ public class myException extends Throwable{
 	public String purchaseInvoiceWorng(){
 		return "InvoiceNumber is already used !!!";
 	}
+	public String salesInvoiceWorng(){
+		return "InvoiceNumber is already used !!!";
+	}
 }

@@ -18,7 +18,7 @@ public void insertPurchase(supplierVO s){
 			st.executeUpdate("insert into supplier(name,address1,address2,GSTNo) values('"+s.getSupplierName()+"','"+s.getSupplierAddress1()+"','"+s.getSupplierAddress2()+"','"+s.getSupplierGSTNo()+"')");
 		}
 		catch(Exception e){
-			System.out.println("purchaseDAO :: insertbill :: "+e);
+			System.out.println("purchaseDAO :: insertPurchase :: "+e);
 		}
 		finally{
 			//st.close();
