@@ -4,15 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MyTally | Purchase</title>
+<title>MyTally | Stock</title>
 </head>
 <body>
-
-<form method="get" action="<%=request.getContextPath()%>/purchasebill">
-Date : <input type="date">
-
-<input type="submit" value="Generatre New Purchse Bill">
-</form>
 
 </body>
 </html>

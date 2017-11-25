@@ -8,4 +8,7 @@ public class myException extends Throwable{
 	public String loginFail(){
 		return "Login Fail ,Please Try Again !!!";
 	}
+	public String purchaseInvoiceWorng(){
+		return "InvoiceNumber is already used !!!";
+	}
 }
