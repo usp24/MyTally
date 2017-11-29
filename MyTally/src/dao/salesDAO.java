@@ -41,7 +41,7 @@ public void insertbill2(salesVO p,customerVO s){
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 		Statement st = con.createStatement();
-		st.executeUpdate("update salesbill set totalAmount='"+p.getSalesTotalAmount()+"',totalRoundOffAmount='"+p.getSalesTotalRoundOffAmount()+"',GST14='"+p.getSalesGST14()+"',GST9='"+p.getSalesGST9()+"'  where customerName='"+s.getCustomerName()+"' AND invoiceNo='"+p.getSalesInvoiceNo()+"' ");
+		st.executeUpdate("update salesbill set totalAmountGST='"+p.getSalesTotalAmountGST()+"', totalAmount='"+p.getSalesTotalAmount()+"',totalRoundOffAmount='"+p.getSalesTotalRoundOffAmount()+"',GST14='"+p.getSalesGST14()+"',GST9='"+p.getSalesGST9()+"'  where customerName='"+s.getCustomerName()+"' AND invoiceNo='"+p.getSalesInvoiceNo()+"' ");
 	}
 	catch(Exception e){
 		System.out.println("salesDAO :: insertbill2 :: "+e);

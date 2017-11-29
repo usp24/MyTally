@@ -87,6 +87,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		salesVO.setSalesInvoiceNo(x);
 		
 		Double salesTotalAmount=0.000;
+		Double salesTotalAmountGST=0.000;
 		Double GST14=0.000;
 		Double GST9=0.000;
 		
@@ -128,10 +129,12 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		
 		salesVO.setSalesGST14(GST14);
 		salesVO.setSalesGST9(GST9);
-		salesTotalAmount += GST14 + GST9;
-		long salesTotalRoundOffAmount = (new Double(Math.round(salesTotalAmount))).longValue();
+		salesTotalAmountGST += (2*GST14) + (2*GST9) + salesTotalAmount;
+		salesVO.setSalesTotalAmountGST(salesTotalAmountGST);
+		long salesTotalRoundOffAmount = (new Double(Math.round(salesTotalAmountGST))).longValue();
 		salesVO.setSalesTotalRoundOffAmount(salesTotalRoundOffAmount);
 		salesVO.setSalesTotalAmount(salesTotalAmount);
+		
 		salesDAO.insertbill2(salesVO, customerVO);
 		
 		response.sendRedirect("menu.jsp");

@@ -9,6 +9,13 @@ public class salesVO {
 	private long salesTotalRoundOffAmount;
 	private int salesNumOfItems;
 	private double salesGST14;
+	private double salesTotalAmountGST;
+	public double getSalesTotalAmountGST() {
+		return salesTotalAmountGST;
+	}
+	public void setSalesTotalAmountGST(double salesTotalAmountGST) {
+		this.salesTotalAmountGST = salesTotalAmountGST;
+	}
 	private double salesGST9;
 	
 	private String salesItemName;

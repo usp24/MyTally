@@ -27,5 +27,6 @@
 <a href="payments.jsp">Payments</a>
 <a href="other.jsp">Other</a>
 <a href="settings.jsp">Settings</a>
+<a href="salesPrint3.jsp">Print</a>
 </body>
 </html>
