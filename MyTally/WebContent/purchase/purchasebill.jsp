@@ -14,7 +14,9 @@ Purchase Invoice Date : <input type="date" name="purchaseInvoiceDate">		<br>
 Purchase Invoice Number : <input type="text" name="purchaseInvoiceNumber" value="${sessionScope.max}">		<br>
 Supplier's Name : <input type="text" name="supplierName" >		<br>
 Supplier's Address-1 : <input type="text" name="supplierAddress1" >	<br>
-Supplier's Address-1 : <input type="text" name="supplierAddress2" >	<br>
+Supplier's Address-2 : <input type="text" name="supplierAddress2" >	<br>
+Area and City : <input type="text" name="supplierCity" >	<br>
+State Code : <input type="text" name="supplierStatecode" value="Gujarat - 24">	<br>
 Supplier's GSTNo. : <input type="text" name="supplierGSTNo" >	<br>
 Number Of Items : <input type="text" name="purchaseNumOfItems" >	<br>
 <input type="hidden" name="ch" value="purchasebill">

@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,12 +31,21 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 									} 
 									catch (myException e) {
 										System.out.println("sales :: doPost :: myException :: "+e.salesInvoiceWorng());
-										response.sendRedirect("salesbill.jsp");
+										response.sendRedirect("sales/salesbill.jsp");
 									}
 									break;
 			case "salesitem" : salesitem(request,response);break;
+			case "salesbillbefore" : try {
+				salesbillbefore(request,response);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}break;
 			default : System.out.println("*** Default Case *** :: sales.java");
-					  response.sendRedirect("menu.jsp");break;
+					  response.sendRedirect("other/menu.jsp");break;
 		}
 	}
 
@@ -51,6 +63,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		String customerName = (String)request.getParameter("customerName");
 		String customerAddress1 = (String)request.getParameter("customerAddress1");
 		String customerAddress2 = (String)request.getParameter("customerAddress2");
+		String customerCity = (String)request.getParameter("customerCity");
+		String customerStatecode = (String)request.getParameter("customerStatecode");
 		String customerGSTNo = (String)request.getParameter("customerGSTNo");
 		String salesNumOfItemss = (String)request.getParameter("salesNumOfItems");
 			Integer salesNumOfItems = new Integer(salesNumOfItemss);
@@ -58,6 +72,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		customerVO.setCustomerName(customerName);
 		customerVO.setCustomerAddress1(customerAddress1);
 		customerVO.setCustomerAddress2(customerAddress2);
+		customerVO.setCustomerCity(customerCity);
+		customerVO.setCustomerStatecode(customerStatecode);
 		customerVO.setCustomerGSTNo(customerGSTNo);
 		
 		salesVO.setSalesInvoiceDate(salesInvoiceDate);
@@ -70,7 +86,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		session.setAttribute("ss",customerVO.getCustomerName());
 		session.setAttribute("xs",salesVO.getSalesInvoiceNo());
 		session.setAttribute("ns",salesVO.getSalesNumOfItems());
-		response.sendRedirect("salesitem.jsp");
+		response.sendRedirect("sales/salesitem.jsp");
 	}
 	
 	void salesitem(HttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -137,7 +153,15 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		
 		salesDAO.insertbill2(salesVO, customerVO);
 		
-		response.sendRedirect("menu.jsp");
+		response.sendRedirect("other/menu.jsp");
 	}
-
+	
+	void salesbillbefore(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException {
+		
+		customerDAO customerDAO = new customerDAO();
+		List<customerVO> list = customerDAO.select();
+		HttpSession session = request.getSession();
+		session.setAttribute("clist", list);
+		response.sendRedirect("sales/salesbill.jsp");
+	}
 }

@@ -18,7 +18,7 @@ Password : <input type="password" name="password">	<br>
 <input type="submit" value="Login">
 <input type="hidden" name="choice" value="login" >
 <p><a href="#">Forgot Password ?</a></p>
-<p><a href="registration.jsp">New User ? Register Your Self</a></p>
+<p><a href="userinfo/registration.jsp">New User ? Register Your Self</a></p>
 </form>
 
 </body>

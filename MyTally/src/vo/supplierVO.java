@@ -9,7 +9,34 @@ public class supplierVO {
 		private String supplierMobileNo;
 		private String supplierGSTNo;
 		private String supplierEmail;
+		private String supplierCity;
+		private String supplierStatecode;
 		
+		public supplierVO(){
+			
+		}
+		
+		public supplierVO(supplierVO ob){
+			this.supplierName = ob.supplierName;
+			this.supplierAddress1 = ob.supplierAddress1;
+			this.supplierAddress2 = ob.supplierAddress2;
+			this.supplierGSTNo = ob.supplierGSTNo;
+			this.supplierCity = ob.supplierCity;
+			this.supplierStatecode = ob.supplierStatecode;
+		}
+		
+		public String getSupplierCity() {
+			return supplierCity;
+		}
+		public void setSupplierCity(String supplierCity) {
+			this.supplierCity = supplierCity;
+		}
+		public String getSupplierStatecode() {
+			return supplierStatecode;
+		}
+		public void setSupplierStatecode(String supplierStatecode) {
+			this.supplierStatecode = supplierStatecode;
+		}
 		public int getId() {
 			return id;
 		}

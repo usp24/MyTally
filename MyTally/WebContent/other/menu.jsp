@@ -19,14 +19,17 @@
 	session.setAttribute("maxs", maxs+1);
 	
 %>
-<a href="supplier.jsp">Supplier</a>
-<a href="customer.jsp">Customer</a>
-<a href="salesbill.jsp">Sales</a>
-<a href="purchasebill.jsp">Purchase</a>
-<a href="viewStock.jsp">View Stock</a>
+<a href="supplier/supplier.jsp">Supplier</a>
+<a href="customer/customer.jsp">Customer</a>
+<form method="post" action="<%=request.getContextPath()%>/sales">
+<input type="submit" value="sale" >
+<input type="hidden" name="ch" value="salesbillbefore">
+</form>
+<a href="sales/salesbillbofore.jsp">Sales</a>
+<a href="purchase/purchasebill.jsp">Purchase</a>
+<a href="stock/viewStock.jsp">View Stock</a>
 <a href="payments.jsp">Payments</a>
 <a href="other.jsp">Other</a>
 <a href="settings.jsp">Settings</a>
-<a href="salesPrint3.jsp">Print</a>
 </body>
 </html>

@@ -10,6 +10,7 @@ public class purchaseVO {
 	private int purchaseNumOfItems;
 	private double purchaseGST14;
 	private double purchaseGST9;
+	private double purchaseTotalAmountGST;
 	
 	private String purchaseItemName;
 	private String purchaseItemDiscription;
@@ -19,6 +20,13 @@ public class purchaseVO {
 	private double purchaseItemUnitPrice;
 	private double purchaseItemDiscount;
 	private double purchaseItemAmount;
+	
+	public double getPurchaseTotalAmountGST() {
+		return purchaseTotalAmountGST;
+	}
+	public void setPurchaseTotalAmountGST(double purchaseTotalAmountGST) {
+		this.purchaseTotalAmountGST = purchaseTotalAmountGST;
+	}
 	public int getId() {
 		return id;
 	}

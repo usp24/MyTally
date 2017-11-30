@@ -69,7 +69,7 @@ public class userinfo extends HttpServlet {
 		userinfoDAO rdao = new userinfoDAO();
 		try{
 			rdao.verify(rvo);
-			response.sendRedirect("menu.jsp");
+			response.sendRedirect("other/menu.jsp");
 		}
 		catch(myException s){
 			response.sendRedirect("index.jsp");

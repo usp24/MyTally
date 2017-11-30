@@ -9,7 +9,36 @@ public class customerVO {
 	private String customerMobileNo;
 	private String customerGSTNo;
 	private String customerEmail;
+	private String customerCity ;
+	private String customerStatecode ;
 	
+	
+	public customerVO(){
+		
+	}
+	
+	public customerVO(customerVO ob){
+		this.customerName = ob.customerName;
+		this.customerAddress1 = ob.customerAddress1;
+		this.customerAddress2 = ob.customerAddress2;
+		this.customerGSTNo = ob.customerGSTNo;
+		this.customerCity = ob.customerCity;
+		this.customerStatecode = ob.customerStatecode;
+	}
+	
+	
+	public String getCustomerCity() {
+		return customerCity;
+	}
+	public void setCustomerCity(String customerCity) {
+		this.customerCity = customerCity;
+	}
+	public String getCustomerStatecode() {
+		return customerStatecode;
+	}
+	public void setCustomerStatecode(String customerStatecode) {
+		this.customerStatecode = customerStatecode;
+	}
 	public int getId() {
 		return id;
 	}
