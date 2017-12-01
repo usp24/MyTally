@@ -119,17 +119,20 @@
 		max-width:calc(95mm - 3px);
 		min-width:calc(95mm - 3px);
 	}
-	.header22 #logo img{
-		margin-bottom : 10px;
-		margin-top : 10px;
+	.header22 #logo{
+		width:290px;
+		height:70px;
+		margin-top:7px;
+		margin-bottom:5px;
 	}
 	.header22 .salerInfo #gst {
-		margin-left:55px;
+		margin-left:65px;
+		font-size:13px;
 	}
 	.header22 .salerInfo #add {
 		text-align:left;
-		padding-bottom:10px;
-		margin-left:123px;
+		padding-bottom:6px;
+		margin-left:125px;
 	}
 	
 	

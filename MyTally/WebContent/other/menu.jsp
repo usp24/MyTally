@@ -9,24 +9,19 @@
 <title>MyTally | Menu</title>
 </head>
 <body>
-<%
-	purchaseDAO purchaseDAO = new purchaseDAO();
-	int max = purchaseDAO.maxInvoiceNo();
-	session.setAttribute("max", max+1);
-	
-	salesDAO s = new salesDAO();
-	int maxs = s.maxInvoiceNo();
-	session.setAttribute("maxs", maxs+1);
-	
-%>
 <a href="supplier/supplier.jsp">Supplier</a>
 <a href="customer/customer.jsp">Customer</a>
+
 <form method="post" action="<%=request.getContextPath()%>/sales">
-<input type="submit" value="sale" >
+<input type="submit" value="sales" >
 <input type="hidden" name="ch" value="salesbillbefore">
 </form>
-<a href="sales/salesbillbofore.jsp">Sales</a>
-<a href="purchase/purchasebill.jsp">Purchase</a>
+
+<form method="post" action="<%=request.getContextPath()%>/purchase">
+<input type="submit" value="Purchase" >
+<input type="hidden" name="ch" value="purchasebillbefore">
+</form>
+
 <a href="stock/viewStock.jsp">View Stock</a>
 <a href="payments.jsp">Payments</a>
 <a href="other.jsp">Other</a>

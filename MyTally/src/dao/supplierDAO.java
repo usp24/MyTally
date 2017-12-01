@@ -8,26 +8,34 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import vo.customerVO;
-import vo.purchaseVO;
 import vo.supplierVO;
 
 public class supplierDAO {
-
-public void insertPurchase(supplierVO s){
+	
+	Statement st;
+	Connection con;
+public void insertPurchase(supplierVO s) throws SQLException{
 		
 		try{	
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
-			Statement st = con.createStatement();
-			st.executeUpdate("insert into supplier(name,address1,address2,GSTNo) values('"+s.getSupplierName()+"','"+s.getSupplierAddress1()+"','"+s.getSupplierAddress2()+"','"+s.getSupplierGSTNo()+"')");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			ResultSet rs = st.executeQuery("select purchaseInvoiceNo from supplier where GSTNo='"+s.getSupplierGSTNo()+"'");
+			
+			if(rs.next()){				
+				String s1 = rs.getString("purchaseInvoiceNo").concat(s.getSupplierPurchaseInvoiceNo()+"*");
+				st.executeUpdate("update supplier set name='"+s.getSupplierName()+"',address1='"+s.getSupplierAddress1()+"',address2='"+s.getSupplierAddress2()+"',city='"+s.getSupplierCity()+"',stateCode='"+s.getSupplierStatecode()+"',purchaseInvoiceNo='"+s1+"' where GSTNo='"+s.getSupplierGSTNo()+"'");
+			}
+			else
+				st.executeUpdate("insert into supplier(name,address1,address2,city,stateCode,GSTNo,purchaseInvoiceNo) values('"+s.getSupplierName()+"','"+s.getSupplierAddress1()+"','"+s.getSupplierAddress2()+"','"+s.getSupplierCity()+"','"+s.getSupplierStatecode()+"','"+s.getSupplierGSTNo()+"','"+s.getSupplierPurchaseInvoiceNo()+"*"+"')");
+			
 		}
 		catch(Exception e){
-			System.out.println("purchaseDAO :: insertPurchase :: "+e);
+			System.out.println("supplierDAO :: insertPurchase :: "+e);
 		}
 		finally{
-			//st.close();
-			//con.close();
+			st.close();
+			con.close();
 		}
 	}
 

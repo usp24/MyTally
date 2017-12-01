@@ -46,7 +46,7 @@
 	</div>
 		
 	<div class="header22">
-		<div id="logo" ><img src="../logo.jpg"></div>
+		<div><img id="logo" src="../logo2.jpg"></div>
 		<div class="salerInfo">
 			<div id="add">9, 'Shanti', Darbari Bagicha Society,<br>Bavla Road, Sanand - Ahmedabad <br>State  Name : Gujarat  Code : 24 </div>
 			<div id="gst"><b>GSTIN : 24APSPP7299B2ZB</b></div>

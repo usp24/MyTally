@@ -6,39 +6,28 @@ public class customerVO {
 	private String customerName;
 	private String customerAddress1;
 	private String customerAddress2;
-	private String customerMobileNo;
-	private String customerGSTNo;
-	private String customerEmail;
 	private String customerCity ;
-	private String customerStatecode ;
+	private String customerStatecode;
+	private String customerGSTNo;
+	private String customerSalesInvoiceNo;
+	private String customerMobileNo;
+	private String customerEmail;
 	
 	
-	public customerVO(){
-		
-	}
-	
+	public customerVO(){}
 	public customerVO(customerVO ob){
 		this.customerName = ob.customerName;
 		this.customerAddress1 = ob.customerAddress1;
 		this.customerAddress2 = ob.customerAddress2;
+		this.customerCity = ob.customerCity;
+		this.customerStatecode = ob.customerStatecode;
 		this.customerGSTNo = ob.customerGSTNo;
+		this.customerSalesInvoiceNo = ob.customerSalesInvoiceNo;
 		this.customerCity = ob.customerCity;
 		this.customerStatecode = ob.customerStatecode;
 	}
 	
 	
-	public String getCustomerCity() {
-		return customerCity;
-	}
-	public void setCustomerCity(String customerCity) {
-		this.customerCity = customerCity;
-	}
-	public String getCustomerStatecode() {
-		return customerStatecode;
-	}
-	public void setCustomerStatecode(String customerStatecode) {
-		this.customerStatecode = customerStatecode;
-	}
 	public int getId() {
 		return id;
 	}
@@ -63,11 +52,17 @@ public class customerVO {
 	public void setCustomerAddress2(String customerAddress2) {
 		this.customerAddress2 = customerAddress2;
 	}
-	public String getCustomerMobileNo() {
-		return customerMobileNo;
+	public String getCustomerCity() {
+		return customerCity;
 	}
-	public void setCustomerMobileNo(String customerMobileNo) {
-		this.customerMobileNo = customerMobileNo;
+	public void setCustomerCity(String customerCity) {
+		this.customerCity = customerCity;
+	}
+	public String getCustomerStatecode() {
+		return customerStatecode;
+	}
+	public void setCustomerStatecode(String customerStatecode) {
+		this.customerStatecode = customerStatecode;
 	}
 	public String getCustomerGSTNo() {
 		return customerGSTNo;
@@ -75,11 +70,22 @@ public class customerVO {
 	public void setCustomerGSTNo(String customerGSTNo) {
 		this.customerGSTNo = customerGSTNo;
 	}
+	public String getCustomerSalesInvoiceNo() {
+		return customerSalesInvoiceNo;
+	}
+	public void setCustomerSalesInvoiceNo(String customerSalesInvoiceNo) {
+		this.customerSalesInvoiceNo = customerSalesInvoiceNo;
+	}
+	public String getCustomerMobileNo() {
+		return customerMobileNo;
+	}
+	public void setCustomerMobileNo(String customerMobileNo) {
+		this.customerMobileNo = customerMobileNo;
+	}
 	public String getCustomerEmail() {
 		return customerEmail;
 	}
 	public void setCustomerEmail(String customerEmail) {
 		this.customerEmail = customerEmail;
 	}
-	
 }
