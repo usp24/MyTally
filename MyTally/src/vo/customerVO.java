@@ -10,11 +10,11 @@ public class customerVO {
 	private String customerStatecode;
 	private String customerGSTNo;
 	private String customerSalesInvoiceNo;
-	private String customerMobileNo;
+	private long customerMobileNo;
 	private String customerEmail;
 	
 	
-	public customerVO(){}
+	/*public customerVO(){}
 	public customerVO(customerVO ob){
 		this.customerName = ob.customerName;
 		this.customerAddress1 = ob.customerAddress1;
@@ -23,9 +23,9 @@ public class customerVO {
 		this.customerStatecode = ob.customerStatecode;
 		this.customerGSTNo = ob.customerGSTNo;
 		this.customerSalesInvoiceNo = ob.customerSalesInvoiceNo;
-		this.customerCity = ob.customerCity;
-		this.customerStatecode = ob.customerStatecode;
-	}
+		this.customerMobileNo = ob.customerMobileNo;
+		this.customerEmail = ob.customerEmail;
+	}*/
 	
 	
 	public int getId() {
@@ -35,10 +35,10 @@ public class customerVO {
 		this.id = id;
 	}
 	public String getCustomerName() {
-		return customerName;
+		return customerName.toUpperCase();
 	}
 	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+		this.customerName = customerName.toUpperCase();
 	}
 	public String getCustomerAddress1() {
 		return customerAddress1;
@@ -76,10 +76,10 @@ public class customerVO {
 	public void setCustomerSalesInvoiceNo(String customerSalesInvoiceNo) {
 		this.customerSalesInvoiceNo = customerSalesInvoiceNo;
 	}
-	public String getCustomerMobileNo() {
+	public long getCustomerMobileNo() {
 		return customerMobileNo;
 	}
-	public void setCustomerMobileNo(String customerMobileNo) {
+	public void setCustomerMobileNo(long customerMobileNo) {
 		this.customerMobileNo = customerMobileNo;
 	}
 	public String getCustomerEmail() {

@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.myException;
+import my.myException;
 import dao.salesDAO;
 import dao.customerDAO;
+import dao.itemDAO;
 import vo.salesVO;
 import vo.customerVO;
+import vo.itemVO;
 
 @WebServlet("/sales")
 public class sales extends HttpServlet {
@@ -29,25 +31,36 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 									try{
 										salesbill(request,response);
 									} 
-									catch (myException | SQLException e) {
+									catch (myException e) {
 										System.out.println("sales :: doPost :: myException :: "+((myException) e).salesInvoiceWorng());
 										response.sendRedirect("sales/salesbill.jsp");
+									} catch (ClassNotFoundException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									} catch (SQLException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
 									}
 									break;
 
-			case "salesbillbefore" : try {
-				salesbillbefore(request,response);
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}break;
+			case "salesbillbefore" : 
+									try {
+										salesbillbefore(request,response);
+									} 
+									catch (ClassNotFoundException e) {
+										e.printStackTrace();
+									} 
+									catch (SQLException e) {
+										e.printStackTrace();
+									}
+									break;
+			
 			default : System.out.println("*** Default Case *** :: sales.java");
 					  response.sendRedirect("other/menu.jsp");break;
 		}
 	}
 
-	void salesbill(HttpServletRequest request, HttpServletResponse response) throws IOException, myException, SQLException{
+	void salesbill(HttpServletRequest request, HttpServletResponse response) throws IOException, myException, SQLException, ClassNotFoundException{
 		
 		salesVO salesVO = new salesVO();
 		customerVO customerVO = new customerVO();
@@ -81,6 +94,11 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		salesVO.setSalesNumOfItems(salesNumOfItems);
 	
 		salesDAO.insertbill(salesVO, customerVO);
+		
+		HttpSession session = request.getSession();
+		itemDAO itemDAO = new itemDAO();
+		List<vo.itemVO> list = itemDAO.selectItemBeforeSale();
+		session.setAttribute("salesItemList", list);
 		
 		response.sendRedirect("sales/salesitem.jsp?s="+customerVO.getCustomerName()+"&g="+customerVO.getCustomerGSTNo()+"&i="+salesVO.getSalesInvoiceNo()+"&n="+salesVO.getSalesNumOfItems()+"");
 	}

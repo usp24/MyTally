@@ -10,10 +10,10 @@ public class supplierVO {
 		private String supplierStatecode;
 		private String supplierGSTNo;
 		private String supplierPurchaseInvoiceNo;
-		private String supplierMobileNo;
+		private long supplierMobileNo;
 		private String supplierEmail;
 		
-		public supplierVO(){}
+		/*public supplierVO(){}
 		public supplierVO(supplierVO ob){
 			this.supplierName = ob.supplierName;
 			this.supplierAddress1 = ob.supplierAddress1;
@@ -25,7 +25,7 @@ public class supplierVO {
 			this.supplierMobileNo = ob.supplierMobileNo;
 			this.supplierEmail = ob.supplierEmail;
 		}
-		
+		*/
 		
 		public int getId() {
 			return id;
@@ -34,10 +34,10 @@ public class supplierVO {
 			this.id = id;
 		}
 		public String getSupplierName() {
-			return supplierName;
+			return supplierName.toUpperCase();
 		}
 		public void setSupplierName(String supplierName) {
-			this.supplierName = supplierName;
+			this.supplierName = supplierName.toUpperCase();
 		}
 		public String getSupplierAddress1() {
 			return supplierAddress1;
@@ -75,10 +75,10 @@ public class supplierVO {
 		public void setSupplierPurchaseInvoiceNo(String supplierPurchaseInvoiceNo) {
 			this.supplierPurchaseInvoiceNo = supplierPurchaseInvoiceNo;
 		}
-		public String getSupplierMobileNo() {
+		public long getSupplierMobileNo() {
 			return supplierMobileNo;
 		}
-		public void setSupplierMobileNo(String supplierMobileNo) {
+		public void setSupplierMobileNo(long supplierMobileNo) {
 			this.supplierMobileNo = supplierMobileNo;
 		}
 		public String getSupplierEmail() {

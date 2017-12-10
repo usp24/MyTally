@@ -14,6 +14,7 @@ public class customerDAO {
 
 	Statement st;
 	Connection con;
+	
 public void insertSales(customerVO s) throws SQLException{
 		
 		try{	
@@ -45,7 +46,7 @@ public List<customerVO> select() throws ClassNotFoundException, SQLException {
 	Class.forName("com.mysql.jdbc.Driver");
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 	Statement st = con.createStatement();
-	ResultSet rs = st.executeQuery("select * from customer");
+	ResultSet rs = st.executeQuery("select name,address1,address2,GSTNo,city,stateCode from customer group by GSTNo order by name");
 	while(rs.next()){
 		customerVO customerVO = new customerVO();
 		customerVO.setCustomerName(rs.getString("name"));

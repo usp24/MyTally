@@ -15,6 +15,7 @@ Address-2 : <input type="text" name="supplierAddress2">	<br>
 Mobile No. : <input type="text" name="supplierMobileNo">	<br>
 GST NO. : <input type="text" name="supplierGSTNo">	<br>
 Email : <input type="text" name="supplierEmail">	<br>
+<input type="hidden" value="newSupplier" >
 <input type="submit" value="Save" >
 </form>
 

@@ -1,25 +1,47 @@
 package vo;
 
-public class itemVO {
+import java.text.DecimalFormat;
 
+public class itemVO {
+	
 	private int id;
 	
-	private String ItemName;
-	private String ItemSrNo;
-	private String ItemDiscription;
-	private String ItemHSN;
-	private int ItemGST;
+	private String itemName;
+	private String itemSrNo;
+	private String itemDescription;
+	private String itemHSN;
+	private int itemGST;
+	private double itemPurchasePrice;
+	private double itemSalesPrice;
+	private int itemQty;
 	
-	private int purchaseItemQty;
-	private double purchaseItemUnitPrice;
-	private double purchaseItemDiscount;
-	private double purchaseItemAmount;
+	private double set(double d){
+		if(d!=0){
+			DecimalFormat df = new DecimalFormat(".00");
+			return Double.parseDouble(df.format(d));
+		}
+		else
+			return -1;
+	}
 	
-	private int salesItemQty;
-	private double salesItemUnitPrice;
-	private double salesItemDiscount;
-	private double salesItemAmount;
-	
+	public double getItemPurchasePrice() {
+		return set(itemPurchasePrice);
+	}
+	public void setItemPurchasePrice(double itemPurchasePrice) {
+		this.itemPurchasePrice = set(itemPurchasePrice);
+	}
+	public double getItemSalesPrice() {
+		return set(itemSalesPrice);
+	}
+	public void setItemSalesPrice(double itemSalesPrice) {
+		this.itemSalesPrice = set(itemSalesPrice);
+	}
+	public int getItemQty() {
+		return itemQty;
+	}
+	public void setItemQty(int itemQty) {
+		this.itemQty = itemQty;
+	}
 	public int getId() {
 		return id;
 	}
@@ -27,81 +49,33 @@ public class itemVO {
 		this.id = id;
 	}
 	public String getItemName() {
-		return ItemName;
+		return itemName.toUpperCase();
 	}
 	public void setItemName(String itemName) {
-		ItemName = itemName;
+		this.itemName = itemName.toUpperCase();
 	}
 	public String getItemSrNo() {
-		return ItemSrNo;
+		return itemSrNo;
 	}
 	public void setItemSrNo(String itemSrNo) {
-		ItemSrNo = itemSrNo;
+		this.itemSrNo = itemSrNo;
 	}
-	public String getItemDiscription() {
-		return ItemDiscription;
+	public String getItemDescription() {
+		return itemDescription;
 	}
-	public void setItemDiscription(String itemDiscription) {
-		ItemDiscription = itemDiscription;
+	public void setItemDescription(String itemDescription) {
+		this.itemDescription = itemDescription;
 	}
 	public String getItemHSN() {
-		return ItemHSN;
+		return itemHSN;
 	}
 	public void setItemHSN(String itemHSN) {
-		ItemHSN = itemHSN;
+		this.itemHSN = itemHSN;
 	}
 	public int getItemGST() {
-		return ItemGST;
+		return itemGST;
 	}
 	public void setItemGST(int itemGST) {
-		ItemGST = itemGST;
-	}
-	public int getPurchaseItemQty() {
-		return purchaseItemQty;
-	}
-	public void setPurchaseItemQty(int purchaseItemQty) {
-		this.purchaseItemQty = purchaseItemQty;
-	}
-	public double getPurchaseItemUnitPrice() {
-		return purchaseItemUnitPrice;
-	}
-	public void setPurchaseItemUnitPrice(double purchaseItemUnitPrice) {
-		this.purchaseItemUnitPrice = purchaseItemUnitPrice;
-	}
-	public double getPurchaseItemDiscount() {
-		return purchaseItemDiscount;
-	}
-	public void setPurchaseItemDiscount(double purchaseItemDiscount) {
-		this.purchaseItemDiscount = purchaseItemDiscount;
-	}
-	public double getPurchaseItemAmount() {
-		return purchaseItemAmount;
-	}
-	public void setPurchaseItemAmount(double purchaseItemAmount) {
-		this.purchaseItemAmount = purchaseItemAmount;
-	}
-	public int getSalesItemQty() {
-		return salesItemQty;
-	}
-	public void setSalesItemQty(int salesItemQty) {
-		this.salesItemQty = salesItemQty;
-	}
-	public double getSalesItemUnitPrice() {
-		return salesItemUnitPrice;
-	}
-	public void setSalesItemUnitPrice(double salesItemUnitPrice) {
-		this.salesItemUnitPrice = salesItemUnitPrice;
-	}
-	public double getSalesItemDiscount() {
-		return salesItemDiscount;
-	}
-	public void setSalesItemDiscount(double salesItemDiscount) {
-		this.salesItemDiscount = salesItemDiscount;
-	}
-	public double getSalesItemAmount() {
-		return salesItemAmount;
-	}
-	public void setSalesItemAmount(double salesItemAmount) {
-		this.salesItemAmount = salesItemAmount;
+		this.itemGST = itemGST;
 	}
 }

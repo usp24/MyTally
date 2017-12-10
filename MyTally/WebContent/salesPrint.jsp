@@ -4,7 +4,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="vo.NumberToWord" %>
+<%@ page import="my.NumberToWord" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
