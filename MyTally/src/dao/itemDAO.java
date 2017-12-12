@@ -50,10 +50,11 @@ public class itemDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 			st = con.createStatement();
-			ResultSet rs = st.executeQuery("select name,description,GST,HSN,purchasePrice from item");
+			ResultSet rs = st.executeQuery("select name,srno,description,GST,HSN,purchasePrice from item");
 			while(rs.next()){
 				itemVO itemVO = new itemVO();
 				itemVO.setItemName(rs.getString("name"));
+				itemVO.setItemSrNo(rs.getString("srno"));
 				itemVO.setItemDescription(rs.getString("description"));
 				itemVO.setItemGST(rs.getInt("GST"));
 				itemVO.setItemHSN(rs.getString("HSN"));

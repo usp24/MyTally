@@ -219,7 +219,7 @@
 		padding:0px;
 		vertical-align: top;
 		text-align:center;
-		padding-top:7px;
+		margin-top:-10px;
 		width:7mm;
 		max-width:7mm ;
 		min-width:7mm;
@@ -408,7 +408,7 @@
 		padding-left:132px;
 	}
 	.item2 #lastrow #lastrowamt{
-		padding-right:3px;
+		padding-right:4px;
 	}
 	
 	#wordrow{

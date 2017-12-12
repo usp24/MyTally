@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="css/fa.css">
 <title>MyTally | Purchase</title>
 
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>		
@@ -33,13 +34,17 @@ $(document).ready(function(){
 			            var c4 = r.insertCell(3);
 			            var c5 = r.insertCell(4);
 			            var c6 = r.insertCell(5);
+			            var c7 = r.insertCell(6);
+			            var c8 = r.insertCell(7);
 			            
 			            c1.innerHTML = id;
 			            c2.innerHTML = list[i].purchaseInvoiceNo;
 			            c3.innerHTML = list[i].purchaseInvoiceDate;
 			            c4.innerHTML = list[i].extra;
 			            c5.innerHTML = list[i].purchaseTotalRoundOffAmount;
-			            c6.innerHTML="<a href='print.jsp?n="+list[i].purchaseInvoiceNo+"&ch=purchase'>View</a> <a href='purchaseedit.jsp?ivn="+list[i].purchaseInvoiceNo+"'>Edit</a>"
+			            c6.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/print?ch=purchase&printInvoiceNo="+list[i].purchaseInvoiceNo+"'><button>View</button>"; 
+			            c7.innerHTML = "<a href='purchaseedit.jsp?ivn="+list[i].purchaseInvoiceNo+"'>Edit</a>";
+			            c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/purchase?ch=delete&n="+list[i].purchaseInvoiceNo+"'><button><i class='fa fa-trash-o' aria-hidden='true'></i></button></form>";
 			            
 			            id++;
 					}
@@ -51,9 +56,7 @@ $(document).ready(function(){
 </head>
 <body>
 
-<form action="purchaseitem.jsp">
-<input type="submit" value="New Purchase Bill" >
-</form>
+<a href="purchaseitem.jsp" >New Purchase Bill</a>
 
 <table id="tb" style="display:none;">
 	<tr>
@@ -62,6 +65,8 @@ $(document).ready(function(){
 		<th>Purchase Invoice Date</th>
 		<th>Supplier's Name</th>
 		<th>Total Amount</th>
+		<th></th>
+		<th></th>
 		<th></th>
     </tr>
 </table>

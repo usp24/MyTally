@@ -35,18 +35,6 @@ public class purchase extends HttpServlet {
 		String ch = (String)request.getParameter("ch");
 		switch(ch)
 		{	
-		/*	case "purchaseBill" : 
-									try{
-										purchaseBill(request,response);
-									} 
-									catch (myException e) {
-										System.out.println("purchase :: doPost :: myException :: "+((myException) e).purchaseInvoiceWorng());
-										response.sendRedirect("purchase/purchasebill.jsp?ch=purchasebillbefore");
-									} catch (Exception e) {
-										System.out.println("purchase :: doPost :: Exception :: "+e);
-										response.sendRedirect("purchase/purchasebill.jsp?ch=purchasebillbefore");
-									}
-									break;*/
 			
 			case "purchaseBillBefore" : 
 										try {
@@ -78,7 +66,9 @@ public class purchase extends HttpServlet {
 										
 			case "purchase" : 
 								try{
-									purchaseMethod(request,response);
+									Integer n =	Integer.parseInt(request.getParameter("n"));
+									String iv = request.getParameter("purchaseInvoiceNumber");
+									purchaseMethod(request,response,n,iv);
 								}catch (Exception e) {
 									e.printStackTrace();
 								}break;
@@ -96,6 +86,26 @@ public class purchase extends HttpServlet {
 							}catch (Exception e) {
 								e.printStackTrace();
 							}break;
+			
+			case "editEntry" : 
+							try{
+								Integer n = Integer.parseInt(request.getParameter("n"));
+								String old = request.getParameter("old_ivn");
+								String iv = request.getParameter("purchaseInvoiceNumber");
+								deleteBill(request,response,old);
+								purchaseMethod(request,response,n,iv);
+								response.sendRedirect("purchase.jsp");
+							}catch (Exception e) {
+								e.printStackTrace();
+							}break;
+			case "delete" : 
+							try{
+								String iv = request.getParameter("n");
+								deleteBill(request,response,iv);
+								response.sendRedirect("purchase.jsp");
+							}catch (Exception e) {
+								e.printStackTrace();
+							}break;
 		
 			default : System.out.println("*** Default Case *** :: purchse.java");
 					  response.sendRedirect("menu.jsp");break;
@@ -106,8 +116,6 @@ public class purchase extends HttpServlet {
 	void purchaseBillBefore(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException {
 		
 		purchaseDAO purchaseDAO = new purchaseDAO();
-		HttpSession session = request.getSession();
-		session.setAttribute("maxp",purchaseDAO.maxInvoiceNo());
 		supplierDAO supplierDAO = new supplierDAO();
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();
@@ -144,8 +152,7 @@ public class purchase extends HttpServlet {
 		supplierDAO supplierDAO = new supplierDAO();
 		
 		
-		String purchaseInvoiceNos = (String)request.getParameter("purchaseInvoiceNumber");
-			Integer purchaseInvoiceNo = new Integer(purchaseInvoiceNos);
+		String purchaseInvoiceNo = (String)request.getParameter("purchaseInvoiceNumber");
 		String purchaseInvoiceDate = (String)request.getParameter("purchaseInvoiceDate");
 		String supplierName = (String)request.getParameter("supplierName").toUpperCase();
 		String supplierAddress1 = (String)request.getParameter("supplierAddress1");
@@ -153,8 +160,6 @@ public class purchase extends HttpServlet {
 		String supplierCity = (String)request.getParameter("supplierCity");
 		String supplierStatecode = (String)request.getParameter("supplierStatecode");
 		String supplierGSTNo = (String)request.getParameter("supplierGSTNo");
-		//String purchaseNumOfItemss = (String)request.getParameter("purchaseNumOfItems");
-			//Integer purchaseNumOfItems = new Integer(purchaseNumOfItemss);
 		
 		supplierVO.setSupplierName(supplierName);
 		supplierVO.setSupplierAddress1(supplierAddress1);
@@ -168,23 +173,18 @@ public class purchase extends HttpServlet {
 		
 		purchaseVO.setPurchaseInvoiceNo(purchaseInvoiceNo);
 		purchaseVO.setPurchaseInvoiceDate(purchaseInvoiceDate);
-		//purchaseVO.setPurchaseNumOfItems(purchaseNumOfItems);
 
 		purchaseDAO.insertbill(purchaseVO, supplierVO);
 	}
 
 	
-	void purchaseMethod(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	void purchaseMethod(HttpServletRequest request, HttpServletResponse response,int n,String iv) throws Exception{
 		
 		try {
 			purchseSupplierEntry(request, response);
 		} catch (myException e) {
 			e.printStackTrace();
 		}
-		
-		Integer n =	-1;
-		String purchaseInvoiceNos = (String)request.getParameter("purchaseInvoiceNumber");
-			Integer iv = new Integer(purchaseInvoiceNos);
 		
 		purchaseVO purchaseVO = new purchaseVO();
 		itemVO itemVO = new itemVO();
@@ -200,6 +200,7 @@ public class purchase extends HttpServlet {
 		
 		for(int i=1;i<=n;i++){
 			
+			if((String)request.getParameter("ItemName"+i)==null)continue;
 			String itemName = (String)request.getParameter("ItemName"+i).toUpperCase();
 			String itemDescription = (String)request.getParameter("ItemDescription"+i);
 			String itemHSN = (String)request.getParameter("ItemHSN"+i);
@@ -211,8 +212,7 @@ public class purchase extends HttpServlet {
 				itemVO.setItemHSN(itemHSN);
 				itemVO.setItemGST(itemGST);
 			
-				String purchaseItemQtys = (String)request.getParameter("purchaseItemQty"+i);
-			Integer purchaseItemQty = new Integer(purchaseItemQtys);
+			Integer purchaseItemQty = Integer.parseInt(request.getParameter("purchaseItemQty"+i));
 			String itemSrNo = "";
 			for(int j=1;j<=purchaseItemQty;j++){
 				String z = (String)request.getParameter("ItemSrNo"+i+""+j);
@@ -265,8 +265,7 @@ public class purchase extends HttpServlet {
 	private void edit(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
 		
 		HttpSession session = request.getSession();
-		String purchaseInvoiceNos = (String)session.getAttribute("ivn");
-		Integer purchaseInvoiceNo = Integer.parseInt(purchaseInvoiceNos);
+		String purchaseInvoiceNo = (String)session.getAttribute("ivn");
 		
 		purchaseDAO purchaseDAO = new purchaseDAO();
 		purchaseVO purchaseVO = new purchaseVO();
@@ -292,6 +291,14 @@ public class purchase extends HttpServlet {
 		out.println(gson.toJson(supplierDAO.getPurchaseEditDetail(supplierVO)));
 		out.flush();
 		out.close();
+	}
+	
+	private void deleteBill(HttpServletRequest request, HttpServletResponse response, String invoiceNo) throws Exception{
+		
+		supplierVO supplierVO = new supplierVO();
+		supplierVO.setSupplierPurchaseInvoiceNo(invoiceNo);
+		supplierDAO supplierDAO = new supplierDAO();
+		supplierDAO.deleteBill(supplierVO);
 	}
 }
 

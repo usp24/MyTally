@@ -1,11 +1,19 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
+
+import dao.printDAO;
+import vo.purchaseVO;
 
 @WebServlet("/print")
 public class print extends HttpServlet {
@@ -18,24 +26,36 @@ public class print extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String ch = request.getParameter("ch");
-		String ns = request.getParameter("n");
-			Integer n = new Integer(ns);
-		
 		switch(ch){
 		
-		case "sale" : sale(n);break;
-		case "purchase" : purchase(n);break;
+		case "salebill" : saleBill(request,response);break;
+		case "purchase" : purchase(request,response);break;
 		default : System.out.println("*** DEFALUT *** :: print");
 		
 		}
 	}
 	
-	private void sale(int n){
+	private void saleBill(HttpServletRequest request, HttpServletResponse response){
 		
 	}
 	
-	private void purchase(int n){
+	private void purchase(HttpServletRequest request, HttpServletResponse response){
 		
+		HttpSession session = request.getSession();
+		String iv = (String)request.getParameter("printInvoiceNo");
+		
+		purchaseVO purchaseVO = new purchaseVO();
+		purchaseVO.setPurchaseInvoiceNo(iv);
+		
+		printDAO printDAO = new printDAO();
+		try{
+			session.setAttribute("bill",printDAO.getPurchaseBill(purchaseVO));
+			session.setAttribute("item", printDAO.getPurchaseItem(purchaseVO));
+			session.setAttribute("supplier",printDAO.getSupplier(purchaseVO));
+			response.sendRedirect("purchasePrint.jsp");
+		}
+		catch(Exception e){
+			System.out.println("print.java :: purchasebill :: "+e);
+		}
 	}
-
 }

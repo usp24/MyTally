@@ -34,7 +34,25 @@
 			});
 			
 			function fn(){
-				alert("Item Added Successfully !!!");
+				
+				var n = document.getElementById("n");
+				var g = document.getElementById("g");
+				var flag = true;
+				
+				if(n.value==""){
+					alert("Please Enter Item Name");
+					flag = false;
+				}
+				else if(g.value!="18" && g.value!="28" && g.value!='' ){
+					alert("GST Rate Can Only Be 18% OR 28%");
+					g.value ='';
+					flag = false;
+				}
+				
+				if(flag==true)
+					return true;
+				else
+					return false;
 			}
 		</script>
 <style type="text/css" >
@@ -45,14 +63,14 @@
 	</head>
 <body>
 
-<form  method="post" action="<%=request.getContextPath()%>/item" >
+<form  method="post" action="<%=request.getContextPath()%>/item" onsubmit="return fn()" >
 Name : <input type="text" name="itemName" id="n"><br>
 Description : <input type="text" name="itemDescription" ><br>
 HSN : <input type="text" name="itemHSN" ><br>
-GST : <input type="text" name="itemGST" value="18"><br>
-PurchasePrice : <input type="text" name="itemPurchasePrice" value="0"><br>
-SalePrice : <input type="text" name="itemSalesPrice" value="0"><br>
-<input type="submit" value="ADD ITEM" onclick="fn()">
+GST : <input type="number" name="itemGST" id="g" ><br>
+PurchasePrice : <input type="number" name="itemPurchasePrice" step='any' ><br>
+SalePrice : <input type="number" name="itemSalesPrice" step='any' ><br>
+<input type="submit" value="ADD ITEM">
 <input type="hidden" name="ch" value="itemEntry">
 </form>
 

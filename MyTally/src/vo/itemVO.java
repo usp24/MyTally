@@ -14,16 +14,26 @@ public class itemVO {
 	private double itemPurchasePrice;
 	private double itemSalesPrice;
 	private int itemQty;
-	
+	private String extra;
+	private Double extrad;
+
 	private double set(double d){
 		if(d!=0){
-			DecimalFormat df = new DecimalFormat(".00");
+			DecimalFormat df = new DecimalFormat("#.00");
 			return Double.parseDouble(df.format(d));
 		}
 		else
-			return -1;
+			return 0.00;
 	}
 	
+	public Double getExtrad() {
+		return extrad;
+	}
+
+	public void setExtrad(Double extrad) {
+		this.extrad = extrad;
+	}
+
 	public double getItemPurchasePrice() {
 		return set(itemPurchasePrice);
 	}
@@ -77,5 +87,11 @@ public class itemVO {
 	}
 	public void setItemGST(int itemGST) {
 		this.itemGST = itemGST;
+	}
+	public String getExtra() {
+		return extra;
+	}
+	public void setExtra(String extra) {
+		this.extra = extra;
 	}
 }

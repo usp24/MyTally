@@ -11,7 +11,10 @@ import vo.userinfoVO;
 
 public class userinfoDAO {
 	
-	public void insert(userinfoVO rvo)throws Exception,myException{
+	Connection con;
+	Statement st;
+	
+	/*public void insert(userinfoVO rvo)throws Exception,myException{
 		
 		try{	
 			Class.forName("com.mysql.jdbc.Driver");
@@ -35,14 +38,14 @@ public class userinfoDAO {
 			//st.close();
 			//con.close();
 		}
-	}
+	}*/
 	
 	public void verify(userinfoVO rvo)throws Exception,myException{
 		
 		try{	
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
-			Statement st = con.createStatement();
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
 			ResultSet rs = st.executeQuery("select id from userinfo where username='"+rvo.getLgusername()+"' and password='"+rvo.getLgpassword()+"'");
 			if(rs.next()==false)
 				throw new myException();
@@ -56,8 +59,8 @@ public class userinfoDAO {
 			throw ob;
 		}
 		finally{
-			//st.close();
-			//con.close();
+			st.close();
+			con.close();
 		}
 	}
 }

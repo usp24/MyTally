@@ -1,11 +1,12 @@
 package vo;
 
 import java.text.DecimalFormat;
+import java.util.Date;
 
 public class purchaseVO {
 	
 	private int id;
-	private int purchaseInvoiceNo;
+	private String purchaseInvoiceNo;
 	private String purchaseInvoiceDate;
 	private int purchaseNumOfItems;
 	private double purchaseTotalAmount;
@@ -16,13 +17,29 @@ public class purchaseVO {
 	private String extra;
 	private double purchaseItemDiscount;
 	private double purchaseItemTotalAmount;
+	private Date printPurchaseDate;
+	
 	
 	private Double set(double d){
-		DecimalFormat df = new DecimalFormat(".00");
-		return new Double(df.format(d));
+		if(d!=0){
+			DecimalFormat df = new DecimalFormat("#.00");
+			return Double.parseDouble(df.format(d));
+		}
+		else
+			return 0.00;
 	}
 	
 	
+	public Date getPrintPurchaseDate() {
+		return printPurchaseDate;
+	}
+
+
+	public void setPrintPurchaseDate(Date printPurchaseDate) {
+		this.printPurchaseDate = printPurchaseDate;
+	}
+
+
 	public String getExtra() {
 		return extra;
 	}
@@ -48,10 +65,10 @@ public class purchaseVO {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getPurchaseInvoiceNo() {
+	public String getPurchaseInvoiceNo() {
 		return purchaseInvoiceNo;
 	}
-	public void setPurchaseInvoiceNo(int purchaseInvoiceNo) {
+	public void setPurchaseInvoiceNo(String purchaseInvoiceNo) {
 		this.purchaseInvoiceNo = purchaseInvoiceNo;
 	}
 	public String getPurchaseInvoiceDate() {

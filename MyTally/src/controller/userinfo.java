@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import my.myException;
 import dao.userinfoDAO;
@@ -73,6 +74,8 @@ public class userinfo extends HttpServlet {
 		}
 		catch(myException s){
 			response.sendRedirect("index.jsp");
+			HttpSession session = request.getSession();
+			session.setAttribute("login_error", s.loginFail());
 		}
 		catch(Exception s){
 			System.out.println("userinfo :: doPost :: login :: "+s);

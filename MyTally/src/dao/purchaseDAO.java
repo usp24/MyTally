@@ -62,42 +62,42 @@ public class purchaseDAO {
 		}
 	}
 	
-	public void insertPurchase(purchaseVO p,itemVO i) throws SQLException{
-		try{	
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
-			st = con.createStatement();
-			st.executeUpdate("insert into purchaseitem(purchaseInvoiceNo,name,srno,description,HSN,GST,qty,unitPrice,discount,totalAmount) values('"+p.getPurchaseInvoiceNo()+"','"+i.getItemName()+"','"+i.getItemSrNo()+"','"+i.getItemDescription()+"','"+i.getItemHSN()+"','"+i.getItemGST()+"','1','"+i.getItemPurchasePrice()+"','"+p.getPurchaseItemDiscount()+"','"+p.getPurchaseItemTotalAmount()+"')");				
-		}
-		catch(Exception e){
-			System.out.println("purchaseDAO :: insertpurchase :: "+e);
-		}
-		finally{
-			st.close();
-			con.close();
-		}
-	}
-
-public int maxInvoiceNo() throws SQLException{
+public void insertPurchase(purchaseVO p,itemVO i) throws SQLException{
 	try{	
 		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 		st = con.createStatement();
-		ResultSet rs = st.executeQuery("select MAX(invoiceNo)'max' from purchasebill");
-		if(rs.next()==true)
-			return (rs.getInt("max")+1);
-		else
-			throw new Exception();
+		st.executeUpdate("insert into purchaseitem(purchaseInvoiceNo,name,srno,description,HSN,GST,qty,unitPrice,discount,totalAmount) values('"+p.getPurchaseInvoiceNo()+"','"+i.getItemName()+"','"+i.getItemSrNo()+"','"+i.getItemDescription()+"','"+i.getItemHSN()+"','"+i.getItemGST()+"','"+i.getItemQty()+"','"+i.getItemPurchasePrice()+"','"+p.getPurchaseItemDiscount()+"','"+p.getPurchaseItemTotalAmount()+"')");				
 	}
 	catch(Exception e){
-		System.out.println("purchaseDAO :: maxInvoiceNo :: "+e);
-		return -1;
+		System.out.println("purchaseDAO :: insertpurchase :: "+e);
 	}
 	finally{
 		st.close();
 		con.close();
 	}
 }
+//
+//public int maxInvoiceNo() throws SQLException{
+//	try{	
+//		Class.forName("com.mysql.jdbc.Driver");
+//		con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+//		st = con.createStatement();
+//		ResultSet rs = st.executeQuery("select MAX(invoiceNo)'max' from purchasebill");
+//		if(rs.next()==true)
+//			return (rs.getInt("max")+1);
+//		else
+//			throw new Exception();
+//	}
+//	catch(Exception e){
+//		System.out.println("purchaseDAO :: maxInvoiceNo :: "+e);
+//		return -1;
+//	}
+//	finally{
+//		st.close();
+//		con.close();
+//	}
+//}
 
 public List<purchaseVO> getInvoiceNo() throws SQLException{
 	
@@ -109,7 +109,7 @@ public List<purchaseVO> getInvoiceNo() throws SQLException{
 		ResultSet rs = st.executeQuery("select invoiceNo from purchasebill");
 		while(rs.next()){
 			purchaseVO p = new purchaseVO();
-			p.setPurchaseInvoiceNo(rs.getInt("invoiceNo"));
+			p.setPurchaseInvoiceNo(rs.getString("invoiceNo"));
 			list.add(p);
 		}
 	}
@@ -131,10 +131,10 @@ public List<purchaseVO> getPurchaseBills() throws SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 		st = con.createStatement();
-		ResultSet rs = st.executeQuery("SELECT invoiceNo,supplierName,DATE_FORMAT(`invoiceDate`, '%d/%m/%Y') AS invoiceDate,totalRoundOffAmount FROM purchasebill ORDER BY YEAR(invoiceDate) DESC, MONTH(invoiceDate) DESC, DAY(invoiceDate) DESC;");
+		ResultSet rs = st.executeQuery("SELECT invoiceNo,supplierName,DATE_FORMAT(`invoiceDate`, '%d/%m/%Y') AS invoiceDate,totalRoundOffAmount FROM purchasebill ORDER BY YEAR(invoiceDate), MONTH(invoiceDate), DAY(invoiceDate)");
 		while(rs.next()){
 			purchaseVO p = new purchaseVO();
-			p.setPurchaseInvoiceNo(rs.getInt("invoiceNo"));
+			p.setPurchaseInvoiceNo(rs.getString("invoiceNo"));
 			p.setPurchaseInvoiceDate(rs.getString("invoiceDate"));
 			p.setExtra(rs.getString("supplierName"));
 			p.setPurchaseTotalRoundOffAmount(rs.getLong("totalRoundOffAmount"));
@@ -159,6 +159,9 @@ public List<purchaseVO> getPurchaseBills() throws SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 		st = con.createStatement();
+		ResultSet r = st.executeQuery("select invoiceDate from purchasebill where invoiceNo='"+purchaseVO.getPurchaseInvoiceNo()+"'");
+		r.next();
+		String date = r.getString("invoiceDate");
 		ResultSet rs = st.executeQuery("select name,srno,description,HSN,GST,qty,unitPrice,discount from purchaseitem where purchaseInvoiceNo='"+purchaseVO.getPurchaseInvoiceNo()+"'");
 		while(rs.next()){
 			itemVO i = new itemVO();
@@ -169,7 +172,8 @@ public List<purchaseVO> getPurchaseBills() throws SQLException{
 			i.setItemGST(rs.getInt("GST"));
 			i.setItemQty(rs.getInt("qty"));
 			i.setItemPurchasePrice(rs.getDouble("unitPrice"));
-			i.setItemSalesPrice(rs.getShort("discount"));
+			i.setItemSalesPrice(rs.getDouble("discount"));
+			i.setExtra(date);
 			list.add(i);
 		}
 	}
@@ -183,6 +187,4 @@ public List<purchaseVO> getPurchaseBills() throws SQLException{
 	}
 	return list;
 }
-
-
 }

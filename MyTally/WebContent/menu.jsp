@@ -13,12 +13,14 @@
 
 <a href="item.jsp">Add New Item</a>
 <a href="purchase.jsp">Purchase</a>
-<a href="salesbil.jsp">Sales</a>
+<a href="sales.jsp">Sales</a>
 
 
 <a href="viewStock.jsp">Maintain Stock</a>
 <a href="payments.jsp">Maintain Payments</a>
 <a href="other.jsp">Other</a>
 <a href="settings.jsp">Settings</a>
+
+
 </body>
 </html>
