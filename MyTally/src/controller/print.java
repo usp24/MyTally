@@ -1,0 +1,61 @@
+package controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
+
+import dao.printDAO;
+import vo.purchaseVO;
+
+@WebServlet("/print")
+public class print extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String ch = request.getParameter("ch");
+		switch(ch){
+		
+		case "salebill" : saleBill(request,response);break;
+		case "purchase" : purchase(request,response);break;
+		default : System.out.println("*** DEFALUT *** :: print");
+		
+		}
+	}
+	
+	private void saleBill(HttpServletRequest request, HttpServletResponse response){
+		
+	}
+	
+	private void purchase(HttpServletRequest request, HttpServletResponse response){
+		
+		HttpSession session = request.getSession();
+		String iv = (String)request.getParameter("printInvoiceNo");
+		
+		purchaseVO purchaseVO = new purchaseVO();
+		purchaseVO.setPurchaseInvoiceNo(iv);
+		
+		printDAO printDAO = new printDAO();
+		try{
+			session.setAttribute("bill",printDAO.getPurchaseBill(purchaseVO));
+			session.setAttribute("item", printDAO.getPurchaseItem(purchaseVO));
+			session.setAttribute("supplier",printDAO.getSupplier(purchaseVO));
+			response.sendRedirect("purchasePrint.jsp");
+		}
+		catch(Exception e){
+			System.out.println("print.java :: purchasebill :: "+e);
+		}
+	}
+}

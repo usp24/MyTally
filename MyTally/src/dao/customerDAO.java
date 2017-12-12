@@ -12,21 +12,31 @@ import vo.customerVO;
 
 public class customerDAO {
 
-
-public void insertSales(customerVO s){
+	Statement st;
+	Connection con;
+	
+public void insertSales(customerVO s) throws SQLException{
 		
 		try{	
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
-			Statement st = con.createStatement();
-			st.executeUpdate("insert into customer(name,address1,address2,GSTNo) values('"+s.getCustomerName()+"','"+s.getCustomerAddress1()+"','"+s.getCustomerAddress2()+"','"+s.getCustomerGSTNo()+"')");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			ResultSet rs = st.executeQuery("select salesInvoiceNo from customer where GSTNo='"+s.getCustomerGSTNo()+"'");
+			
+			if(rs.next()){				
+				String s1 = rs.getString("salesInvoiceNo").concat(s.getCustomerSalesInvoiceNo()+"*");
+				st.executeUpdate("update customer set name='"+s.getCustomerName()+"',address1='"+s.getCustomerAddress1()+"',address2='"+s.getCustomerAddress2()+"',city='"+s.getCustomerCity()+"',stateCode='"+s.getCustomerStatecode()+"',salesInvoiceNo='"+s1+"' where GSTNo='"+s.getCustomerGSTNo()+"'");
+			}
+			else
+				st.executeUpdate("insert into customer(name,address1,address2,city,stateCode,GSTNo,salesInvoiceNo) values('"+s.getCustomerName()+"','"+s.getCustomerAddress1()+"','"+s.getCustomerAddress2()+"','"+s.getCustomerCity()+"','"+s.getCustomerStatecode()+"','"+s.getCustomerGSTNo()+"','"+s.getCustomerSalesInvoiceNo()+"*"+"')");
+			
 		}
 		catch(Exception e){
-			System.out.println("CustomerDAO :: insertSales :: "+e);
+			System.out.println("customerDAO :: insertSales :: "+e);
 		}
 		finally{
-			//st.close();
-			//con.close();
+			st.close();
+			con.close();
 		}
 	}
 
@@ -36,7 +46,7 @@ public List<customerVO> select() throws ClassNotFoundException, SQLException {
 	Class.forName("com.mysql.jdbc.Driver");
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 	Statement st = con.createStatement();
-	ResultSet rs = st.executeQuery("select * from customer");
+	ResultSet rs = st.executeQuery("select name,address1,address2,GSTNo,city,stateCode from customer group by GSTNo order by name");
 	while(rs.next()){
 		customerVO customerVO = new customerVO();
 		customerVO.setCustomerName(rs.getString("name"));
@@ -49,18 +59,17 @@ public List<customerVO> select() throws ClassNotFoundException, SQLException {
 	}
 	return list;
 }
-
 /*
-public void insertDirect(CustomerVO s){
+public void insertDirect(customerVO s){
 	
 	try{	
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 		Statement st = con.createStatement();
-		st.executeUpdate("insert into Customer(name,address1,address2,GSTNo) values('"+s.getCustomerName()+"','"+s.getCustomerAddress1()+"','"+s.getCustomerAddress2()+"','"+s.getCustomerGSTNo()+"')");
+		st.executeUpdate("insert into customer(name,address1,address2,GSTNo) values('"+s.getCustomerName()+"','"+s.getCustomerAddress1()+"','"+s.getCustomerAddress2()+"','"+s.getCustomerGSTNo()+"')");
 	}
 	catch(Exception e){
-		System.out.println("SalesDAO :: insertbill :: "+e);
+		System.out.println("salesDAO :: insertbill :: "+e);
 	}
 	finally{
 		//st.close();

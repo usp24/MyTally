@@ -1,4 +1,5 @@
-package vo;
+package my;
+
 public class NumberToWord
 {
 public String call (String number_str)
