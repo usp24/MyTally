@@ -17,7 +17,6 @@ public class purchaseVO {
 	private String extra;
 	private double purchaseItemDiscount;
 	private double purchaseItemTotalAmount;
-	private Date printPurchaseDate;
 	
 	
 	private Double set(double d){
@@ -29,17 +28,6 @@ public class purchaseVO {
 			return 0.00;
 	}
 	
-	
-	public Date getPrintPurchaseDate() {
-		return printPurchaseDate;
-	}
-
-
-	public void setPrintPurchaseDate(Date printPurchaseDate) {
-		this.printPurchaseDate = printPurchaseDate;
-	}
-
-
 	public String getExtra() {
 		return extra;
 	}

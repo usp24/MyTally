@@ -7,12 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import vo.itemVO;
 import vo.purchaseVO;
 import vo.supplierVO;
+import vo.salesVO;
+import vo.customerVO;
 
 public class printDAO {
 
@@ -111,6 +112,106 @@ public class printDAO {
 			st2.close();
 		}catch (Exception e) {
 			System.out.println("printDAO :: getSupplier :: "+e);
+		}
+		finally{
+			st.close();
+			con.close();
+		}
+		return list;
+	}
+	
+	public List<salesVO> getSalesBill(salesVO salesVO) throws SQLException{
+		
+		List<salesVO> list = new ArrayList<salesVO>();
+		SimpleDateFormat sm = new SimpleDateFormat("dd-MMM-yyyy");
+		try{	
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			ResultSet rs = st.executeQuery("select invoiceNo,invoiceDate,totalAmount,GST14,GST9,totalAmountGST,totalRoundOffAmount from salesbill where invoiceNo='"+salesVO.getSalesInvoiceNo()+"'");
+			while(rs.next()){
+				salesVO salesVO2 = new salesVO();
+				salesVO2.setSalesInvoiceNo(rs.getInt("invoiceNo"));
+				salesVO2.setSalesInvoiceDate(sm.format(rs.getDate("invoiceDate")));
+				salesVO2.setSalesTotalAmount(rs.getDouble("totalAmount"));
+				salesVO2.setSalesGST14(rs.getDouble("GST14"));
+				salesVO2.setSalesGST9(rs.getDouble("GST9"));
+				salesVO2.setSalesTotalAmountGST(rs.getDouble("totalAmountGST"));
+				salesVO2.setSalesTotalRoundOffAmount(rs.getLong("totalRoundOffAmount"));
+				list.add(salesVO2);
+			}
+		}catch (Exception e) {
+			System.out.println("printDAO :: getSalesBill :: "+e);
+		}
+		finally{
+			st.close();
+			con.close();
+		}
+		return list;
+	}
+	
+	public List<itemVO> getSalesItem(salesVO salesVO) throws SQLException{
+		
+		List<itemVO> list = new ArrayList<itemVO>();
+		try{	
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			Statement st2 = con.createStatement();
+			ResultSet r = st2.executeQuery("select SUM(qty)as 'sum' from salesitem where salesInvoiceNo='"+salesVO.getSalesInvoiceNo()+"'");
+			r.next();
+			ResultSet rs = st.executeQuery("select name,srno,description,HSN,GST,qty,unitPrice,discount,totalAmount from salesitem where salesInvoiceNo='"+salesVO.getSalesInvoiceNo()+"'");
+			while(rs.next()){
+				itemVO i = new itemVO();
+				i.setItemName(rs.getString("name"));
+				i.setItemSrNo(rs.getString("srno"));
+				i.setItemDescription(rs.getString("description"));
+				i.setItemHSN(rs.getString("HSN"));
+				i.setItemGST(rs.getInt("GST"));
+				i.setItemQty(rs.getInt("qty"));
+				i.setItemSalesPrice(rs.getDouble("unitPrice"));
+				i.setItemPurchasePrice(rs.getDouble("discount"));
+				i.setExtra(r.getString("sum"));
+				i.setExtrad(rs.getDouble("totalAmount"));
+				list.add(i);
+			}
+			st2.close();
+		}
+		catch(Exception e){
+			System.out.println("printDAO :: getSalesItem :: "+e);
+			return null;
+		}
+		finally{
+			st.close();
+			con.close();
+		}
+		return list;
+	}
+
+	public List<customerVO> getCustomer(salesVO salesVO) throws SQLException{
+		
+		List<customerVO> list = new ArrayList<customerVO>();
+		try{	
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			Statement st2 = con.createStatement();
+			ResultSet r = st.executeQuery("select customerName from salesbill where invoiceNo='"+salesVO.getSalesInvoiceNo()+"'");
+			r.next();
+			ResultSet rs = st2.executeQuery("select name,address1,address2,GSTNo,city,stateCode from customer where name='"+r.getString("customerName")+"'");
+			while(rs.next()){
+				customerVO customerVO = new customerVO();
+				customerVO.setCustomerName(rs.getString("name"));
+				customerVO.setCustomerAddress1(rs.getString("address1"));
+				customerVO.setCustomerAddress2(rs.getString("address2"));
+				customerVO.setCustomerGSTNo(rs.getString("gstNo"));
+				customerVO.setCustomerCity(rs.getString("city"));
+				customerVO.setCustomerStatecode(rs.getString("stateCode"));
+				list.add(customerVO);
+			}
+			st2.close();
+		}catch (Exception e) {
+			System.out.println("printDAO :: getCustomer :: "+e);
 		}
 		finally{
 			st.close();

@@ -12,21 +12,7 @@ public class supplierVO {
 		private String supplierPurchaseInvoiceNo;
 		private long supplierMobileNo;
 		private String supplierEmail;
-		
-		/*public supplierVO(){}
-		public supplierVO(supplierVO ob){
-			this.supplierName = ob.supplierName;
-			this.supplierAddress1 = ob.supplierAddress1;
-			this.supplierAddress2 = ob.supplierAddress2;
-			this.supplierCity = ob.supplierCity;
-			this.supplierStatecode = ob.supplierStatecode;
-			this.supplierGSTNo = ob.supplierGSTNo;
-			this.supplierPurchaseInvoiceNo = ob.supplierPurchaseInvoiceNo;
-			this.supplierMobileNo = ob.supplierMobileNo;
-			this.supplierEmail = ob.supplierEmail;
-		}
-		*/
-		
+
 		public int getId() {
 			return id;
 		}

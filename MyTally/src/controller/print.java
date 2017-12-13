@@ -1,19 +1,15 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.google.gson.Gson;
-
 import dao.printDAO;
 import vo.purchaseVO;
+import vo.salesVO;
 
 @WebServlet("/print")
 public class print extends HttpServlet {
@@ -28,7 +24,7 @@ public class print extends HttpServlet {
 		String ch = request.getParameter("ch");
 		switch(ch){
 		
-		case "salebill" : saleBill(request,response);break;
+		case "sales" : saleBill(request,response);break;
 		case "purchase" : purchase(request,response);break;
 		default : System.out.println("*** DEFALUT *** :: print");
 		
@@ -36,7 +32,23 @@ public class print extends HttpServlet {
 	}
 	
 	private void saleBill(HttpServletRequest request, HttpServletResponse response){
+	
+		HttpSession session = request.getSession();
+		Integer iv = Integer.parseInt((String)request.getParameter("printInvoiceNo"));
 		
+		salesVO salesVO = new salesVO();
+		salesVO.setSalesInvoiceNo(iv);
+		
+		printDAO printDAO = new printDAO();
+		try{
+			session.setAttribute("bill",printDAO.getSalesBill(salesVO));
+			session.setAttribute("item", printDAO.getSalesItem(salesVO));
+			session.setAttribute("customer",printDAO.getCustomer(salesVO));
+			response.sendRedirect("salesPrint.jsp");
+		}
+		catch(Exception e){
+			System.out.println("print.java :: salesbill :: "+e);
+		}
 	}
 	
 	private void purchase(HttpServletRequest request, HttpServletResponse response){

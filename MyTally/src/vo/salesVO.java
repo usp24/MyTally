@@ -13,22 +13,32 @@ public class salesVO {
 	private double salesGST14;
 	private double salesTotalAmountGST;
 	private long salesTotalRoundOffAmount;
-	
+	private String extra;
 	private double salesItemDiscount;
 	private double salesItemTotalAmount;
 	
+	
 	private Double set(double d){
-		DecimalFormat df = new DecimalFormat();
-		df.setMinimumFractionDigits(2);
-		df.setMaximumFractionDigits(2);
-		return new Double(df.format(d));
+		if(d!=0){
+			DecimalFormat df = new DecimalFormat("#.00");
+			return Double.parseDouble(df.format(d));
+		}
+		else
+			return 0.00;
 	}
 	
+	public String getExtra() {
+		return extra;
+	}
+
+	public void setExtra(String extra) {
+		this.extra = extra;
+	}
 	public double getSalesItemDiscount() {
-		return salesItemDiscount;
+		return set(salesItemDiscount);
 	}
 	public void setSalesItemDiscount(double salesItemDiscount) {
-		this.salesItemDiscount = salesItemDiscount;
+		this.salesItemDiscount = set(salesItemDiscount);
 	}
 	public double getSalesItemTotalAmount() {
 		return set(salesItemTotalAmount);
@@ -90,4 +100,5 @@ public class salesVO {
 	public void setSalesTotalRoundOffAmount(long salesTotalRoundOffAmount) {
 		this.salesTotalRoundOffAmount = salesTotalRoundOffAmount;
 	}
+
 }

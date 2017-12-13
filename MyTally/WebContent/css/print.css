@@ -215,11 +215,14 @@
 		border-right:1px solid black;
 	
 	}
+	.item #data #tdsr{
+		vertical-align: baseline;
+		padding-top:7px;
+	}
 	.item #data #srno{
 		padding:0px;
-		vertical-align: top;
+		vertical-align: baseline;
 		text-align:center;
-		margin-top:-10px;
 		width:7mm;
 		max-width:7mm ;
 		min-width:7mm;
@@ -252,8 +255,8 @@
 		font-weight: bold;
 	}
 	.item #data #goods #dn{
-		padding-top:2px;
-		pading-left:15px;
+		padding-top:0px;
+		margin-left:4px;
 	}
 	.item #data #hsn{
 		text-align: left;
@@ -405,7 +408,7 @@
 		padding-left:210px;
 	} 
 	.item2 #lastrow #lastrowqty{
-		padding-left:132px;
+		padding-left:131px;
 	}
 	.item2 #lastrow #lastrowamt{
 		padding-right:4px;

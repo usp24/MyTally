@@ -6,10 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import vo.purchaseVO;
 import vo.supplierVO;
 
 public class supplierDAO {
@@ -23,7 +20,7 @@ public class supplierDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 			st = con.createStatement();
-			ResultSet rs = st.executeQuery("select id,purchaseInvoiceNo from supplier where GSTNo='"+s.getSupplierGSTNo()+"' AND name='"+s.getSupplierName()+"'");
+			ResultSet rs = st.executeQuery("select id,purchaseInvoiceNo from supplier where GSTNo='"+s.getSupplierGSTNo()+"'");
 			if(rs.next()){				
 				String s1 = rs.getString("purchaseInvoiceNo").concat(s.getSupplierPurchaseInvoiceNo()+"*");
 				st.executeUpdate("update supplier set name='"+s.getSupplierName()+"',GSTNo='"+s.getSupplierGSTNo()+"',address1='"+s.getSupplierAddress1()+"',address2='"+s.getSupplierAddress2()+"',city='"+s.getSupplierCity()+"',stateCode='"+s.getSupplierStatecode()+"',purchaseInvoiceNo='"+s1+"' where id='"+rs.getInt("id")+"'");
@@ -135,15 +132,12 @@ public class supplierDAO {
 			        
 			        List<String> list_i = new ArrayList<String>();
 			        List<String> d = new ArrayList<String>();
-			        
+
 			        for(int j=0;j<ari.length;j++)
-			            list_i.add(ari[j]);
-					for(int i=0;i<arp.length;i++){
-						for(int j=0;j<list_i.size();j++){
-			                if(arp[i].equals(list_i.get(j)) && !(arp[i].equals("")) )
-			                    d.add((String)list_i.get(j));
-						}
-					}
+			        	list_i.add(ari[j]);
+			        for(int j=0;j<arp.length;j++)
+			        	d.add(arp[j]);
+		        
 			        list_i.removeAll(d);
 			        String n2="";
 					for(int i=0;i<list_i.size();i++){

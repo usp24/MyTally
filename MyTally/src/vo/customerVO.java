@@ -13,21 +13,6 @@ public class customerVO {
 	private long customerMobileNo;
 	private String customerEmail;
 	
-	
-	/*public customerVO(){}
-	public customerVO(customerVO ob){
-		this.customerName = ob.customerName;
-		this.customerAddress1 = ob.customerAddress1;
-		this.customerAddress2 = ob.customerAddress2;
-		this.customerCity = ob.customerCity;
-		this.customerStatecode = ob.customerStatecode;
-		this.customerGSTNo = ob.customerGSTNo;
-		this.customerSalesInvoiceNo = ob.customerSalesInvoiceNo;
-		this.customerMobileNo = ob.customerMobileNo;
-		this.customerEmail = ob.customerEmail;
-	}*/
-	
-	
 	public int getId() {
 		return id;
 	}

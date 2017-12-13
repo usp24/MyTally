@@ -240,10 +240,11 @@ function sub(){
 				flag = false;
 				break;
 			}
-			else if(g.value!="18" && g.value!="28"){
+			else if(gst.value!="18" && gst.value!="28"){
 				alert("GST Rate Can Only Be 18% OR 28%");
-				g.value ='';
+				gst.value ='';
 				flag = false;
+				break;
 			}
 			else if(unitPrice.value==""){
 				alert("Please Enter UnitPrice of Item "+i);
@@ -285,7 +286,7 @@ text-transform: uppercase;
 <form action="<%=request.getContextPath()%>/purchase" method="post" onsubmit="return sub()" >
 
 Purchase Invoice Date : <input type="date" name="purchaseInvoiceDate" id="date">		<br>
-Purchase Invoice Number : <input type="text" name="purchaseInvoiceNumber" value="${sessionScope.maxp}" id="iv">		<br>
+Purchase Invoice Number : <input type="text" name="purchaseInvoiceNumber" id="iv">		<br>
 Supplier's Name : <input type="text" name="supplierName" list="dl" id="name">	<br>
 Supplier's Address-1 : <input type="text" name="supplierAddress1" id="add1" >	<br>
 Supplier's Address-2 : <input type="text" name="supplierAddress2" id="add2" >	<br>

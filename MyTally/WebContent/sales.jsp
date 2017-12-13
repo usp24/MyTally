@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="css/fa.css">
-<title>MyTally | Purchase</title>
+<title>MyTally | Sales</title>
 
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>		
 <script type="text/javascript">
@@ -16,7 +16,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type : 'POST',
-			url : 'purchase?ch=purchaseBillShow',
+			url : 'sales?ch=salesBillShow',
 			headres : {
 				Accept : "application/json; charset=utf-8",
 				"Content-Type" : "application/json; charset=utf-8"
@@ -38,13 +38,13 @@ $(document).ready(function(){
 			            var c8 = r.insertCell(7);
 			            
 			            c1.innerHTML = id;
-			            c2.innerHTML = list[i].purchaseInvoiceNo;
-			            c3.innerHTML = list[i].purchaseInvoiceDate;
+			            c2.innerHTML = list[i].salesInvoiceNo;
+			            c3.innerHTML = list[i].salesInvoiceDate;
 			            c4.innerHTML = list[i].extra;
-			            c5.innerHTML = list[i].purchaseTotalRoundOffAmount;
-			            c6.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/print?ch=purchase&printInvoiceNo="+list[i].purchaseInvoiceNo+"'><button>View</button>"; 
-			            c7.innerHTML = "<a href='purchaseedit.jsp?ivn="+list[i].purchaseInvoiceNo+"'>Edit</a>";
-			            c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/purchase?ch=delete&n="+list[i].purchaseInvoiceNo+"'><button class='fa fa-trash-o' aria-hidden='true' ></button></form>";
+			            c5.innerHTML = list[i].salesTotalRoundOffAmount;
+			            c6.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/print?ch=sales&printInvoiceNo="+list[i].salesInvoiceNo+"'><button>View</button>"; 
+			            c7.innerHTML = "<a href='salesedit.jsp?ivn="+list[i].salesInvoiceNo+"'>Edit</a>";
+			            c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/sales?ch=delete&n="+list[i].salesInvoiceNo+"'><button><i class='fa fa-trash-o' aria-hidden='true'></i></button></form>";
 			            
 			            id++;
 					}
@@ -56,14 +56,14 @@ $(document).ready(function(){
 </head>
 <body>
 
-<a href="purchaseitem.jsp" >New Purchase Bill</a>
+<a href="salesitem.jsp" >New Sales Bill</a>
 
 <table id="tb" style="display:none;">
 	<tr>
 		<th>Sr No.</th>
-		<th>Purchase Invoice No.</th>
-		<th>Purchase Invoice Date</th>
-		<th>Supplier's Name</th>
+		<th>Sales Invoice No.</th>
+		<th>Sales Invoice Date</th>
+		<th>Customer's Name</th>
 		<th>Total Amount</th>
 		<th></th>
 		<th></th>

@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -115,7 +114,6 @@ public class purchase extends HttpServlet {
 	
 	void purchaseBillBefore(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException {
 		
-		purchaseDAO purchaseDAO = new purchaseDAO();
 		supplierDAO supplierDAO = new supplierDAO();
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();
@@ -301,7 +299,3 @@ public class purchase extends HttpServlet {
 		supplierDAO.deleteBill(supplierVO);
 	}
 }
-
-
-
-

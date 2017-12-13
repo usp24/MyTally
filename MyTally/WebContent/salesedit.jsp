@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MyTally | Purchase-Edit</title>
+<title>MyTally | Sales-Edit</title>
 
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>		
 <script type="text/javascript">
@@ -22,7 +22,7 @@ $(document).ready(function(){
 	
 	$.ajax({
 		type : 'POST',
-		url : 'purchase?ch=edit',
+		url : 'sales?ch=edit',
 		headres : {
 			Accept : "application/json; charset=utf-8",
 			"Content-Type" : "application/json; charset=utf-8"
@@ -46,8 +46,8 @@ $(document).ready(function(){
 			item1.value = list3[0].itemName;
 			GST1.value = list3[0].itemGST;
 			q1.value = list3[0].itemQty;
-			p1.value = list3[0].itemPurchasePrice;
-			d1.value = list3[0].itemSalesPrice;
+			p1.value = list3[0].itemSalesPrice;
+			d1.value = list3[0].itemPurchasePrice;
 			HSN1.value = list3[0].itemHSN;
 			disc1.value = list3[0].itemDescription;
 			
@@ -84,13 +84,13 @@ $(document).ready(function(){
 				c1.innerHTML = i+1;
 				c2.innerHTML = "<input type='text' list='dl_item' name='ItemName"+cnt+"' id='item"+cnt+"' value='"+list3[i].itemName+"'>";
 				c3.innerHTML = "<input type='text' name='ItemDescription"+cnt+"' id='disc"+cnt+"'  value='"+list3[i].itemDescription+"'>";
-				c4.innerHTML = "<input type='text' name='purchaseItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemQty+"'>";
+				c4.innerHTML = "<input type='text' name='salesItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemQty+"'>";
 				c5.innerHTML = "<input type='text' name='ItemSrNo"+cnt+"1' list='dl_srno' id='srno"+cnt+"1'><div id='srdiv"+cnt+"' style='display:none;'>";
 				c6.innerHTML = "<input type='text' name='ItemHSN"+cnt+"' id='hsn"+cnt+"' value='"+list3[i].itemHSN+"' >";
 				c7.innerHTML = "<input type='text' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='"+list3[i].itemGST+"' >%";
-				c8.innerHTML = "<input type='text' name='purchaseItemUnitPrice"+cnt+"' id='p"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemPurchasePrice+"' >";
-				c9.innerHTML = "<input type='text' name='purchaseItemDiscount"+cnt+"' onblur='fn("+cnt+")' id='d"+cnt+"' value='"+list3[i].itemSalesPrice+"' >%";
-				c10.innerHTML = "<input type='text' name='purchaseItemTotalAmount"+cnt+"' id='amt"+cnt+"' readonly>";
+				c8.innerHTML = "<input type='text' name='salesItemUnitPrice"+cnt+"' id='p"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemSalesPrice+"' >";
+				c9.innerHTML = "<input type='text' name='salesItemDiscount"+cnt+"' onblur='fn("+cnt+")' id='d"+cnt+"' value='"+list3[i].itemPurchasePrice+"' >%";
+				c10.innerHTML = "<input type='text' name='salesItemTotalAmount"+cnt+"' id='amt"+cnt+"' readonly>";
 				c11.innerHTML = "<input type='button' value='+' onclick='fb()'>";
 				c12.innerHTML = "<input type='button' value='X' onclick='fnd(this)'>";
 				
@@ -115,7 +115,7 @@ $(document).ready(function(){
 	
 	$.ajax({
 		type : 'POST',
-		url : 'purchase?ch=edit2',
+		url : 'sales?ch=edit2',
 		headres : {
 			Accept : "application/json; charset=utf-8",
 			"Content-Type" : "application/json; charset=utf-8"
@@ -129,18 +129,18 @@ $(document).ready(function(){
 			var statecode = document.getElementById("statecode");
 			var gst = document.getElementById("gst");
 			
-			name.value = list4[0].supplierName;
-			add1.value = list4[0].supplierAddress1;
-			add2.value = list4[0].supplierAddress2;
-			city.value = list4[0].supplierCity;
-			statecode.value = list4[0].supplierStatecode;
-			gst.value = list4[0].supplierGSTNo;
+			name.value = list4[0].customerName;
+			add1.value = list4[0].customerAddress1;
+			add2.value = list4[0].customerAddress2;
+			city.value = list4[0].customerCity;
+			statecode.value = list4[0].customerStatecode;
+			gst.value = list4[0].customerGSTNo;
 		}
 	});
 	
 	$.ajax({
 		type : 'POST',
-		url : 'purchase?ch=purchaseBillBefore',
+		url : 'sales?ch=salesBillBefore',
 		headres : {
 			Accept : "application/json; charset=utf-8",
 			"Content-Type" : "application/json; charset=utf-8"
@@ -150,14 +150,14 @@ $(document).ready(function(){
 			list1 = $.parseJSON(x);
 			dl.innerHTML = "";
 			for(var i=0;i<list1.length;i++){
-				dl.innerHTML += "<option value='"+list1[i].supplierName+"'/>";
+				dl.innerHTML += "<option value='"+list1[i].customerName+"'/>";
 			}
 		}
 	});
 	
 	$.ajax({
 		type : 'POST',
-		url : 'purchase?ch=purchaseBillBefore2',
+		url : 'sales?ch=salesBillBefore2',
 		headres : {
 			Accept : "application/json; charset=utf-8",
 			"Content-Type" : "application/json; charset=utf-8"
@@ -190,8 +190,8 @@ $(document).ready(function(){
 		var no = document.getElementById("iv");
 		var old = document.getElementById("old_ivn");
 		for(var i=0;i<list2.length;i++){
-			if(no.value == list2[i].purchaseInvoiceNo && no.value!=old.value){
-				alert("Purchase Bill With Invoice No : '"+iv.value+"' Is Already Generated, Please Enter Different Invoice No");
+			if(no.value == list2[i].salesInvoiceNo && no.value!=old.value){
+				alert("Sales Bill With Invoice No : '"+iv.value+"' Is Already Generated, Please Enter Different Invoice No");
 				iv.value = '';
 				break;
 			}
@@ -209,12 +209,12 @@ $(document).ready(function(){
 		var gst = document.getElementById("gst");
 		
 		for(var i=0;i<list1.length;i++){
-			if(name.value==list1[i].supplierName){
-				add1.value = list1[i].supplierAddress1;
-				add2.value = list1[i].supplierAddress2;
-				city.value = list1[i].supplierCity;
-				statecode.value = list1[i].supplierStatecode;
-				gst.value = list1[i].supplierGSTNo;
+			if(name.value==list1[i].customerName){
+				add1.value = list1[i].customerAddress1;
+				add2.value = list1[i].customerAddress2;
+				city.value = list1[i].customerCity;
+				statecode.value = list1[i].customerStatecode;
+				gst.value = list1[i].customerGSTNo;
 				break;
 			}		
 		}	
@@ -263,7 +263,7 @@ function fn3(row){
 			hsn.value = list[i].itemHSN;
 			gst.value = list[i].itemGST;
 			disc.value = list[i].itemDescription;
-			unitPrice.value = list[i].itemPurchasePrice;
+			unitPrice.value = list[i].itemSalesPrice;
 			
 			var txt = list[i].itemSrNo;
 			txt = txt.split('*');
@@ -299,13 +299,13 @@ function fb(){
 	c1.innerHTML = cnt;
 	c2.innerHTML = "<input type='text' list='dl_item' name='ItemName"+cnt+"' id='item"+cnt+"' onblur='fn3("+cnt+")' >";
 	c3.innerHTML = "<input type='text' name='ItemDescription"+cnt+"' id='disc"+cnt+"'>";
-	c4.innerHTML = "<input type='number' name='purchaseItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' onblur='fn2("+cnt+")'>";
+	c4.innerHTML = "<input type='number' name='salesItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' onblur='fn2("+cnt+")'>";
 	c5.innerHTML = "<input type='text' name='ItemSrNo"+cnt+"1' list='dl_srno' id='srno"+cnt+"1'><div id='srdiv"+cnt+"' style='display:none;'>";
 	c6.innerHTML = "<input type='text' name='ItemHSN"+cnt+"' id='hsn"+cnt+"'>";
 	c7.innerHTML = "<input type='number' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='18' >%";
-	c8.innerHTML = "<input type='number' name='purchaseItemUnitPrice"+cnt+"' id='p"+cnt+"' onkeyup='fn("+cnt+")' step='any' >";
-	c9.innerHTML = "<input type='number' name='purchaseItemDiscount"+cnt+"' value='0' onblur='fn("+cnt+")' id='d"+cnt+"' step='any' >%";
-	c10.innerHTML = "<input type='number' name='purchaseItemTotalAmount"+cnt+"' id='amt"+cnt+"' step='any' readonly>";
+	c8.innerHTML = "<input type='number' name='salesItemUnitPrice"+cnt+"' id='p"+cnt+"' onkeyup='fn("+cnt+")' step='any' >";
+	c9.innerHTML = "<input type='number' name='salesItemDiscount"+cnt+"' value='0' onblur='fn("+cnt+")' id='d"+cnt+"' step='any' >%";
+	c10.innerHTML = "<input type='number' name='salesItemTotalAmount"+cnt+"' id='amt"+cnt+"' step='any' readonly>";
 	c11.innerHTML = "<input type='button' value='+' onclick='fb()' >";
 	c12.innerHTML = "<input type='button' value='X' onclick='fnd(this)'>";
 	nr.value = cnt;
@@ -334,7 +334,7 @@ function sub(){
 		flag = false;
 	}
 	else if(name.value==""){
-		alert("Please Enter Supplier's Name");
+		alert("Please Enter Customer's Name");
 		flag = false;
 	}
 	else{
@@ -402,16 +402,16 @@ text-transform: uppercase;
 <datalist id="dl_item" ></datalist>
 <datalist id="dl_srno" ></datalist>
 
-<form action="<%=request.getContextPath()%>/purchase" method="post" onsubmit="return sub()" >
+<form action="<%=request.getContextPath()%>/sales" method="post" onsubmit="return sub()" >
 
-Purchase Invoice Date : <input type="date" name="purchaseInvoiceDate" id="date">		<br>
-Purchase Invoice Number : <input type="number" name="purchaseInvoiceNumber" value="${param.ivn}" id="iv">		<br>
-Supplier's Name : <input type="text" name="supplierName" list="dl" id="name">	<br>
-Supplier's Address-1 : <input type="text" name="supplierAddress1" id="add1" >	<br>
-Supplier's Address-2 : <input type="text" name="supplierAddress2" id="add2" >	<br>
-Area and City : <input type="text" name="supplierCity" id="city">	<br>
-State Code : <input type="text" name="supplierStatecode" value="Gujarat - 24" id="statecode">	<br>
-Supplier's GSTNo. : <input type="text" name="supplierGSTNo" id="gst">	<br>
+Sales Invoice Date : <input type="date" name="salesInvoiceDate" id="date">		<br>
+Sales Invoice Number : <input type="text" name="salesInvoiceNumber" value="${param.ivn}" id="iv">		<br>
+Customer's Name : <input type="text" name="customerName" list="dl" id="name">	<br>
+Customer's Address-1 : <input type="text" name="customerAddress1" id="add1" >	<br>
+Customer's Address-2 : <input type="text" name="customerAddress2" id="add2" >	<br>
+Area and City : <input type="text" name="customerCity" id="city">	<br>
+State Code : <input type="text" name="customerStatecode" value="Gujarat - 24" id="statecode">	<br>
+Customer's GSTNo. : <input type="text" name="customerGSTNo" id="gst">	<br>
 
 <hr>
 
@@ -434,13 +434,13 @@ Supplier's GSTNo. : <input type="text" name="supplierGSTNo" id="gst">	<br>
 	<td>1</td>
 	<td><input type="text" list="dl_item" name="ItemName1" id="item1"></td>
 	<td><input type="text" name="ItemDescription1" id="disc1"></td>
-	<td><input type="number" name="purchaseItemQty1" id="q1" onkeyup="fn('1')"></td>
+	<td><input type="number" name="salesItemQty1" id="q1" onkeyup="fn('1')"></td>
 	<td><input type="text" name="ItemSrNo11" list="dl_srno" id="srno11"><div id="srdiv1" style="display:none;"></div></td>
 	<td><input type="text" name="ItemHSN1" id="hsn1"></td>
 	<td><input type="number" name="ItemGST1" id="gst1" value="18" >%</td>
-	<td><input type="number" name="purchaseItemUnitPrice1" id="p1" onkeyup="fn('1')" step="any" ></td>
-	<td><input type="number" name="purchaseItemDiscount1" value="0" onblur="fn('1')" id="d1" step="any" >%</td>
-	<td><input type="number" name="purchaseItemTotalAmount1" id="amt1" step="any" readonly></td>
+	<td><input type="number" name="salesItemUnitPrice1" id="p1" onkeyup="fn('1')" step="any" ></td>
+	<td><input type="number" name="salesItemDiscount1" value="0" onblur="fn('1')" id="d1" step="any" >%</td>
+	<td><input type="number" name="salesItemTotalAmount1" id="amt1" step="any" readonly></td>
 	<td><input type="button" value="+" onclick="fb()" ></td>
 	<td><input type="button" value="X" onclick="fnd(this)" ></td>
 </tr>
