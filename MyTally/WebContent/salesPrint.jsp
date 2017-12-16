@@ -9,13 +9,24 @@
 <head>
 <link rel="stylesheet" href="css/print.css" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" >
+$(document).ready(function(){
+	var div = document.getElementById("copy");
+	if (confirm("Press OK for ORIGINAL COPY \n\nPress CANCLE for DUPLICATE COPY") == true)
+		div.innerHTML = "(ORIGINAL COPY)";
+	else
+		div.innerHTML = "(DUPLICATE COPY)";
+});
+</script>
+
 <title>MyTally | Print</title>
 </head>
 <body>
 <c:set var="nul" value="" ></c:set>
 <div id="container"><center>
 <div class="header1">
-	<div id="copy">(ORIGINAL COPY)</div>
+	<div id="copy"></div>
 	<div id="head">TAX INVOICE</div>
 </div>
 

@@ -10,7 +10,7 @@ public class customerVO {
 	private String customerStatecode;
 	private String customerGSTNo;
 	private String customerSalesInvoiceNo;
-	private long customerMobileNo;
+	private String customerMobileNo;
 	private String customerEmail;
 	
 	public int getId() {
@@ -61,10 +61,10 @@ public class customerVO {
 	public void setCustomerSalesInvoiceNo(String customerSalesInvoiceNo) {
 		this.customerSalesInvoiceNo = customerSalesInvoiceNo;
 	}
-	public long getCustomerMobileNo() {
+	public String getCustomerMobileNo() {
 		return customerMobileNo;
 	}
-	public void setCustomerMobileNo(long customerMobileNo) {
+	public void setCustomerMobileNo(String customerMobileNo) {
 		this.customerMobileNo = customerMobileNo;
 	}
 	public String getCustomerEmail() {

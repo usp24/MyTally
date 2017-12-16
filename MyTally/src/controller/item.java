@@ -35,7 +35,7 @@ public class item extends HttpServlet {
 									
 		case "itemEntry" : try {
 				itemEntry(request,response);
-				response.sendRedirect("menu.jsp");
+				response.sendRedirect("item.jsp");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}break;
@@ -44,11 +44,62 @@ public class item extends HttpServlet {
 			itemDetail(request,response);
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}break;	
+		}break;
 		
+		case "itemDetailSale" : try {
+			itemDetailSale(request,response);
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}break;
+		
+		case "itemStock" : try {
+			itemStock(request,response);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}break;
+		
+		case "stockPurchase" : try {
+			stockPurchase(request,response);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}break;
+		
+		case "itemView" : try {
+			itemView(request,response);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}break;
+	
 		default : System.out.println("*** DEFAULT CASE *** :: item.java");break;
 		
 		}
+	}
+
+	private void itemView(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+		
+		itemDAO itemDAO = new itemDAO();
+		Gson gson = new Gson();
+		PrintWriter out = response.getWriter();
+		out.println(gson.toJson(itemDAO.viewAllItem()));
+	}
+
+	private void stockPurchase(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		
+		String itemName = request.getParameter("name");
+		itemVO itemVO = new itemVO();
+		itemVO.setItemName(itemName);
+		itemDAO itemDAO = new itemDAO();
+		Gson gson = new Gson();
+		PrintWriter out = response.getWriter();
+		out.println(gson.toJson(itemDAO.getstockPurchaseBill(itemVO)));
+	}
+
+	private void itemStock(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		
+		itemDAO itemDAO = new itemDAO();
+		Gson gson = new Gson();
+		PrintWriter out = response.getWriter();
+		out.println(gson.toJson(itemDAO.getStock()));
 	}
 
 	void itemEntryBefore(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException{
@@ -65,6 +116,14 @@ public class item extends HttpServlet {
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();
 		out.println(gson.toJson(itemDAO.getItemDetail()));
+	}
+	
+	void itemDetailSale(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException{
+		
+		itemDAO itemDAO = new itemDAO();
+		Gson gson = new Gson();
+		PrintWriter out = response.getWriter();
+		out.println(gson.toJson(itemDAO.getItemDetailSale()));
 	}
 
 	void itemEntry(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{

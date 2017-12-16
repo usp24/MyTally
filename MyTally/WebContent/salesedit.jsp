@@ -170,7 +170,7 @@ $(document).ready(function(){
 	
 	$.ajax({
 		type : 'POST',
-		url : 'item?ch=itemDetail',
+		url : 'item?ch=itemDetailSale',
 		headres : {
 			Accept : "application/json; charset=utf-8",
 			"Content-Type" : "application/json; charset=utf-8"
@@ -321,6 +321,7 @@ function fnd(btn){
 function sub(){
 	
 	var flag = true;
+	var tb = document.getElementById("tb1");
 	var date = document.getElementById("date");
 	var iv = document.getElementById("iv");
 	var name = document.getElementById("name");
@@ -338,21 +339,51 @@ function sub(){
 		flag = false;
 	}
 	else{
+		for(var i=1;i<tb.rows.length;i++){
 		
-		for(var i=1;i<cnt;i++){
+			var c = tb.rows[i].cells;
+			var z1 = c[1].innerHTML;
+			var z2 = c[3].innerHTML;
+			var z3 = c[6].innerHTML;
+			var z4 = c[7].innerHTML;
 			
-			var name = document.getElementById("item"+i);
-			var qty = document.getElementById("q"+i);
-			var gst = document.getElementById("gst"+i);
-			var unitPrice = document.getElementById("p"+i);
+			var pn;
+			var pq;
+			var pg;
+			var pu;
+			
+			var zzz = z1.substring("59","60");
+			if(zzz<=9){
+				pn = z1.substring("55","60");
+				pq = z2.substring("46","48");
+				pg = z3.substring("41","45");
+				pu = z4.substring("52","54");
+			}
+			else if(zzz=="m"){
+				pn = z1.substring("56","62");
+				pq = z2.substring("47","50");
+				pg = z3.substring("42","47");
+				pu = z4.substring("53","56");
+			}
+			else{
+				pn = z1.substring("57","64");
+				pq = z2.substring("48","52");
+				pg = z3.substring("43","49");
+				pu = z4.substring("54","58");
+			}
+			
+			var name = document.getElementById(pn);
+			var qty = document.getElementById(pq);
+			var gst = document.getElementById(pg);
+			var unitPrice = document.getElementById(pu);
 			
 			if(name.value==""){
-				alert("Please Enter Name of Item "+i);
+				alert("Please Enter Name of Item");
 				flag = false;
 				break;
 			}
 			else if(qty.value==""){
-				alert("Please Enter Qty of Item "+i);
+				alert("Please Enter Qty of Item");
 				flag = false;
 				break;
 			}
@@ -363,12 +394,12 @@ function sub(){
 				break;
 			}
 			else if(unitPrice.value==""){
-				alert("Please Enter UnitPrice of Item "+i);
+				alert("Please Enter UnitPrice of Item ");
 				flag = false;
 				break;
 			}
 		}
-	}
+	}	
 	
 	if(flag==true)
 		return true;
@@ -410,7 +441,7 @@ Customer's Name : <input type="text" name="customerName" list="dl" id="name">	<b
 Customer's Address-1 : <input type="text" name="customerAddress1" id="add1" >	<br>
 Customer's Address-2 : <input type="text" name="customerAddress2" id="add2" >	<br>
 Area and City : <input type="text" name="customerCity" id="city">	<br>
-State Code : <input type="text" name="customerStatecode" value="Gujarat - 24" id="statecode">	<br>
+State & Code : <input type="text" name="customerStatecode" value="Gujarat, Code : 24" id="statecode">	<br>
 Customer's GSTNo. : <input type="text" name="customerGSTNo" id="gst">	<br>
 
 <hr>

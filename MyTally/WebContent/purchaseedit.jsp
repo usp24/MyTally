@@ -84,13 +84,13 @@ $(document).ready(function(){
 				c1.innerHTML = i+1;
 				c2.innerHTML = "<input type='text' list='dl_item' name='ItemName"+cnt+"' id='item"+cnt+"' value='"+list3[i].itemName+"'>";
 				c3.innerHTML = "<input type='text' name='ItemDescription"+cnt+"' id='disc"+cnt+"'  value='"+list3[i].itemDescription+"'>";
-				c4.innerHTML = "<input type='text' name='purchaseItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemQty+"'>";
+				c4.innerHTML = "<input type='number' name='purchaseItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemQty+"'>";
 				c5.innerHTML = "<input type='text' name='ItemSrNo"+cnt+"1' list='dl_srno' id='srno"+cnt+"1'><div id='srdiv"+cnt+"' style='display:none;'>";
 				c6.innerHTML = "<input type='text' name='ItemHSN"+cnt+"' id='hsn"+cnt+"' value='"+list3[i].itemHSN+"' >";
-				c7.innerHTML = "<input type='text' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='"+list3[i].itemGST+"' >%";
-				c8.innerHTML = "<input type='text' name='purchaseItemUnitPrice"+cnt+"' id='p"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemPurchasePrice+"' >";
-				c9.innerHTML = "<input type='text' name='purchaseItemDiscount"+cnt+"' onblur='fn("+cnt+")' id='d"+cnt+"' value='"+list3[i].itemSalesPrice+"' >%";
-				c10.innerHTML = "<input type='text' name='purchaseItemTotalAmount"+cnt+"' id='amt"+cnt+"' readonly>";
+				c7.innerHTML = "<input type='number' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='"+list3[i].itemGST+"' >%";
+				c8.innerHTML = "<input type='number' name='purchaseItemUnitPrice"+cnt+"' id='p"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemPurchasePrice+"' >";
+				c9.innerHTML = "<input type='number' name='purchaseItemDiscount"+cnt+"' onblur='fn("+cnt+")' id='d"+cnt+"' value='"+list3[i].itemSalesPrice+"' >%";
+				c10.innerHTML = "<input type='number' name='purchaseItemTotalAmount"+cnt+"' id='amt"+cnt+"' readonly>";
 				c11.innerHTML = "<input type='button' value='+' onclick='fb()'>";
 				c12.innerHTML = "<input type='button' value='X' onclick='fnd(this)'>";
 				
@@ -320,6 +320,7 @@ function fnd(btn){
 	
 function sub(){
 	
+	var tb = document.getElementById("tb1");
 	var flag = true;
 	var date = document.getElementById("date");
 	var iv = document.getElementById("iv");
@@ -338,38 +339,67 @@ function sub(){
 		flag = false;
 	}
 	else{
-		
-		for(var i=1;i<cnt;i++){
-			
-			var name = document.getElementById("item"+i);
-			var qty = document.getElementById("q"+i);
-			var gst = document.getElementById("gst"+i);
-			var unitPrice = document.getElementById("p"+i);
-			
-			if(name.value==""){
-				alert("Please Enter Name of Item "+i);
-				flag = false;
-				break;
-			}
-			else if(qty.value==""){
-				alert("Please Enter Qty of Item "+i);
-				flag = false;
-				break;
-			}
-			else if(gst.value!="18" && gst.value!="28"){
-				alert("GST Rate Can Only Be 18% OR 28%");
-				gst.value ='';
-				flag = false;
-				break;
-			}
-			else if(unitPrice.value==""){
-				alert("Please Enter UnitPrice of Item "+i);
-				flag = false;
-				break;
-			}
+		for(var i=1;i<tb.rows.length;i++){
+
+				var c = tb.rows[i].cells;
+				var z1 = c[1].innerHTML;
+				var z2 = c[3].innerHTML;
+				var z3 = c[6].innerHTML;
+				var z4 = c[7].innerHTML;
+				
+				var pn;
+				var pq;
+				var pg;
+				var pu;
+				
+				var zzz = z1.substring("59","60");
+				if(zzz<=9){
+					pn = z1.substring("55","60");
+					pq = z2.substring("49","51");
+					pg = z3.substring("41","45");
+					pu = z4.substring("55","57");
+				}
+				else if(zzz=="m"){
+					pn = z1.substring("56","62");
+					pq = z2.substring("50","53");
+					pg = z3.substring("42","47");
+					pu = z4.substring("56","59");
+				}
+				else{
+					pn = z1.substring("57","64");
+					pq = z2.substring("51","55");
+					pg = z3.substring("43","49");
+					pu = z4.substring("57","61");
+				}
+				
+				var name = document.getElementById(pn);
+				var qty = document.getElementById(pq);
+				var gst = document.getElementById(pg);
+				var unitPrice = document.getElementById(pu);
+				
+				if(name.value==""){
+					alert("Please Enter Name of Item");
+					flag = false;
+					break;
+				}
+				else if(qty.value==""){
+					alert("Please Enter Qty of Item");
+					flag = false;
+					break;
+				}
+				else if(gst.value!="18" && gst.value!="28"){
+					alert("GST Rate Can Only Be 18% OR 28%");
+					gst.value ='';
+					flag = false;
+					break;
+				}
+				else if(unitPrice.value==""){
+					alert("Please Enter UnitPrice of Item ");
+					flag = false;
+					break;
+				}
 		}
-	}
-	
+	}	
 	if(flag==true)
 		return true;
 	else
@@ -405,12 +435,12 @@ text-transform: uppercase;
 <form action="<%=request.getContextPath()%>/purchase" method="post" onsubmit="return sub()" >
 
 Purchase Invoice Date : <input type="date" name="purchaseInvoiceDate" id="date">		<br>
-Purchase Invoice Number : <input type="number" name="purchaseInvoiceNumber" value="${param.ivn}" id="iv">		<br>
+Purchase Invoice Number : <input type="text" name="purchaseInvoiceNumber" value="${param.ivn}" id="iv">		<br>
 Supplier's Name : <input type="text" name="supplierName" list="dl" id="name">	<br>
 Supplier's Address-1 : <input type="text" name="supplierAddress1" id="add1" >	<br>
 Supplier's Address-2 : <input type="text" name="supplierAddress2" id="add2" >	<br>
 Area and City : <input type="text" name="supplierCity" id="city">	<br>
-State Code : <input type="text" name="supplierStatecode" value="Gujarat - 24" id="statecode">	<br>
+State & Code : <input type="text" name="supplierStatecode" value="Gujarat, Code : 24" id="statecode">	<br>
 Supplier's GSTNo. : <input type="text" name="supplierGSTNo" id="gst">	<br>
 
 <hr>

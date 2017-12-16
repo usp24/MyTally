@@ -11,12 +11,12 @@
 <a href="customer.jsp">Customers</a>
 
 
-<a href="item.jsp">Add New Item</a>
+<a href="item.jsp">Item Master</a>
 <a href="purchase.jsp">Purchase</a>
 <a href="sales.jsp">Sales</a>
 
 
-<a href="viewStock.jsp">Maintain Stock</a>
+<a href="stock.jsp">Stock</a>
 <a href="payments.jsp">Maintain Payments</a>
 <a href="other.jsp">Other</a>
 <a href="settings.jsp">Settings</a>

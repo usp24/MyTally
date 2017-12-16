@@ -19,10 +19,10 @@
 							"Content-Type" : "application/json; charset=utf-8"
 						},
 						success : function(x){
-							var list = $.parseJSON(x);
+							var list1 = $.parseJSON(x);
 							var n = document.getElementById("n");
-							for(var i=0;i<list.length;i++){
-								if(n.value.toUpperCase()==list[i].itemName){
+							for(var i=0;i<list1.length;i++){
+								if(n.value.toUpperCase()==list1[i].itemName){
 									alert("This Item Is Already Registered");
 									n.value = '';
 									break;
@@ -31,8 +31,45 @@
 						}
 					});
 				});
-			});
 			
+			var list;
+				$.ajax({
+					type : 'POST',
+					url : 'item?ch=itemView',
+					headres : {
+						Accept : "application/json; charset=utf-8",
+						"Content-Type" : "application/json; charset=utf-8"
+					},
+					success : function(x){
+						list = $.parseJSON(x);
+						if(list.length>0){
+				        	for(var i=0;i<list.length;i++){    
+					            var r = tb.insertRow(-1);
+					            var c1 = r.insertCell(0);
+					            var c2 = r.insertCell(1);
+					            var c3 = r.insertCell(2);
+					            var c4 = r.insertCell(3);
+					            var c5 = r.insertCell(4);
+					            var c6 = r.insertCell(5);
+					            var c7 = r.insertCell(6);
+					            
+					            c1.innerHTML = (i+1);
+					            c2.innerHTML = list[i].itemName;
+					            c3.innerHTML = list[i].itemDescription;
+					            c4.innerHTML = list[i].itemHSN;
+					            c5.innerHTML = list[i].itemGST;
+					            c6.innerHTML = list[i].itemPurchasePrice;
+					            c7.innerHTML = list[i].itemSalesPrice;
+				        	}
+						}
+						else{
+							var rs = document.getElementById("rs");
+							rs.innerHTML = "No Items Found !!!";
+						}
+					}
+				});
+			});
+
 			function fn(){
 				
 				var n = document.getElementById("n");
@@ -54,13 +91,18 @@
 				else
 					return false;
 			}
+			
+			function f2(){
+				tb = document.getElementById("tb");
+				tb.style.display = "";
+			}
 		</script>
 <style type="text/css" >
 #n{
 	text-transform: uppercase;
 }
 </style>
-	</head>
+</head>
 <body>
 
 <form  method="post" action="<%=request.getContextPath()%>/item" onsubmit="return fn()" >
@@ -73,6 +115,22 @@ SalePrice : <input type="number" name="itemSalesPrice" step='any' ><br>
 <input type="submit" value="ADD ITEM">
 <input type="hidden" name="ch" value="itemEntry">
 </form>
+
+<h1 id="rs"></h1>
+<button id="btn" onclick="f2()" >View All Items</button>
+<table id="tb" style="display:none;" >
+<tr>
+	<th>No.</th>
+	<th>Name</th>
+	<th>Description</th>
+	<th>HSN</th>
+	<th>GST</th>
+	<th>Purchase Price</th>
+	<th>Sales Price</th>
+	<th></th>
+	<th></th>
+</tr>
+</table>
 
 </body>
 </html>

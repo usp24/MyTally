@@ -149,22 +149,42 @@ public class customerDAO {
 			con.close();
 		}
 	}
-
-/*
-public void insertDirect(customerVO s){
+	public void insertDirect(customerVO s) throws SQLException{
+		
+		try{	
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			st.executeUpdate("insert into customer(name,address1,address2,GSTNo,city,stateCode,mobileNo,email) values('"+s.getCustomerName()+"','"+s.getCustomerAddress1()+"','"+s.getCustomerAddress2()+"','"+s.getCustomerGSTNo()+"','"+s.getCustomerCity()+"','"+s.getCustomerStatecode()+"','"+s.getCustomerMobileNo()+"','"+s.getCustomerEmail()+"')");
+		}
+		catch(Exception e){
+			System.out.println("customerDAO :: insertDirect :: "+e);
+		}
+		finally{
+			st.close();
+			con.close();
+		}
+	}
 	
-	try{	
+	public List<customerVO> customerEntryBefore() throws ClassNotFoundException, SQLException {
+
+		List<customerVO> list = new ArrayList<customerVO>();
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 		Statement st = con.createStatement();
-		st.executeUpdate("insert into customer(name,address1,address2,GSTNo) values('"+s.getCustomerName()+"','"+s.getCustomerAddress1()+"','"+s.getCustomerAddress2()+"','"+s.getCustomerGSTNo()+"')");
+		ResultSet rs = st.executeQuery("select name,address1,address2,GSTNo,city,stateCode,mobileNo,email from customer group by GSTNo order by name");
+		while(rs.next()){
+			customerVO customerVO = new customerVO();
+			customerVO.setCustomerName(rs.getString("name"));
+			customerVO.setCustomerAddress1(rs.getString("address1"));
+			customerVO.setCustomerAddress2(rs.getString("address2"));
+			customerVO.setCustomerGSTNo(rs.getString("gstNo"));
+			customerVO.setCustomerCity(rs.getString("city"));
+			customerVO.setCustomerStatecode(rs.getString("stateCode"));
+			customerVO.setCustomerMobileNo(rs.getString("mobileNo"));
+			customerVO.setCustomerEmail(rs.getString("email"));
+			list.add(customerVO);
+		}
+		return list;
 	}
-	catch(Exception e){
-		System.out.println("salesDAO :: insertbill :: "+e);
-	}
-	finally{
-		//st.close();
-		//con.close();
-	}
-}*/
 }

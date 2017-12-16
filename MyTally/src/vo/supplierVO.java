@@ -10,7 +10,7 @@ public class supplierVO {
 		private String supplierStatecode;
 		private String supplierGSTNo;
 		private String supplierPurchaseInvoiceNo;
-		private long supplierMobileNo;
+		private String supplierMobileNo;
 		private String supplierEmail;
 
 		public int getId() {
@@ -61,10 +61,10 @@ public class supplierVO {
 		public void setSupplierPurchaseInvoiceNo(String supplierPurchaseInvoiceNo) {
 			this.supplierPurchaseInvoiceNo = supplierPurchaseInvoiceNo;
 		}
-		public long getSupplierMobileNo() {
+		public String getSupplierMobileNo() {
 			return supplierMobileNo;
 		}
-		public void setSupplierMobileNo(long supplierMobileNo) {
+		public void setSupplierMobileNo(String supplierMobileNo) {
 			this.supplierMobileNo = supplierMobileNo;
 		}
 		public String getSupplierEmail() {
