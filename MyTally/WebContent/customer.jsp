@@ -1,13 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>MyTally | Customer</title>
+<link rel="stylesheet" href="css/fa.css">
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-var list;
+var dr = "<c:out value="${param.dr}"/>";
+if(dr=="t"){
+	alert("Deleted Successfully");
+	dr="z";
+	window.open("customer.jsp", "_self");
+}
+else if(dr=="f"){
+	alert("Cant Delete");
+	dr="z";
+	window.open("customer.jsp", "_self");
+}
+else{dr="z";}
 $(document).ready(function(){
 	
 	$("#n").blur(function(){
@@ -53,6 +66,8 @@ $(document).ready(function(){
 				         var c7 = r.insertCell(6);
 				         var c8 = r.insertCell(7);
 				         var c9 = r.insertCell(8);
+				         var c10 = r.insertCell(9);
+				         var c11 = r.insertCell(10);
 				          
 				         c1.innerHTML = (i+1);
 				         c2.innerHTML = list[i].customerName;
@@ -63,16 +78,16 @@ $(document).ready(function(){
 				         c7.innerHTML = list[i].customerGSTNo;
 				         c8.innerHTML = list[i].customerMobileNo;
 				         c9.innerHTML = list[i].customerEmail;
+				         c10.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/customer?ch=edit&n="+list[i].customerName+"'><button>Edit</button></form>";
+				         c11.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/customer?ch=delete&n="+list[i].customerName+"'><button class='fa fa-trash-o' aria-hidden='true' ></button></form>";
 			    	}
 				}
 				else{
-					var rs = document.getElementById("rs");
 					rs.innerHTML = "No Record Found !!!";
 				}
 			}
 	});
 });
-
 function fn(){
 	
 	var n = document.getElementById("n");
@@ -96,7 +111,8 @@ function fn(){
 }
 
 function f2(){
-	
+	var rs = document.getElementById("rs");
+	rs.style.display = "";
 	tb = document.getElementById("tb");
 	tb.style.display = "";
 }
@@ -111,7 +127,7 @@ function f2(){
 
 <h1>Customer's Details</h1>
 <form method="post" action="<%=request.getContextPath()%>/customer" onsubmit="return fn()" >
-Name : <input type="text" name="customerName" id="n" >	<br>
+Name : <input type="text" name="customerName" id="n">	<br>
 Address-1 : <input type="text" name="customerAddress1">	<br>
 Address-2 : <input type="text" name="customerAddress2">	<br>
 City : <input type="text" name="customerCity">	<br>
@@ -123,8 +139,8 @@ Email : <input type="email" name="customerEmail">	<br>
 <input type="submit" value="Save" >
 </form>
 
-<h1 id="rs"></h1>
 <button id="btn" onclick="f2()" >View All Customer</button>
+<h1 id="rs" style="display:none;" ></h1>
 <table id="tb" style="display:none;" >
 <tr>
 	<th>No.</th>

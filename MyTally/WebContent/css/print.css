@@ -178,9 +178,9 @@
 		min-width:82mm;
 	}
 	.item #itemHeader #hsn{
-		width:20mm;
-		max-width:20mm ;
-		min-width:20mm;
+		width:18mm;
+		max-width:18mm ;
+		min-width:18mm;
 	}
 	.item #itemHeader #qy{
 		width:9mm;
@@ -204,9 +204,9 @@
 	}
 	.item #itemHeader #totamt{
 		border-right: none;
-		width:23mm;
-		max-width:23mm ;
-		min-width:23mm;
+		width:25mm;
+		max-width:25mm ;
+		min-width:25mm;
 	}
 	
 	
@@ -251,7 +251,7 @@
 	}	
 	.item #data #goods #name{
 		text-transform: capitalize;
-		padding-top:6px;
+		padding-top:5px;
 		font-weight: bold;
 	}
 	.item #data #goods #dn{

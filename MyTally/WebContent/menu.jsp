@@ -17,7 +17,7 @@
 
 
 <a href="stock.jsp">Stock</a>
-<a href="payments.jsp">Maintain Payments</a>
+<a href="payment.jsp">Maintain Payments</a>
 <a href="other.jsp">Other</a>
 <a href="settings.jsp">Settings</a>
 

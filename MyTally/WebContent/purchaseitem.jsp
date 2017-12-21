@@ -92,7 +92,7 @@ $(document).ready(function(){
 		var gst = document.getElementById("gst");
 		
 		for(var i=0;i<list1.length;i++){
-			if(name.value==list1[i].supplierName){
+			if(name.value.toUpperCase()==list1[i].supplierName){
 				add1.value = list1[i].supplierAddress1;
 				add2.value = list1[i].supplierAddress2;
 				city.value = list1[i].supplierCity;
@@ -142,7 +142,7 @@ function fn3(row){
 	srn.value='';
 	
 	for(var i=0;i<num;i++){
-		if(list[i].itemName == name.value){
+		if(list[i].itemName == name.value.toUpperCase()){
 			hsn.value = list[i].itemHSN;
 			gst.value = list[i].itemGST;
 			disc.value = list[i].itemDescription;
@@ -180,7 +180,7 @@ function fb(){
 	var c12 = r.insertCell(11);
 	
 	c1.innerHTML = cnt;
-	c2.innerHTML = "<input type='text' list='dl_item' name='ItemName"+cnt+"' id='item"+cnt+"' onblur='fn3("+cnt+")' >";
+	c2.innerHTML = "<input type='text' list='dl_item' name='ItemName"+cnt+"' id='item"+cnt+"' onblur='fn3("+cnt+")' class='name'>";
 	c3.innerHTML = "<input type='text' name='ItemDescription"+cnt+"' id='disc"+cnt+"'>";
 	c4.innerHTML = "<input type='number' name='purchaseItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' onblur='fn2("+cnt+")'>";
 	c5.innerHTML = "<input type='text' name='ItemSrNo"+cnt+"1' list='dl_srno' id='srno"+cnt+"1'><div id='srdiv"+cnt+"' style='display:none;'>";
@@ -301,7 +301,7 @@ th,td{
 input{
 	border:none;
 }
-#name{
+#name,.name{
 text-transform: uppercase;
 }
 </style>
@@ -342,7 +342,7 @@ Supplier's GSTNo. : <input type="text" name="supplierGSTNo" id="gst">	<br>
 </tr>
 <tr>
 	<td>1</td>
-	<td><input type="text" list="dl_item" name="ItemName1" id="item1" onblur="fn3('1')"></td>
+	<td><input type="text" list="dl_item" name="ItemName1" id="item1" onblur="fn3('1')" class="name"></td>
 	<td><input type="text" name="ItemDescription1" id="disc1"></td>
 	<td><input type="number" name="purchaseItemQty1" id="q1" onkeyup="fn('1')" onblur="fn2('1')"></td>
 	<td><input type="text" name="ItemSrNo11" list="dl_srno" id="srno11"><div id="srdiv1" style="display:none;"></div></td>

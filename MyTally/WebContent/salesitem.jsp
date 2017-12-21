@@ -93,7 +93,7 @@ $(document).ready(function(){
 		var gst = document.getElementById("gst");
 		
 		for(var i=0;i<list1.length;i++){
-			if(name.value==list1[i].customerName){
+			if(name.value.toUpperCase()==list1[i].customerName){
 				add1.value = list1[i].customerAddress1;
 				add2.value = list1[i].customerAddress2;
 				city.value = list1[i].customerCity;
@@ -143,7 +143,7 @@ function fn3(row){
 	srn.value='';
 	
 	for(var i=0;i<num;i++){
-		if(list[i].itemName == name.value){
+		if(list[i].itemName == name.value.toUpperCase()){
 			hsn.value = list[i].itemHSN;
 			gst.value = list[i].itemGST;
 			disc.value = list[i].itemDescription;
@@ -297,7 +297,6 @@ window.onload = function() {
         window.location.reload();
     }
 }
-
 </script>
 
 <style type="text/css" >
@@ -313,7 +312,7 @@ th,td,tr{
 input{
 	border:none;
 }
-#name{
+#name,.name{
 text-transform: uppercase;
 }
 </style>
@@ -354,7 +353,7 @@ Customer's GSTNo. : <input type="text" name="customerGSTNo" id="gst">	<br>
 </tr>
 <tr>
 	<td>1</td>
-	<td><input type="text" list="dl_item" name="ItemName1" id="item1" onblur="fn3('1')"></td>
+	<td><input type="text" list="dl_item" name="ItemName1" id="item1" onblur="fn3('1')" class="" ></td>
 	<td><input type="text" name="ItemDescription1" id="disc1"></td>
 	<td><input type="number" name="salesItemQty1" id="q1" onkeyup="fn('1')" onblur="fn2('1')"></td>
 	<td><input type="text" name="ItemSrNo11" list="dl_srno" id="srno11"><div id="srdiv1" style="display:none;"></div></td>

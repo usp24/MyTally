@@ -1,17 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="css/fa.css">
 <title>MyTally | Stock</title>
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>		
 <script type="text/javascript">
 var list;
+var name = "<c:out value='${param.name}' />";
 $(document).ready(function(){
 	$.ajax({
 		type : 'POST',
-		url : 'item?ch=itemStock',
+		url : 'item?ch=stockPurchase&name='+name+'',
 		headres : {
 			Accept : "application/json; charset=utf-8",
 			"Content-Type" : "application/json; charset=utf-8"
@@ -32,35 +35,19 @@ $(document).ready(function(){
 		            var c7 = r.insertCell(6);
 		            var c8 = r.insertCell(7);
 		            
-		            var txt = list[i].itemSrNo;
-					txt = txt.split('*');
-					var s = txt.length;
-					var y = "";
-					for(var j=1;j<=s;j++){
-						var x = txt.pop();
-						if(x!=""){
-							y = y.concat(x);
-							if(j!=s)
-								y = y.concat(", ");
-						}
-					}
-		            
 		            c1.innerHTML = (i+1);
-		            c2.innerHTML = list[i].itemName;
-		            c3.innerHTML = y;
-		            c4.innerHTML = list[i].itemDescription;
-		            c5.innerHTML = list[i].itemHSN;
-		            c6.innerHTML = list[i].itemGST;
-		            c7.innerHTML = list[i].itemQty;
-		            if(list[i].itemQty>0)
-		            	c8.innerHTML = "<a href='stockPurchase.jsp?name="+list[i].itemName+"'>View Purchase Bill</a>";
-		            else
-		            	c8.innerHTML = "<a href='stockSales.jsp?name="+list[i].itemName+"'>View Sales Bill</a>";
-	        	}
+		            c2.innerHTML = list[i].purchaseInvoiceNo;
+		            c3.innerHTML = list[i].purchaseInvoiceDate;
+		            c4.innerHTML = list[i].extra;
+		            c5.innerHTML = list[i].purchaseTotalAmountGST;
+		            c6.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/print?ch=purchase&printInvoiceNo="+list[i].purchaseInvoiceNo+"'><button>View</button>"; 
+		            c7.innerHTML = "<a href='purchaseedit.jsp?ivn="+list[i].purchaseInvoiceNo+"'>Edit</a>";
+		            c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/purchase?ch=delete&n="+list[i].purchaseInvoiceNo+"'><button class='fa fa-trash-o' aria-hidden='true' ></button></form>";
+				}
 			}
 			else{
 				var rs = document.getElementById("rs");
-				rs.innerHTML = "No Items In Stock";
+				rs.innerHTML = "No Record Found !!!";
 			}
 		}
 	});
@@ -68,16 +55,18 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+
 <h1 id="rs" ></h1>
+
 <table id="tb" style="display:none;">
 	<tr>
-		<th>No.</th>
-		<th>Name</th>
-		<th>Sr.No.</th>
-		<th>Description</th>
-		<th>HSN</th>
-		<th>GST</th>
-		<th>Qty</th>
+		<th>Sr No.</th>
+		<th>Purchase Invoice No.</th>
+		<th>Purchase Invoice Date</th>
+		<th>Supplier's Name</th>
+		<th>Total Amount</th>
+		<th></th>
+		<th></th>
 		<th></th>
     </tr>
 </table>

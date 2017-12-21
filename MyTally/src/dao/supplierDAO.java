@@ -81,28 +81,6 @@ public class supplierDAO {
 		return list;
 	}
 	
-	public List<supplierVO> supplierEntryBefore() throws ClassNotFoundException, SQLException {
-
-		List<supplierVO> list = new ArrayList<supplierVO>();
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
-		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery("select name,address1,address2,GSTNo,city,stateCode,mobileNo,email from supplier group by GSTNo order by name");
-		while(rs.next()){
-			supplierVO supplierVO = new supplierVO();
-			supplierVO.setSupplierName(rs.getString("name"));
-			supplierVO.setSupplierAddress1(rs.getString("address1"));
-			supplierVO.setSupplierAddress2(rs.getString("address2"));
-			supplierVO.setSupplierGSTNo(rs.getString("gstNo"));
-			supplierVO.setSupplierCity(rs.getString("city"));
-			supplierVO.setSupplierStatecode(rs.getString("stateCode"));
-			supplierVO.setSupplierMobileNo(rs.getString("mobileNo"));
-			supplierVO.setSupplierEmail(rs.getString("email"));
-			list.add(supplierVO);
-		}
-		return list;
-	}
-	
 	public void deleteBill(supplierVO supplierVO) throws Exception {
 		
 		try{	
@@ -189,6 +167,28 @@ public class supplierDAO {
 		}
 	}
 
+	public List<supplierVO> supplierEntryBefore() throws ClassNotFoundException, SQLException {
+
+		List<supplierVO> list = new ArrayList<supplierVO>();
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("select name,address1,address2,GSTNo,city,stateCode,mobileNo,email from supplier group by GSTNo order by name");
+		while(rs.next()){
+			supplierVO supplierVO = new supplierVO();
+			supplierVO.setSupplierName(rs.getString("name"));
+			supplierVO.setSupplierAddress1(rs.getString("address1"));
+			supplierVO.setSupplierAddress2(rs.getString("address2"));
+			supplierVO.setSupplierGSTNo(rs.getString("gstNo"));
+			supplierVO.setSupplierCity(rs.getString("city"));
+			supplierVO.setSupplierStatecode(rs.getString("stateCode"));
+			supplierVO.setSupplierMobileNo(rs.getString("mobileNo"));
+			supplierVO.setSupplierEmail(rs.getString("email"));
+			list.add(supplierVO);
+		}
+		return list;
+	}
+
 	public void insertDirect(supplierVO s) throws SQLException{
 		
 		try{	
@@ -199,6 +199,81 @@ public class supplierDAO {
 		}
 		catch(Exception e){
 			System.out.println("purchaseDAO :: insertbill :: "+e);
+		}
+		finally{
+			st.close();
+			con.close();
+		}
+	}
+
+	public boolean delete(supplierVO s) throws SQLException {
+	
+		try{	
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			Statement st2 = con.createStatement();
+			ResultSet rs = st.executeQuery("select id from purchasebill where supplierName='"+s.getSupplierName()+"'");
+			if(rs.next())
+				return false;
+			else{
+				st2.executeUpdate("delete from supplier where name='"+s.getSupplierName()+"'");
+				st2.executeUpdate("delete from purchasebill where supplierName='"+s.getSupplierName()+"'");
+				return true;
+			}
+		}
+		catch(Exception e){
+			System.out.println("supplierDAO :: delete :: "+e);
+		}
+		finally{
+			st.close();
+			con.close();
+		}
+		return false;
+	}
+
+	public List<supplierVO> editDetail(supplierVO s) throws SQLException{
+		
+		List<supplierVO> list = new ArrayList<supplierVO>();
+		try{	
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			ResultSet rs = st.executeQuery("select name,address1,address2,GSTNo,city,stateCode,mobileNo,email from supplier where name='"+s.getSupplierName()+"'");
+			rs.next();
+				supplierVO supplierVO = new supplierVO();
+				supplierVO.setSupplierName(rs.getString("name"));
+				supplierVO.setSupplierAddress1(rs.getString("address1"));
+				supplierVO.setSupplierAddress2(rs.getString("address2"));
+				supplierVO.setSupplierGSTNo(rs.getString("gstNo"));
+				supplierVO.setSupplierCity(rs.getString("city"));
+				supplierVO.setSupplierStatecode(rs.getString("stateCode"));
+				supplierVO.setSupplierMobileNo(rs.getString("mobileNo"));
+				supplierVO.setSupplierEmail(rs.getString("email"));
+				list.add(supplierVO);
+		}
+		catch(Exception e){
+			System.out.println("supplierDAO :: delete :: "+e);
+		}
+		finally{
+			st.close();
+			con.close();
+		}
+		return list;
+	}
+
+	public void updateDirect(supplierVO supplierVO, String oldSupplierName) throws SQLException {
+		
+		try{	
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			st.executeUpdate("update purchasebill set supplierName='"+supplierVO.getSupplierName()+"' where supplierName='"+oldSupplierName+"'");
+			st.executeUpdate("update supplier set name='"+supplierVO.getSupplierName()+"' , address1='"+supplierVO.getSupplierAddress1()+"' , address2='"+supplierVO.getSupplierAddress2()+"' , city='"+supplierVO.getSupplierCity()+"' , stateCode='"+supplierVO.getSupplierStatecode()+"' , GSTNo='"+supplierVO.getSupplierGSTNo()+"' , mobileNo='"+supplierVO.getSupplierMobileNo()+"' , email='"+supplierVO.getSupplierEmail()+"' where name='"+oldSupplierName+"' ");
+		
+		}
+		catch(Exception e){
+			System.out.println("supplierDAO :: updateDirect :: "+e);
 		}
 		finally{
 			st.close();

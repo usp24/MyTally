@@ -1,14 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<%@ taglib uri="http://java.sun.com/jstl/core_rt"  prefix="c"%>
 <html>
 	<head>
+		<link rel="stylesheet" href="css/fa.css">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>MyTally | Items</title>
 		<script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>		
 		<script type="text/javascript">
-		
+		var dr = "<c:out value="${param.dr}" />";
+		if(dr=="t"){
+			alert("Deleted Successfully");
+			dr="z";
+			window.open("item.jsp", "_self");
+		}
+		else if(dr=="f"){
+			alert("Cant Delete");
+			dr="z";
+			window.open("item.jsp", "_self");
+		}
+		else{dr="z";}
 			$(document).ready(function(){
 				$("#n").blur(function(){
 					$.ajax({
@@ -52,6 +64,8 @@
 					            var c5 = r.insertCell(4);
 					            var c6 = r.insertCell(5);
 					            var c7 = r.insertCell(6);
+					            var c8 = r.insertCell(7);
+					            var c9 = r.insertCell(8);
 					            
 					            c1.innerHTML = (i+1);
 					            c2.innerHTML = list[i].itemName;
@@ -60,10 +74,11 @@
 					            c5.innerHTML = list[i].itemGST;
 					            c6.innerHTML = list[i].itemPurchasePrice;
 					            c7.innerHTML = list[i].itemSalesPrice;
+					            c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/item?ch=edit&n="+list[i].itemName+"'><button>Edit</button></form>";
+						        c9.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/item?ch=delete&n="+list[i].itemName+"'><button class='fa fa-trash-o' aria-hidden='true' ></button></form>";
 				        	}
 						}
 						else{
-							var rs = document.getElementById("rs");
 							rs.innerHTML = "No Items Found !!!";
 						}
 					}
@@ -80,7 +95,7 @@
 					alert("Please Enter Item Name");
 					flag = false;
 				}
-				else if(g.value!="18" && g.value!="28" && g.value!='' ){
+				else if(g.value!="18" && g.value!="28" && g.value!=''){
 					alert("GST Rate Can Only Be 18% OR 28%");
 					g.value ='';
 					flag = false;
@@ -95,6 +110,8 @@
 			function f2(){
 				tb = document.getElementById("tb");
 				tb.style.display = "";
+				var rs = document.getElementById("rs");
+				rs.style.display="";
 			}
 		</script>
 <style type="text/css" >
@@ -116,8 +133,8 @@ SalePrice : <input type="number" name="itemSalesPrice" step='any' ><br>
 <input type="hidden" name="ch" value="itemEntry">
 </form>
 
-<h1 id="rs"></h1>
 <button id="btn" onclick="f2()" >View All Items</button>
+<h1 id="rs" style="display:none;"></h1>
 <table id="tb" style="display:none;" >
 <tr>
 	<th>No.</th>

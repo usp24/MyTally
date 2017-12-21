@@ -6,28 +6,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>MyTally | Login</title>
-
 <script type="text/javascript" >
-	function fn(){
+function fn(){
 		
-		var u = document.getElementById("u");
-		var p = document.getElementById("p");
-		var flag = true;
-		
-		if(u.value==""){
-			alert("Please Enter Username");
-			flag = false;
-		}
-		else if(p.value==""){
-			alert("Please Enter Password");
-			flag = false;
-		}
-		
-		if(flag==true)
-			return true;
-		else 
-			return false;
+	var u = document.getElementById("u");
+	var p = document.getElementById("p");
+	var flag = true;
+	
+	if(u.value==""){
+		alert("Please Enter Username");
+		flag = false;
 	}
+	else if(p.value==""){
+		alert("Please Enter Password");
+		flag = false;
+	}
+	
+	if(flag==true)
+		return true;
+	else 
+		return false;
+}
 </script>
 
 </head>

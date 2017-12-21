@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vo.customerVO;
+import vo.supplierVO;
 
 public class customerDAO {
 	
@@ -186,5 +187,78 @@ public class customerDAO {
 			list.add(customerVO);
 		}
 		return list;
+	}
+	
+	public boolean delete(customerVO s) throws SQLException {
+		
+		try{	
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			Statement st2 = con.createStatement();
+			ResultSet rs = st.executeQuery("select id from salesbill where customerName='"+s.getCustomerName()+"'");
+			if(rs.next())
+				return false;
+			else{
+				st2.executeUpdate("delete from customer where name='"+s.getCustomerName()+"'");
+				return true;
+			}
+		}
+		catch(Exception e){
+			System.out.println("customerDAO :: delete :: "+e);
+		}
+		finally{
+			st.close();
+			con.close();
+		}
+		return false;
+	}
+
+	public List<customerVO> editDetail(customerVO s) throws SQLException{
+		
+		List<customerVO> list = new ArrayList<customerVO>();
+		try{	
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			ResultSet rs = st.executeQuery("select name,address1,address2,GSTNo,city,stateCode,mobileNo,email from customer where name='"+s.getCustomerName()+"'");
+			rs.next();
+				customerVO customerVO = new customerVO();
+				customerVO.setCustomerName(rs.getString("name"));
+				customerVO.setCustomerAddress1(rs.getString("address1"));
+				customerVO.setCustomerAddress2(rs.getString("address2"));
+				customerVO.setCustomerGSTNo(rs.getString("gstNo"));
+				customerVO.setCustomerCity(rs.getString("city"));
+				customerVO.setCustomerStatecode(rs.getString("stateCode"));
+				customerVO.setCustomerMobileNo(rs.getString("mobileNo"));
+				customerVO.setCustomerEmail(rs.getString("email"));
+				list.add(customerVO);
+		}
+		catch(Exception e){
+			System.out.println("customerDAO :: delete :: "+e);
+		}
+		finally{
+			st.close();
+			con.close();
+		}
+		return list;
+	}
+
+	public void updateDirect(customerVO customerVO, String oldCustomerName) throws SQLException {
+		try{	
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			st.executeUpdate("update salesbill set customerName='"+customerVO.getCustomerName()+"' where customerName='"+oldCustomerName+"'");
+			st.executeUpdate("update customer set name='"+customerVO.getCustomerName()+"' , address1='"+customerVO.getCustomerAddress1()+"' , address2='"+customerVO.getCustomerAddress2()+"' , city='"+customerVO.getCustomerCity()+"' , stateCode='"+customerVO.getCustomerStatecode()+"' , GSTNo='"+customerVO.getCustomerGSTNo()+"' , mobileNo='"+customerVO.getCustomerMobileNo()+"' , email='"+customerVO.getCustomerEmail()+"' where name='"+oldCustomerName+"' ");
+
+		}
+		catch(Exception e){
+			System.out.println("customerDAO :: updateDirect :: "+e);
+		}
+		finally{
+			st.close();
+			con.close();
+		}
 	}
 }
