@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="css/fa.css">
-<title>MyTally | Sales</title>
+<title>Sale</title>
 
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>		
 <script type="text/javascript">
@@ -42,9 +42,9 @@ $(document).ready(function(){
 			            c3.innerHTML = list[i].salesInvoiceDate;
 			            c4.innerHTML = list[i].extra;
 			            c5.innerHTML = list[i].salesTotalRoundOffAmount;
-			            c6.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/print?ch=sales&printInvoiceNo="+list[i].salesInvoiceNo+"'><button>View</button>"; 
-			            c7.innerHTML = "<a href='salesedit.jsp?ivn="+list[i].salesInvoiceNo+"'>Edit</a>";
-			            c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/sales?ch=delete&n="+list[i].salesInvoiceNo+"'><button><i class='fa fa-trash-o' aria-hidden='true'></i></button></form>";
+			            c6.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/print?ch=sales&printInvoiceNo="+list[i].salesInvoiceNo+"'><button style='color:#191818;' id='bview' class='fa fa-eye' aria-hidden='true' ></button>"; 
+			            c7.innerHTML = "<a id='bedit' href='salesedit.jsp?ivn="+list[i].salesInvoiceNo+"'><i style='color:#191818;' class='fa fa-pencil' aria-hidden='true'></i></a>";
+			            c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/sales?ch=delete&n="+list[i].salesInvoiceNo+"'><button id='bdel' style='color:#191818;' class='fa fa-times' aria-hidden='true' ></button></form>";
 			            
 			            id++;
 					}
@@ -52,18 +52,230 @@ $(document).ready(function(){
 			}
 		});
 });
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 75) {
+         $(".menubar").addClass('fix');
+    } else {
+         $(".menubar").removeClass('fix');
+    }
+});
 </script>
+
+<style type="text/css" >
+body{
+	background-color: #edf8f896;
+	overflow:visible;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	font-family: Calibri,verdana,arial,sans-serif;
+}
+a{
+	text-decoration: none;
+	color:inherit;
+	cursor: pointer;
+}
+
+
+.header{
+	margin:auto;
+	overflow:hidden;
+	padding-top: 10px;
+	margin-bottom: 3px;
+}
+.header #title{
+	float: left;
+	clear: left;
+	padding-left:18px;
+}
+.header #text{
+	float: right;
+	padding-right:10px;
+	padding-top:15px;
+}
+.header #title #titleh1{
+	color: #4B4B4B;
+	text-transform: uppercase;
+	font-size : 41px;
+	margin: 0px;
+}
+.header #title #titleh1:HOVER{
+	color: #00aba9;
+}
+.header #title #titleh1 #u{
+	font-size:55px;
+	color:  #00aba9;
+}
+.header #text #textp{
+	letter-spacing:3px;
+	font-size: 14px;
+	font-family: verdana;
+}
+
+.menubar{
+	margin:auto;
+	overflow: visible;
+}
+.fix{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    margin:0;
+}
+.menubar ul{
+	display : inline-block;
+	background-color: #5E5E5E;
+	width: 100%;
+	margin: 0px;
+	padding:0px;
+	padding-left:10px;
+	text-align: center;
+	font-size: 17px;
+	letter-spacing: 1px;
+	font-family: verdana;
+	box-shadow: -2px 3px 4px -2px #5E5E5E;
+}
+.menubar li{
+	height:33px;
+	padding-top:11px;
+	padding-left:15px;
+	padding-right:15px;
+	float:left;
+	display: inherit;
+	color: white;
+}
+.menubar #current{
+	background: #00aba9;
+}
+.menubar li:HOVER{
+	background: black !important;
+}
+
+
+
+#link{
+	margin:auto;
+	height:30px;
+	background: #00aba9;
+	color: white;
+	padding:10px;
+	font-size: 25px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	margin-top: 50px;
+	width: 210px;
+}
+#link:HOVER{
+	box-shadow: 1px 2px 9px 0px #5E5E5E;
+}
+
+
+#tb{
+	margin: auto;
+	margin-top:50px;
+	margin-bottom:50px;
+	white-space:nowrap;
+	border-collapse: collapse; 
+	border:2px solid black;
+}
+#tb #thead td{
+	height:20px;
+	margin:0px;
+	padding:0px;
+}
+#tb #thead h3{
+	color: #5E5E5E;
+	text-transform: uppercase;
+	margin:0px;
+	padding:5px;
+	letter-spacing: 1px;
+	font-size:22px;
+}#tb #thead h3:HOVER{
+	color: #5E5E5E;
+	background: #efefef !important;
+}
+#tb tr{
+	border:2px solid black;
+}
+#tb th{
+	font-size:21px;
+	text-transform: capitalize;
+	padding:10px;
+	background: #5E5E5E;
+	color:white;
+	font-weight: normal;
+}
+#tb td{
+	border-bottom:none;
+	border-top:none;
+	background: #efefef;
+	padding:10px;
+	font-size: 17px;
+}
+#tb td:nth-child(3),th:nth-child(3),td:nth-child(4),th:nth-child(4),td:nth-child(5),th:nth-child(5){
+	text-align: left;
+}
+#tb #bedit,#bview,#bdel{
+	 background-color: Transparent;
+	 border: none;
+	 cursor: pointer;
+	 height:21px;
+}
+#tb td:nth-last-child(-n+3){
+	border:none;
+	padding-right:5px;
+	padding-left: 5px;
+	font-size: 18px;
+	width:30px;
+}
+#tb td:nth-last-child(-n+3):HOVER{
+	background-color: #00aba9;
+}
+#tb td:nth-child(2),td:nth-child(5){
+	max-width:140px;
+     word-wrap: break-word;       
+     word-break: break-all;
+     white-space: normal;
+}
+#tb td:nth-child(4){
+	max-width:400px;
+     word-wrap: break-word;       
+     word-break: break-all;
+     white-space: normal;
+}
+</style>
+
 </head>
 <body>
 
-<a href="salesitem.jsp" >New Sales Bill</a>
+<div class="header">
+	<div id="title" ><h1 id="titleh1" ><a href="menu.jsp" ><span id="u">U</span>Accounting</a></h1></div>
+	<div id="text" ><p id="textp" >THE WORLD'S BEST ACCOUNTING SOFTWARE</p></div>
+</div>
+<div class="menubar">
+	<ul>
+		<li><a href="menu.jsp" >HOME</a></li>
+		<li id="current" ><a href="sales.jsp" >SALE</a></li>
+		<li><a href="purchase.jsp" >PURCHASE</a></li>
+		<li><a href="item.jsp" >ITEM MASTER</a></li>
+		<li><a href="stock.jsp" >STOCK</a></li>
+		<li><a href="supplier.jsp" >SUPPLIERS</a></li>
+		<li><a href="customer.jsp" >CUSTOMERS</a></li>
+	</ul>
+</div>
+
+<div id="link" ><a href="salesitem.jsp" >New Sales Bill</a></div>
 
 <table id="tb" style="display:none;">
+	<tr id="thead">
+		<td colspan="8"><h3>Sales Invoices</h3></td>
+	</tr>
 	<tr>
-		<th>Sr No.</th>
-		<th>Sales Invoice No.</th>
-		<th>Sales Invoice Date</th>
-		<th>Customer's Name</th>
+		<th>No.</th>
+		<th>Invoice No.</th>
+		<th>Invoice Date</th>
+		<th>Customer</th>
 		<th>Total Amount</th>
 		<th></th>
 		<th></th>

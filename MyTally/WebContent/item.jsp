@@ -55,6 +55,7 @@
 					success : function(x){
 						list = $.parseJSON(x);
 						if(list.length>0){
+							var tb = document.getElementById("tb");
 				        	for(var i=0;i<list.length;i++){    
 					            var r = tb.insertRow(-1);
 					            var c1 = r.insertCell(0);
@@ -74,12 +75,13 @@
 					            c5.innerHTML = list[i].itemGST;
 					            c6.innerHTML = list[i].itemPurchasePrice;
 					            c7.innerHTML = list[i].itemSalesPrice;
-					            c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/item?ch=edit&n="+list[i].itemName+"'><button>Edit</button></form>";
-						        c9.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/item?ch=delete&n="+list[i].itemName+"'><button class='fa fa-trash-o' aria-hidden='true' ></button></form>";
+					            c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/item?ch=edit&n="+list[i].itemName+"'><button  class='fa fa-pencil' aria-hidden='true' ></button></form>";
+						        c9.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/item?ch=delete&n="+list[i].itemName+"'><button class='fa fa-times' aria-hidden='true' ></button></form>";
 				        	}
 						}
 						else{
-							rs.innerHTML = "No Items Found !!!";
+							var tb = document.getElementById("tb");
+							tb.style.display="none";
 						}
 					}
 				});
@@ -106,47 +108,300 @@
 				else
 					return false;
 			}
-			
 			function f2(){
-				tb = document.getElementById("tb");
-				tb.style.display = "";
-				var rs = document.getElementById("rs");
-				rs.style.display="";
+				var form = document.getElementById("form");
+				form.style.display="";
+				
+				var btn = document.getElementById("btn");
+				btn.style.display="none";
 			}
-		</script>
-<style type="text/css" >
-#n{
-	text-transform: uppercase;
-}
-</style>
+			$(window).scroll(function() {
+			    if ($(this).scrollTop() > 75) {
+			         $(".menubar").addClass('fix');
+			    } else {
+			         $(".menubar").removeClass('fix');
+			    }
+			});
+</script>
+
+			<style type="text/css" >
+			body{
+				background-color: #edf8f896;
+				overflow:visible;
+				margin: 0px;
+				padding: 0px;
+				text-align: center;
+				font-family: Calibri,verdana,arial,sans-serif;
+			}
+			a{
+				text-decoration: none;
+				color:inherit;
+				cursor: pointer;
+			}
+			button{
+				border:none;
+				background:none;
+				cursor: pointer;
+				height:21px;
+			}
+			h1{
+				color:#5E5E5E;
+			}
+
+
+			.header{
+				margin:auto;
+				overflow:hidden;
+				padding-top: 10px;
+				margin-bottom: 3px;
+			}
+			.header #title{
+				float: left;
+				clear: left;
+				padding-left:18px;
+			}
+			.header #text{
+				float: right;
+				padding-right:10px;
+				padding-top:15px;
+			}
+			.header #title #titleh1{
+				color: #4B4B4B;
+				text-transform: uppercase;
+				font-size : 41px;
+				margin: 0px;
+			}
+			.header #title #titleh1:HOVER{
+				color: #00aba9;
+			}
+			.header #title #titleh1 #u{
+				font-size:55px;
+				color:  #00aba9;
+			}
+			.header #text #textp{
+				letter-spacing:3px;
+				font-size: 14px;
+				font-family: verdana;
+			}
+			
+			.menubar{
+				margin:auto;
+				overflow: visible;
+			}
+			.fix{
+			    position:fixed;
+			    top:0;
+			    left:0;
+			    right:0;
+			    margin:0;
+			}
+			.menubar ul{
+				display : inline-block;
+				background-color: #5E5E5E;
+				width: 100%;
+				margin: 0px;
+				padding:0px;
+				padding-left:10px;
+				text-align: center;
+				font-size: 17px;
+				letter-spacing: 1px;
+				font-family: verdana;
+				box-shadow: -2px 3px 4px -2px #5E5E5E;
+			}
+			.menubar li{
+				height:33px;
+				padding-top:11px;
+				padding-left:15px;
+				padding-right:15px;
+				float:left;
+				display: inherit;
+				color: white;
+			}
+			.menubar #current{
+				background: #00aba9;
+			}
+			.menubar li:HOVER{
+				background: black !important;
+			}
+
+
+			#btn{
+				border:none;
+				margin:auto;
+				background: #00aba9;
+				color: white;
+				padding:10px;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				margin-top: 50px;
+				height:50px;
+				width: 240px;
+				font-size: 20px;
+			}
+			#btn:HOVER{
+				box-shadow: 1px 2px 9px 0px #5E5E5E;
+			}
+			#form{
+				margin:auto;
+				text-align: center;
+				margin-top:70px;
+				margin-bottom:100px;
+			}
+			input[type=submit]{
+				border:none;
+				margin:auto;
+				background:  #5E5E5E;
+				color: white;
+				padding:10px;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				margin-top: 30px;
+				height:45px;
+				width: 210px;
+				font-size: 19px;
+			}
+			input[type=submit]:HOVER{
+				box-shadow: 1px 2px 9px 0px #5E5E5E;
+			}
+			input[type=text],input[type=number]{
+				width:250px;
+				margin-bottom:17px;
+				padding:3px;
+			}
+			.boxName{
+				width:260px;
+				margin: auto;
+				padding: 0px;
+				text-align: left;
+				font-size:18px;
+				padding-bottom:3px;
+			}
+			
+			
+			#tb{
+				margin: auto;
+				margin-top:50px;
+				margin-bottom:50px;
+				white-space:nowrap;
+				border-collapse: collapse; 
+				border:2px solid black;
+			}
+			#tb #thead td{
+				height:20px;
+				margin:0px;
+				padding:0px;
+			}
+			#tb #thead h3{
+				color: #5E5E5E;
+				text-transform: uppercase;
+				margin:0px;
+				padding:5px;
+				letter-spacing: 1px;
+				font-size:22px;
+			}
+			#tb #thead h3:HOVER{
+				color: #5E5E5E;
+				background: #efefef !important;
+			}
+			#tb tr{
+				border:2px solid black;
+			}
+			#tb th{
+				font-size:21px;
+				text-transform: capitalize;
+				padding:10px;
+				background: #5E5E5E;
+				color:white;
+				font-weight: normal;
+			}
+			#tb td{
+				border-bottom:none;
+				border-top:none;
+				background: #efefef;
+				padding:10px;
+				font-size: 17px;
+			}
+			#tb td:nth-child(3),th:nth-child(3),td:nth-child(4),th:nth-child(4),td:nth-child(2),th:nth-child(2),td:nth-child(6),th:nth-child(6),td:nth-child(7),th:nth-child(7){
+				text-align: left;
+			}
+			#tb td:nth-last-child(-n+2):HOVER{
+				background-color: #00aba9;
+			}
+			#tb td:nth-child(2){
+				 max-width:320px;
+			     word-wrap: break-word;       
+			     word-break: break-all;
+			     white-space: normal;
+			}
+			#tb td:nth-child(3){
+				 max-width:220px;
+			     word-wrap: break-word;       
+			     word-break: break-all;
+			     white-space: normal;
+			}
+			
+			#n{
+				text-transform: uppercase;
+			}
+			</style>
+
 </head>
 <body>
 
+<div class="header">
+	<div id="title" ><h1 id="titleh1" ><a href="menu.jsp" ><span id="u">U</span>Accounting</a></h1></div>
+	<div id="text" ><p id="textp" >THE WORLD'S BEST ACCOUNTING SOFTWARE</p></div>
+</div>
+<div class="menubar">
+	<ul>
+		<li><a href="menu.jsp" >HOME</a></li>
+		<li><a href="sales.jsp" >SALE</a></li>
+		<li><a href="purchase.jsp" >PURCHASE</a></li>
+		<li  id="current" ><a href="item.jsp" >ITEM MASTER</a></li>
+		<li><a href="stock.jsp" >STOCK</a></li>
+		<li><a href="supplier.jsp" >SUPPLIERS</a></li>
+		<li><a href="customer.jsp" >CUSTOMERS</a></li>
+	</ul>
+</div>
+
+
+<button id="btn" onclick="f2()">ADD NEW ITEM</button>
+<div id="form" style="display:none;" >
+<h1>Enter Details Of New Item</h1>
+
 <form  method="post" action="<%=request.getContextPath()%>/item" onsubmit="return fn()" >
-Name : <input type="text" name="itemName" id="n"><br>
-Description : <input type="text" name="itemDescription" ><br>
-HSN : <input type="text" name="itemHSN" ><br>
-GST : <input type="number" name="itemGST" id="g" ><br>
-PurchasePrice : <input type="number" name="itemPurchasePrice" step='any' ><br>
-SalePrice : <input type="number" name="itemSalesPrice" step='any' ><br>
-<input type="submit" value="ADD ITEM">
+<div class="boxName" >Name*</div>
+<input type="text" name="itemName" id="n" placeholder1="Enter Name...">
+<div class="boxName" >Description</div>
+<input type="text" name="itemDescription" placeholder1="Enter Description..." >
+<div class="boxName" >HSN</div>
+<input type="text" name="itemHSN"  placeholder1="Enter HSN...">
+<div class="boxName" >GST</div>
+<input type="number" name="itemGST" id="g"  placeholder1="Enter GST...">
+<div class="boxName" >Purchase Price</div>
+<input type="number" name="itemPurchasePrice" step='any'  placeholder1="Enter Purchase Price...">
+<div class="boxName" >Sale Price</div>
+<input type="number" name="itemSalesPrice" step='any'  placeholder1="Enter Sale Price..."><br>
+<input type="submit" value="SAVE ITEM">
 <input type="hidden" name="ch" value="itemEntry">
 </form>
+</div>
 
-<button id="btn" onclick="f2()" >View All Items</button>
-<h1 id="rs" style="display:none;"></h1>
-<table id="tb" style="display:none;" >
-<tr>
-	<th>No.</th>
-	<th>Name</th>
-	<th>Description</th>
-	<th>HSN</th>
-	<th>GST</th>
-	<th>Purchase Price</th>
-	<th>Sales Price</th>
-	<th></th>
-	<th></th>
-</tr>
+<table id="tb">
+	<tr id="thead">
+		<td colspan="9"><h3>Items</h3></td>
+	</tr>
+	<tr>
+		<th>No.</th>
+		<th>Name</th>
+		<th>Description</th>
+		<th>HSN</th>
+		<th>GST</th>
+		<th>Purchase Price</th>
+		<th>Sales Price</th>
+		<th></th>
+		<th></th>
+	</tr>
 </table>
 
 </body>

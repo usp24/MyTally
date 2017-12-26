@@ -238,7 +238,12 @@ $(document).ready(function(){
 		<td id="lastrowqty" >${tq}</td>
 		<td></td>
 		<td></td>
-		<td id="lastrowamt" >&#8377; ${p1}.00</td>
+		<td id="lastrowamt" >
+		&#8377; <%	
+			Long aa = new Long((Long)pageContext.getAttribute("p1")); 
+			out.print(String.format(("%,.2f"),Double.parseDouble(aa.toString())));
+		%>
+		</td>
 	</tr>
 </table>
 </div>
@@ -249,7 +254,6 @@ $(document).ready(function(){
 	<div id="word" >INR 
 		<%
 			NumberToWord yy = new NumberToWord();
-			Long aa = new Long((Long)pageContext.getAttribute("p1"));
 			String s = yy.call(aa.toString());
 		%>
 		<%=s %>

@@ -20,6 +20,7 @@ import dao.salesDAO;
 import vo.customerVO;
 import vo.itemVO;
 import vo.purchaseVO;
+import vo.salesVO;
 
 @WebServlet("/item")
 public class item extends HttpServlet {
@@ -64,6 +65,12 @@ public class item extends HttpServlet {
 		
 		case "stockPurchase" : try {
 			stockPurchase(request,response);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}break;
+		
+		case "stockSales" : try {
+			stockSales(request,response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}break;
@@ -173,13 +180,28 @@ public class item extends HttpServlet {
 		itemVO itemVO = new itemVO();
 		itemVO.setItemName(itemName);
 		itemDAO itemDAO = new itemDAO();
-				List<purchaseVO> l = itemDAO.getstockPurchaseBill(itemVO);
+				/*List<purchaseVO> l = itemDAO.getstockPurchaseBill(itemVO);
 				System.out.println(l.size()+"/////**\\\\");
 				for(int k=0;k<l.size();k++)
-		            System.out.println(l.get(k).getPurchaseInvoiceNo()+"..............");
+		            System.out.println(l.get(k).getPurchaseInvoiceNo()+"..............");*/
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();
 		out.println(gson.toJson(itemDAO.getstockPurchaseBill(itemVO)));
+	}
+	
+	private void stockSales(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		
+		String itemName = request.getParameter("name");
+		itemVO itemVO = new itemVO();
+		itemVO.setItemName(itemName);
+		itemDAO itemDAO = new itemDAO();
+			/*	List<salesVO> l = itemDAO.getstockSalesBill(itemVO);
+				System.out.println(l.size()+"/////**\\\\");
+				for(int k=0;k<l.size();k++)
+		            System.out.println(l.get(k).getSalesInvoiceNo()+"..............");*/
+		Gson gson = new Gson();
+		PrintWriter out = response.getWriter();
+		out.println(gson.toJson(itemDAO.getstockSalesBill(itemVO)));
 	}
 
 	private void itemStock(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {

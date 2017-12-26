@@ -178,9 +178,9 @@
 		min-width:82mm;
 	}
 	.item #itemHeader #hsn{
-		width:18mm;
-		max-width:18mm ;
-		min-width:18mm;
+		width:14mm;
+		max-width:14mm ;
+		min-width:14mm;
 	}
 	.item #itemHeader #qy{
 		width:9mm;
@@ -204,9 +204,9 @@
 	}
 	.item #itemHeader #totamt{
 		border-right: none;
-		width:25mm;
-		max-width:25mm ;
-		min-width:25mm;
+		width:29mm;
+		max-width:29mm ;
+		min-width:29mm;
 	}
 	
 	
@@ -261,9 +261,9 @@
 	.item #data #hsn{
 		text-align: left;
 		padding-left:3px;
-		width:20mm;
-		max-width:20mm ;
-		min-width:20mm;
+		width:14mm;
+		max-width:14mm ;
+		min-width:14mm;
 		white-space: -moz-pre-wrap !important;
      	white-space: -pre-wrap;      
      	white-space: -o-pre-wrap;    
@@ -316,9 +316,9 @@
 		padding-right:3px;
 		text-align:right;
 		border-right:none;
-		width:23mm;
-		max-width:23mm ;
-		min-width:23mm;
+		width:29mm;
+		max-width:29mm ;
+		min-width:29mm;
 		white-space: -moz-pre-wrap !important;
      	white-space: -pre-wrap;      
      	white-space: -o-pre-wrap;    
@@ -348,9 +348,9 @@
 		font-size: 15px;
 		padding-right:3px;
 		text-align:right;
-		width:23mm;
-		max-width:23mm ;
-		min-width:23mm;
+		width:25mm;
+		max-width:25mm ;
+		min-width:25mm;
 		white-space: -moz-pre-wrap !important;
      	white-space: -pre-wrap;      
      	white-space: -o-pre-wrap;    
@@ -404,15 +404,58 @@
 		font-weight: bold;
 		text-align: right;
 	}
+	
+	.item2 #lastrow #r1{
+		padding-right:4px;
+		width:7mm;
+		max-width:7mm ;
+		min-width:7mm;
+	}
 	.item2 #lastrow #lastrowtot{
-		padding-left:210px;
-	} 
+		text-align : right;
+		padding-right:23px;
+		padding-top:2px;
+		width:82mm;
+		max-width:82mm ;
+		min-width:82mm;
+	}
+	.item2 #lastrow #r3{
+		width:14mm;
+		max-width:14mm ;
+		min-width:14mm;
+	}
+	.item2 #lastrow #r4{
+		width:9mm;
+		max-width:9mm ;
+		min-width:9mm;
+	}
 	.item2 #lastrow #lastrowqty{
-		padding-left:131px;
+		text-align:center;
+		padding-top : 2px;
+		padding-right:3px;
+		width:12mm;
+		max-width:12mm ;
+		min-width:12mm;
+	}
+	.item2 #lastrow #r6{
+		width:10mm;
+		max-width:10mm ;
+		min-width:10mm;
+	}
+	.item2 #lastrow #r7{
+		width:20mm;
+		max-width:20mm ;
+		min-width:20mm;
 	}
 	.item2 #lastrow #lastrowamt{
 		padding-right:4px;
+		padding-top : 2px;
+		width:29mm;
+		max-width:29mm ;
+		min-width:29mm;
 	}
+	
+	
 	
 	#wordrow{
 		position:absolute;
