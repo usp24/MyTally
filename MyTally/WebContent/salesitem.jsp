@@ -186,12 +186,12 @@ function fb(){
 	c4.innerHTML = "<input type='number' name='salesItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' onblur='fn2("+cnt+")'>";
 	c5.innerHTML = "<input type='text' name='ItemSrNo"+cnt+"1' list='dl_srno' id='srno"+cnt+"1'><div id='srdiv"+cnt+"' style='display:none;'>";
 	c6.innerHTML = "<input type='text' name='ItemHSN"+cnt+"' id='hsn"+cnt+"'>";
-	c7.innerHTML = "<input type='number' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='18' >%";
+	c7.innerHTML = "<input type='number' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='18' ><input type='text' value='%' readonly>";
 	c8.innerHTML = "<input type='number' name='salesItemUnitPrice"+cnt+"' id='p"+cnt+"' onkeyup='fn("+cnt+")' step='any' >";
-	c9.innerHTML = "<input type='number' name='salesItemDiscount"+cnt+"' value='0' onblur='fn("+cnt+")' id='d"+cnt+"' step='any' >%";
+	c9.innerHTML = "<input type='number' name='salesItemDiscount"+cnt+"' value='0' onblur='fn("+cnt+")' id='d"+cnt+"' step='any' ><input type='text' value='%' readonly>";
 	c10.innerHTML = "<input type='number' name='salesItemTotalAmount"+cnt+"' id='amt"+cnt+"' step='any' readonly>";
 	c11.innerHTML = "<input type='button' value='+' onclick='fb()' >";
-	c12.innerHTML = "<input type='button' value='X' onclick='fnd(this)'>";
+	c12.innerHTML = "<input type='button' value='x' onclick='fnd(this)'>";
 	nr.value = cnt;
 	cnt++;
 }
@@ -599,8 +599,8 @@ text-transform: uppercase;
 <div class="menubar">
 	<ul>
 		<li><a href="menu.jsp" >HOME</a></li>
-		<li><a href="sales.jsp" >SALE</a></li>
-		<li id="current" ><a href="purchase.jsp" >PURCHASE</a></li>
+		<li id="current" ><a href="sales.jsp" >SALE</a></li>
+		<li><a href="purchase.jsp" >PURCHASE</a></li>
 		<li><a href="item.jsp" >ITEM MASTER</a></li>
 		<li><a href="stock.jsp" >STOCK</a></li>
 		<li><a href="supplier.jsp" >SUPPLIERS</a></li>
@@ -613,17 +613,18 @@ text-transform: uppercase;
 <datalist id="dl_srno" ></datalist>
 
 <form action="<%=request.getContextPath()%>/sales" method="post" onsubmit="return sub()">
-
-Sales Invoice Date : <input type="date" name="salesInvoiceDate" id="date">		<br>
-Sales Invoice Number : <input type="number" name="salesInvoiceNumber" value="${sessionScope.max}" id="iv">		<br>
-Customer's Name : <input type="text" name="customerName" list="dl" id="name">	<br>
-Customer's Address-1 : <input type="text" name="customerAddress1" id="add1" >	<br>
-Customer's Address-2 : <input type="text" name="customerAddress2" id="add2" >	<br>
-Area and City : <input type="text" name="customerCity" id="city">	<br>
-State & Code : <input type="text" name="customerStatecode" value="Gujarat, Code : 24" id="statecode">	<br>
-Customer's GSTNo. : <input type="text" name="customerGSTNo" id="gst">	<br>
-
-<hr>
+<div id="form1" >
+	<div class="boxName" >Sales Invoice Date </div><input type="date" name="salesInvoiceDate" id="date">
+	<div class="boxName" >Sales Invoice Number </div><input type="number" name="salesInvoiceNumber" value="${sessionScope.max}" id="iv">
+	<div class="boxName" >Customer's Name </div><input type="text" name="customerName" list="dl" id="name">
+	<div class="boxName" >Customer's GSTNo. </div><input type="text" name="customerGSTNo" id="gst">
+</div>
+<div id="form2" >
+	<div class="boxName" >Customer's Address-1 </div><input type="text" name="customerAddress1" id="add1" >
+	<div class="boxName" >Customer's Address-2 </div><input type="text" name="customerAddress2" id="add2" >
+	<div class="boxName" >Area and City </div><input type="text" name="customerCity" id="city">
+	<div class="boxName" >State & Code </div><input type="text" name="customerStatecode" value="Gujarat, Code : 24" id="statecode">
+</div>
 
 <table id="tb1">
 <tr>
@@ -647,9 +648,9 @@ Customer's GSTNo. : <input type="text" name="customerGSTNo" id="gst">	<br>
 	<td><input type="number" name="salesItemQty1" id="q1" onkeyup="fn('1')" onblur="fn2('1')"></td>
 	<td><input type="text" name="ItemSrNo11" list="dl_srno" id="srno11"><div id="srdiv1" style="display:none;"></div></td>
 	<td><input type="text" name="ItemHSN1" id="hsn1"></td>
-	<td><input type="number" name="ItemGST1" id="gst1" value="18" >%</td>
+	<td><input type="number" name="ItemGST1" id="gst1" value="18" ><input type="text" value="%" readonly></td>
 	<td><input type="number" name="salesItemUnitPrice1" id="p1" onkeyup="fn('1')" step="any" ></td>
-	<td><input type="number" name="salesItemDiscount1" value="0" onblur="fn('1')" id="d1" step="any" >%</td>
+	<td><input type="number" name="salesItemDiscount1" value="0" onblur="fn('1')" id="d1" step="any" ><input type="text" value="%" readonly></td>
 	<td><input type="number" name="salesItemTotalAmount1" id="amt1" step="any" readonly></td>
 	<td><input type="button" value="+" onclick="fb()" ></td>
 	<td></td>

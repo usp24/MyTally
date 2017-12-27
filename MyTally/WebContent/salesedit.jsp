@@ -87,12 +87,12 @@ $(document).ready(function(){
 				c4.innerHTML = "<input type='text' name='salesItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemQty+"'>";
 				c5.innerHTML = "<input type='text' name='ItemSrNo"+cnt+"1' list='dl_srno' id='srno"+cnt+"1'><div id='srdiv"+cnt+"' style='display:none;'>";
 				c6.innerHTML = "<input type='text' name='ItemHSN"+cnt+"' id='hsn"+cnt+"' value='"+list3[i].itemHSN+"' >";
-				c7.innerHTML = "<input type='text' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='"+list3[i].itemGST+"' >%";
+				c7.innerHTML = "<input type='text' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='"+list3[i].itemGST+"' ><input type='text' value='%' readonly>";
 				c8.innerHTML = "<input type='text' name='salesItemUnitPrice"+cnt+"' id='p"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemSalesPrice+"' >";
-				c9.innerHTML = "<input type='text' name='salesItemDiscount"+cnt+"' onblur='fn("+cnt+")' id='d"+cnt+"' value='"+list3[i].itemPurchasePrice+"' >%";
+				c9.innerHTML = "<input type='text' name='salesItemDiscount"+cnt+"' onblur='fn("+cnt+")' id='d"+cnt+"' value='"+list3[i].itemPurchasePrice+"' ><input type='text' value='%' readonly>";
 				c10.innerHTML = "<input type='text' name='salesItemTotalAmount"+cnt+"' id='amt"+cnt+"' readonly>";
 				c11.innerHTML = "<input type='button' value='+' onclick='fb()'>";
-				c12.innerHTML = "<input type='button' value='X' onclick='fnd(this)'>";
+				c12.innerHTML = "<input type='button' value='x' onclick='fnd(this)'>";
 				
 				fn(cnt);
 				fn2(cnt);
@@ -302,12 +302,12 @@ function fb(){
 	c4.innerHTML = "<input type='number' name='salesItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' onblur='fn2("+cnt+")'>";
 	c5.innerHTML = "<input type='text' name='ItemSrNo"+cnt+"1' list='dl_srno' id='srno"+cnt+"1'><div id='srdiv"+cnt+"' style='display:none;'>";
 	c6.innerHTML = "<input type='text' name='ItemHSN"+cnt+"' id='hsn"+cnt+"'>";
-	c7.innerHTML = "<input type='number' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='18' >%";
+	c7.innerHTML = "<input type='number' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='18' ><input type='text' value='%' readonly>";
 	c8.innerHTML = "<input type='number' name='salesItemUnitPrice"+cnt+"' id='p"+cnt+"' onkeyup='fn("+cnt+")' step='any' >";
-	c9.innerHTML = "<input type='number' name='salesItemDiscount"+cnt+"' value='0' onblur='fn("+cnt+")' id='d"+cnt+"' step='any' >%";
+	c9.innerHTML = "<input type='number' name='salesItemDiscount"+cnt+"' value='0' onblur='fn("+cnt+")' id='d"+cnt+"' step='any' ><input type='text' value='%' readonly>";
 	c10.innerHTML = "<input type='number' name='salesItemTotalAmount"+cnt+"' id='amt"+cnt+"' step='any' readonly>";
 	c11.innerHTML = "<input type='button' value='+' onclick='fb()' >";
-	c12.innerHTML = "<input type='button' value='X' onclick='fnd(this)'>";
+	c12.innerHTML = "<input type='button' value='x' onclick='fnd(this)'>";
 	nr.value = cnt;
 	cnt++;
 }
@@ -406,18 +406,307 @@ function sub(){
 	else
 		return false;
 }	
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 75) {
+         $(".menubar").addClass('fix');
+    } else {
+         $(".menubar").removeClass('fix');
+    }
+});
 </script>
 
 <style type="text/css" >
-table{
-	border-collapse : collapse;
-	border : 1px solid black;
+body{
+	background-color: #edf8f896;
+	overflow:visible;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	font-family: Calibri,verdana,arial,sans-serif;
 }
-th,td{
-	border : 1px solid black;
+a{
+	text-decoration: none;
+	color:inherit;
+	cursor: pointer;
 }
-input{
+button{
 	border:none;
+	background:none;
+	cursor: pointer;
+	height:21px;
+}
+
+
+.header{
+	margin:auto;
+	overflow:hidden;
+	padding-top: 10px;
+	margin-bottom: 3px;
+}
+.header #title{
+	float: left;
+	clear: left;
+	padding-left:18px;
+}
+.header #text{
+	float: right;
+	padding-right:10px;
+	padding-top:15px;
+}
+.header #title #titleh1{
+	color: #4B4B4B;
+	text-transform: uppercase;
+	font-size : 41px;
+	margin: 0px;
+}
+.header #title #titleh1:HOVER{
+	color: #00aba9;
+}
+.header #title #titleh1 #u{
+	font-size:55px;
+	color:  #00aba9;
+}
+.header #text #textp{
+	letter-spacing:3px;
+	font-size: 14px;
+	font-family: verdana;
+}
+
+.menubar{
+	margin:auto;
+	overflow: visible;
+}
+.fix{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    margin:0;
+}
+.menubar ul{
+	display : inline-block;
+	background-color: #5E5E5E;
+	width: 100%;
+	margin: 0px;
+	padding:0px;
+	padding-left:10px;
+	text-align: center;
+	font-size: 17px;
+	letter-spacing: 1px;
+	font-family: verdana;
+	box-shadow: -2px 3px 4px -2px #5E5E5E;
+}
+.menubar li{
+	height:33px;
+	padding-top:11px;
+	padding-left:15px;
+	padding-right:15px;
+	float:left;
+	display: inherit;
+	color: white;
+}
+.menubar #current{
+	background: #00aba9;
+}
+.menubar li:HOVER{
+	background: black !important;
+}
+
+
+#form1{
+	margin:auto;
+	text-align: center;
+	margin-top:70px;
+	margin-bottom:100px;
+	float:left;
+	clear:left;
+	margin-left:50px;
+}
+#form2{
+	margin:auto;
+	text-align: center;
+	margin-top:70px;
+	margin-bottom:100px;
+	float:right;
+	margin-right:50px;
+}
+#form1 #date,#iv,#name,#gst{
+	width:250px !important;
+	padding:3px !important;
+	margin-top: -26px !important;
+    margin-bottom: 25px !important;
+    margin-right: -90px !important;
+}
+#form2 #add1,#add2,#city,#statecode{
+	width:250px !important;
+	padding:3px !important;
+	margin-top: -26px !important;
+    margin-bottom: 25px !important;
+    margin-right: -90px !important;
+}
+.boxName{
+	width:260px;
+	margin: auto;
+	padding: 0px;
+	font-size:18px;
+	padding-bottom:3px;
+	text-align: right;
+    padding-right: 448px;
+}
+
+
+
+#tb1{
+	margin: auto;
+	margin-top:50px;
+	margin-bottom:50px;
+	white-space:nowrap;
+	border-collapse: collapse; 
+	border:2px solid black;
+	font-size: 18px;
+}
+#tb1 tr{
+	border:2px solid black;
+}
+#tb1 th{
+	text-transform: capitalize;
+	background: #5E5E5E;
+	color:white;
+	font-weight: normal;
+	padding:4px;
+	font-size:18px;
+}
+#tb1 td{
+	border:1px solid black;
+	border-bottom:none;
+	border-top:none;
+	padding:2px;
+}
+#tb1 input{
+	background: transparent;
+	border: none;
+	padding:2px;
+	vertical-align: middle;
+	font-size: 17px;
+}
+#tb1 td:nth-child(2){
+	width:355px;
+	min-width:355px;
+	max-width:355px;
+}
+#tb1 td:nth-child(2) input{
+	width:350px;
+	min-width:350px;
+	max-width:350px;
+}
+#tb1 td:nth-child(3){
+	width:230px;
+	min-width:230px;
+	max-width:230px;
+}
+#tb1 td:nth-child(3) input{
+	width:225px;
+	min-width:225px;
+	max-width:225px;
+}
+#tb1 td:nth-child(4),td:nth-child(7),td:nth-child(9){
+	width:60px;
+	min-width:60px;
+	max-width:60px;
+}
+#tb1 td:nth-child(4) input{
+	width:55px;
+	min-width:55px;
+	max-width:55px;
+}
+#tb1 td:nth-child(7) input{
+	width:39px;
+	min-width:39px;
+	max-width:39px;
+}
+#tb1 td:nth-child(9) input{
+	width:47px;
+	min-width:47px;
+	max-width:47px;
+}
+#tb1 td:nth-child(6),td:nth-child(8),td:nth-child(10){
+	width:125px;
+	min-width:125px;
+	max-width:125px;
+}
+#tb1 td:nth-child(6) input{
+	width:120px;
+	min-width:120px;
+	max-width:120px;
+}
+#tb1 td:nth-child(8) input{
+	width:120px;
+	min-width:120px;
+	max-width:120px;
+}
+#tb1 td:nth-child(10) input{
+	width:120px;
+	min-width:120px;
+	max-width:120px;
+}
+#tb1 input[type=button]{
+	font-size: 21px;
+}
+#tb1 input[type=button]:FOCUS{
+	background-color: #00aba9;
+}
+#tb1 input[type=button]:HOVER{
+	background-color: #00aba9;
+}
+
+#link{
+	height:30px;
+	background: #00aba9;
+	color: white;
+	font-size:15px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	width: 150px;
+	border: none;
+}
+#link:HOVER{
+	box-shadow: 1px 2px 9px 0px #5E5E5E;
+}
+#link:FOCUS{
+	box-shadow: 1px 2px 9px 0px #5E5E5E;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type=submit]{
+	border:none;
+	margin:auto;
+	background:  #5E5E5E;
+	color: white;
+	padding:10px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	margin-top: 30px;
+	height:45px;
+	width: 210px;
+	font-size: 19px;
+	margin-bottom: 80px;
+}
+input[type=submit]:HOVER{
+	background: #00aba9;
+	color: white;
+	box-shadow: 1px 2px 9px 0px #5E5E5E;
+}
+input[type=submit]:FOCUS{
+	background: #00aba9;
+	color: white;
+	box-shadow: 1px 2px 9px 0px #5E5E5E;
 }
 #name,.name{
 text-transform: uppercase;
@@ -425,26 +714,40 @@ text-transform: uppercase;
 </style>
 </head>
 <body>
-<%
-	session.setAttribute("ivn",request.getParameter("ivn"));
-%>
+
+<div class="header">
+	<div id="title" ><h1 id="titleh1" ><a href="menu.jsp" ><span id="u">U</span>Accounting</a></h1></div>
+	<div id="text" ><p id="textp" >THE WORLD'S BEST ACCOUNTING SOFTWARE</p></div>
+</div>
+<div class="menubar">
+	<ul>
+		<li><a href="menu.jsp" >HOME</a></li>
+		<li id="current" ><a href="sales.jsp" >SALE</a></li>
+		<li><a href="purchase.jsp" >PURCHASE</a></li>
+		<li><a href="item.jsp" >ITEM MASTER</a></li>
+		<li><a href="stock.jsp" >STOCK</a></li>
+		<li><a href="supplier.jsp" >SUPPLIERS</a></li>
+		<li><a href="customer.jsp" >CUSTOMERS</a></li>
+	</ul>
+</div>
 
 <datalist id="dl" ></datalist>
 <datalist id="dl_item" ></datalist>
 <datalist id="dl_srno" ></datalist>
 
-<form action="<%=request.getContextPath()%>/sales" method="post" onsubmit="return sub()" >
-
-Sales Invoice Date : <input type="date" name="salesInvoiceDate" id="date">		<br>
-Sales Invoice Number : <input type="text" name="salesInvoiceNumber" value="${param.ivn}" id="iv">		<br>
-Customer's Name : <input type="text" name="customerName" list="dl" id="name">	<br>
-Customer's Address-1 : <input type="text" name="customerAddress1" id="add1" >	<br>
-Customer's Address-2 : <input type="text" name="customerAddress2" id="add2" >	<br>
-Area and City : <input type="text" name="customerCity" id="city">	<br>
-State & Code : <input type="text" name="customerStatecode" value="Gujarat, Code : 24" id="statecode">	<br>
-Customer's GSTNo. : <input type="text" name="customerGSTNo" id="gst">	<br>
-
-<hr>
+<form action="<%=request.getContextPath()%>/sales" method="post" onsubmit="return sub()">
+<div id="form1" >
+	<div class="boxName" >Sales Invoice Date </div><input type="date" name="salesInvoiceDate" id="date">
+	<div class="boxName" >Sales Invoice Number </div><input type="number" name="salesInvoiceNumber" value="${sessionScope.max}" id="iv">
+	<div class="boxName" >Customer's Name </div><input type="text" name="customerName" list="dl" id="name">
+	<div class="boxName" >Customer's GSTNo. </div><input type="text" name="customerGSTNo" id="gst">
+</div>
+<div id="form2" >
+	<div class="boxName" >Customer's Address-1 </div><input type="text" name="customerAddress1" id="add1" >
+	<div class="boxName" >Customer's Address-2 </div><input type="text" name="customerAddress2" id="add2" >
+	<div class="boxName" >Area and City </div><input type="text" name="customerCity" id="city">
+	<div class="boxName" >State & Code </div><input type="text" name="customerStatecode" value="Gujarat, Code : 24" id="statecode">
+</div>
 
 <table id="tb1">
 <tr>
@@ -468,21 +771,21 @@ Customer's GSTNo. : <input type="text" name="customerGSTNo" id="gst">	<br>
 	<td><input type="number" name="salesItemQty1" id="q1" onkeyup="fn('1')"></td>
 	<td><input type="text" name="ItemSrNo11" list="dl_srno" id="srno11"><div id="srdiv1" style="display:none;"></div></td>
 	<td><input type="text" name="ItemHSN1" id="hsn1"></td>
-	<td><input type="number" name="ItemGST1" id="gst1" value="18" >%</td>
+	<td><input type="number" name="ItemGST1" id="gst1" value="18" ><input type="text" value="%" readonly></td>
 	<td><input type="number" name="salesItemUnitPrice1" id="p1" onkeyup="fn('1')" step="any" ></td>
-	<td><input type="number" name="salesItemDiscount1" value="0" onblur="fn('1')" id="d1" step="any" >%</td>
+	<td><input type="number" name="salesItemDiscount1" value="0" onblur="fn('1')" id="d1" step="any" ><input type="text" value="%" readonly></td>
 	<td><input type="number" name="salesItemTotalAmount1" id="amt1" step="any" readonly></td>
 	<td><input type="button" value="+" onclick="fb()" ></td>
-	<td><input type="button" value="X" onclick="fnd(this)" ></td>
+	<td><input type="button" value="x" onclick="fnd(this)" ></td>
 </tr>
 </table>
+<div style="text-align: left;margin-left: 20px;" ><input type="button" value="Add Row" onclick="fb()" id="link"></div><br>
 
 <input type="hidden" name="old_ivn" id="old_ivn" value="${param.ivn}">
 <input type="hidden" name="ch" value="editEntry">
 <input type="hidden" name="n" id="nr" value="1" >
 <input type="submit" value="SAVE">
 
-<input type="button" value="+" onclick="fb()" >
 
 </form>
 </body>
