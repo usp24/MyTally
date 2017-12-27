@@ -243,8 +243,7 @@ public class itemDAO {
 			
 			ResultSet rs2 = st2.executeQuery("select purchaseInvoiceNo,qty,srno from purchaseitem where name='"+itemVO.getItemName()+"' order by id desc");
 			if(i.size()!=0){	
-				while(rs2.next() && qtyi>0 && i.size()>0){	
-					System.out.println("::"+qtyi+"::");
+				while(rs2.next() && i.size()>0){	
 					String[] srnop = rs2.getString("srno").split("\\*");
 				    List<String> p = new ArrayList<String>();
 			        for(int j=0;j<srnop.length;j++){
@@ -254,35 +253,49 @@ public class itemDAO {
 			        
 			        int il = i.size();
 				    i.removeAll(p);
-				    if(i.size()<il){
+				    if(i.size()!=il){
 				    	qtyi -= (il - i.size());
 				    	purchaseVO purchaseVO = new purchaseVO();
 						purchaseVO.setPurchaseInvoiceNo(rs2.getString("purchaseInvoiceNo"));
 						list2.add(purchaseVO);
 				    }
 				}
-				/*if(qtyi>0){
-					String s1 = "select purchaseInvoiceNo,qty,srno from purchaseitem where name='"+itemVO.getItemName()+"'";
-					String s2 = "order by id desc";
-					String s = " AND NOT purchaseInvoiceNo='"+s1+"'";
-					for(int j=0;j<list2.size();j++){
-						String x = list2.get(j).getPurchaseInvoiceNo();
-						
+				
+				if(qtyi>0){
+					for(int j=0;j<srnoi.length;j++){
+						if(!srnoi[j].equals(""))
+							i.add(srnoi[j]);
 					}
-					ResultSet rs3 = st2.executeQuery(s1.concat(s).concat(s2));
-				}*/
+					ResultSet rs3 = st2.executeQuery("select purchaseInvoiceNo,qty,srno from purchaseitem where name='"+itemVO.getItemName()+"' order by id desc");
+					while(rs3.next() && qtyi>0){
+						String[] srnop = rs3.getString("srno").split("\\*");
+					    List<String> p = new ArrayList<String>();
+				        for(int j=0;j<srnop.length;j++){
+							if(!srnop[j].equals(""))
+								p.add(srnop[j]);
+						}   
+				        int pqty = rs3.getInt("qty");
+				        int il = i.size();
+					    i.removeAll(p);
+					    if(i.size()!=il){
+					    	pqty -= (il-i.size());
+					    	qtyi -= pqty;
+					    }
+					    else{
+					    	qtyi -= pqty;
+							purchaseVO purchaseVO = new purchaseVO();
+							purchaseVO.setPurchaseInvoiceNo(rs3.getString("purchaseInvoiceNo"));
+							list2.add(purchaseVO);
+					    }
+					}
+				}
 			}	
 			else{
-				while(rs2.next()){
-					if(( (qtyi - rs2.getInt("qty"))>0 || qtyi<=rs2.getInt("qty")) && (qtyi>0)){
-						System.out.println(":s:"+qtyi+":s:");
-						qtyi = qtyi - rs2.getInt("qty");
+				while(rs2.next() && qtyi>0){
+						qtyi -= rs2.getInt("qty");
 						purchaseVO purchaseVO = new purchaseVO();
 						purchaseVO.setPurchaseInvoiceNo(rs2.getString("purchaseInvoiceNo"));
 						list2.add(purchaseVO);
-					}
-					else 
-						break;
 				}
 			}
 			
@@ -318,7 +331,7 @@ public class itemDAO {
 			
 			ResultSet rs = st.executeQuery("select srno,qty from item where name='"+itemVO.getItemName()+"'");
 			rs.next();
-			int qtyi = rs.getInt("qty");
+			int qtyi = 0 - rs.getInt("qty");
 			String[] srnoi = rs.getString("srno").split("\\*");
 			List<String> i = new ArrayList<String>();
 			for(int j=0;j<srnoi.length;j++){
@@ -328,8 +341,7 @@ public class itemDAO {
 			
 			ResultSet rs2 = st2.executeQuery("select salesInvoiceNo,qty,srno from salesitem where name='"+itemVO.getItemName()+"' order by id desc");
 			if(i.size()!=0){	
-				while(rs2.next() && qtyi>0 && i.size()>0){	
-					System.out.println("::"+qtyi+"::");
+				while(rs2.next() && i.size()>0){	
 					String[] srnop = rs2.getString("srno").split("\\*");
 				    List<String> p = new ArrayList<String>();
 			        for(int j=0;j<srnop.length;j++){
@@ -339,46 +351,60 @@ public class itemDAO {
 			        
 			        int il = i.size();
 				    i.removeAll(p);
-				    if(i.size()<il){
+				    if(i.size()!=il){
 				    	qtyi -= (il - i.size());
 				    	salesVO salesVO = new salesVO();
 						salesVO.setSalesInvoiceNo(rs2.getInt("salesInvoiceNo"));
 						list2.add(salesVO);
 				    }
 				}
-				/*if(qtyi>0){
-					String s1 = "select salesInvoiceNo,qty,srno from salesitem where name='"+itemVO.getItemName()+"'";
-					String s2 = "order by id desc";
-					String s = " AND NOT salesInvoiceNo='"+s1+"'";
-					for(int j=0;j<list2.size();j++){
-						String x = list2.get(j).getSalesInvoiceNo();
-						
+				
+				if(qtyi>0){
+					for(int j=0;j<srnoi.length;j++){
+						if(!srnoi[j].equals(""))
+							i.add(srnoi[j]);
 					}
-					ResultSet rs3 = st2.executeQuery(s1.concat(s).concat(s2));
-				}*/
+					ResultSet rs3 = st2.executeQuery("select salesInvoiceNo,qty,srno from salesitem where name='"+itemVO.getItemName()+"' order by id desc");
+					while(rs3.next() && qtyi>0){
+						String[] srnop = rs3.getString("srno").split("\\*");
+					    List<String> p = new ArrayList<String>();
+				        for(int j=0;j<srnop.length;j++){
+							if(!srnop[j].equals(""))
+								p.add(srnop[j]);
+						}   
+				        int pqty = rs3.getInt("qty");
+				        int il = i.size();
+					    i.removeAll(p);
+					    if(i.size()!=il){
+					    	pqty -= (il-i.size());
+					    	qtyi -= pqty;
+					    }
+					    else{
+					    	qtyi -= pqty;
+							salesVO salesVO = new salesVO();
+							salesVO.setSalesInvoiceNo(rs3.getInt("salesInvoiceNo"));
+							list2.add(salesVO);
+					    }
+					}
+				}
 			}	
 			else{
-				while(rs2.next()){
-					if(( (qtyi - rs2.getInt("qty"))>0 || qtyi<=rs2.getInt("qty")) && (qtyi>0)){
-						System.out.println(":s:"+qtyi+":s:");
-						qtyi = qtyi - rs2.getInt("qty");
+				while(rs2.next() && qtyi>0){
+						qtyi -= rs2.getInt("qty");
 						salesVO salesVO = new salesVO();
 						salesVO.setSalesInvoiceNo(rs2.getInt("salesInvoiceNo"));
 						list2.add(salesVO);
-					}
-					else 
-						break;
 				}
 			}
 			
 			for(int j=0;j<list2.size();j++){
-				ResultSet rs3 = st3.executeQuery("select invoiceNo,invoiceDate,customerName,totalAmountGST from salesbill where invoiceNo='"+list2.get(j).getSalesInvoiceNo()+"'");
-				rs3.next();
+				ResultSet rs4 = st3.executeQuery("select invoiceNo,invoiceDate,customerName,totalAmountGST from salesbill where invoiceNo='"+list2.get(j).getSalesInvoiceNo()+"'");
+				rs4.next();
 				salesVO salesVO = new salesVO();
-				salesVO.setSalesInvoiceNo(rs3.getInt("invoiceNo"));
-				salesVO.setSalesInvoiceDate(rs3.getString("invoiceDate"));
-				salesVO.setExtra(rs3.getString("customerName"));
-				salesVO.setSalesTotalAmountGST(rs3.getDouble("totalAmountGST"));
+				salesVO.setSalesInvoiceNo(rs4.getInt("invoiceNo"));
+				salesVO.setSalesInvoiceDate(rs4.getString("invoiceDate"));
+				salesVO.setExtra(rs4.getString("customerName"));
+				salesVO.setSalesTotalAmountGST(rs4.getDouble("totalAmountGST"));
 				list.add(salesVO);
 			}
 		}catch (Exception e) {
@@ -388,7 +414,7 @@ public class itemDAO {
 			st.close();
 			con.close();
 		}
-		return list;
+		return list;	
 	}
 
 	

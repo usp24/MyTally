@@ -180,10 +180,6 @@ public class item extends HttpServlet {
 		itemVO itemVO = new itemVO();
 		itemVO.setItemName(itemName);
 		itemDAO itemDAO = new itemDAO();
-				/*List<purchaseVO> l = itemDAO.getstockPurchaseBill(itemVO);
-				System.out.println(l.size()+"/////**\\\\");
-				for(int k=0;k<l.size();k++)
-		            System.out.println(l.get(k).getPurchaseInvoiceNo()+"..............");*/
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();
 		out.println(gson.toJson(itemDAO.getstockPurchaseBill(itemVO)));
@@ -195,10 +191,6 @@ public class item extends HttpServlet {
 		itemVO itemVO = new itemVO();
 		itemVO.setItemName(itemName);
 		itemDAO itemDAO = new itemDAO();
-			/*	List<salesVO> l = itemDAO.getstockSalesBill(itemVO);
-				System.out.println(l.size()+"/////**\\\\");
-				for(int k=0;k<l.size();k++)
-		            System.out.println(l.get(k).getSalesInvoiceNo()+"..............");*/
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();
 		out.println(gson.toJson(itemDAO.getstockSalesBill(itemVO)));

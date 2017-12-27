@@ -35,11 +35,11 @@ $(document).ready(function(){
 		            var c6 = r.insertCell(5);
 		            var c7 = r.insertCell(6);
 		            
-		            c1.innerHTML = id;
+		            c1.innerHTML = i+1;
 		            c2.innerHTML = list[i].salesInvoiceNo;
 		            c3.innerHTML = list[i].salesInvoiceDate;
 		            c4.innerHTML = list[i].extra;
-		            c5.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/print?ch=sales&printInvoiceNo="+list[i].saleInvoiceNo+"'><button  class='fa fa-eye' aria-hidden='true'  ></button>"; 
+		            c5.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/print?ch=sales&printInvoiceNo="+list[i].salesInvoiceNo+"'><button  class='fa fa-eye' aria-hidden='true'  ></button>"; 
 		            c6.innerHTML = "<a href='salesedit.jsp?ivn="+list[i].saleInvoiceNo+"'><i  class='fa fa-pencil' aria-hidden='true'  ></i></a>";
 		            c7.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/sales?ch=delete&n="+list[i].salesInvoiceNo+"'><button class='fa fa-times' aria-hidden='true' onclick='return dz()' ></button></form>";
 				}
