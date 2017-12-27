@@ -117,7 +117,8 @@ public List<salesVO> getSalesBills() throws SQLException{
 			p.setSalesInvoiceNo(rs.getInt("invoiceNo"));
 			p.setSalesInvoiceDate(rs.getString("invoiceDate"));
 			p.setExtra(rs.getString("customerName"));
-			p.setSalesTotalRoundOffAmount(rs.getLong("totalRoundOffAmount"));
+			Long aa = rs.getLong("totalRoundOffAmount");
+			p.setExtra2((String.format(("%,.2f"),Double.parseDouble(aa.toString()))));
 			list.add(p);
 		}
 	}

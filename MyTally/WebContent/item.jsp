@@ -6,7 +6,8 @@
 	<head>
 		<link rel="stylesheet" href="css/fa.css">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>MyTally | Items</title>
+		<title>Items</title>
+		<link rel="icon" type="image/png" href="img/fi1.ico">
 		<script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>		
 		<script type="text/javascript">
 		var dr = "<c:out value="${param.dr}" />";
@@ -73,10 +74,10 @@
 					            c3.innerHTML = list[i].itemDescription;
 					            c4.innerHTML = list[i].itemHSN;
 					            c5.innerHTML = list[i].itemGST;
-					            c6.innerHTML = list[i].itemPurchasePrice;
-					            c7.innerHTML = list[i].itemSalesPrice;
+					            c6.innerHTML = list[i].extra;
+					            c7.innerHTML = list[i].itemSrNo;
 					            c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/item?ch=edit&n="+list[i].itemName+"'><button  class='fa fa-pencil' aria-hidden='true' ></button></form>";
-						        c9.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/item?ch=delete&n="+list[i].itemName+"'><button class='fa fa-times' aria-hidden='true' ></button></form>";
+						        c9.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/item?ch=delete&n="+list[i].itemName+"'><button class='fa fa-times' aria-hidden='true' onclick='return dz()'></button></form>";
 				        	}
 						}
 						else{
@@ -122,6 +123,12 @@
 			         $(".menubar").removeClass('fix');
 			    }
 			});
+			function dz(){
+				if (confirm("Are You Sure You Want To Delete ?") == true)
+					return true;
+				else
+					return false;
+			}
 </script>
 
 			<style type="text/css" >
@@ -265,16 +272,19 @@
 			}
 			input[type=text],input[type=number]{
 				width:250px;
-				margin-bottom:17px;
 				padding:3px;
+				margin-top: -26px;
+				margin-bottom: 25px;
+    			margin-right: -90px;
 			}
 			.boxName{
 				width:260px;
 				margin: auto;
 				padding: 0px;
-				text-align: left;
 				font-size:18px;
 				padding-bottom:3px;
+				text-align: right;
+    			padding-right: 448px;
 			}
 			
 			
@@ -339,6 +349,13 @@
 			     word-break: break-all;
 			     white-space: normal;
 			}
+			input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button {
+			    -webkit-appearance: none;
+			    margin: 0;
+			}
+			input[type="number"] {
+			    -moz-appearance: textfield;
+			}
 			
 			#n{
 				text-transform: uppercase;
@@ -357,7 +374,7 @@
 		<li><a href="menu.jsp" >HOME</a></li>
 		<li><a href="sales.jsp" >SALE</a></li>
 		<li><a href="purchase.jsp" >PURCHASE</a></li>
-		<li  id="current" ><a href="item.jsp" >ITEM MASTER</a></li>
+		<li id="current" ><a href="item.jsp" >ITEM MASTER</a></li>
 		<li><a href="stock.jsp" >STOCK</a></li>
 		<li><a href="supplier.jsp" >SUPPLIERS</a></li>
 		<li><a href="customer.jsp" >CUSTOMERS</a></li>
@@ -367,7 +384,7 @@
 
 <button id="btn" onclick="f2()">ADD NEW ITEM</button>
 <div id="form" style="display:none;" >
-<h1>Enter Details Of New Item</h1>
+<h1  style="padding-bottom:20px;">Enter Details Of New Item</h1>
 
 <form  method="post" action="<%=request.getContextPath()%>/item" onsubmit="return fn()" >
 <div class="boxName" >Name*</div>

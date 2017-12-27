@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="css/fa.css">
 <title>Sale</title>
-
+<link rel="icon" type="image/png" href="img/fi1.ico">
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>		
 <script type="text/javascript">
 $(document).ready(function(){
@@ -41,10 +41,10 @@ $(document).ready(function(){
 			            c2.innerHTML = list[i].salesInvoiceNo;
 			            c3.innerHTML = list[i].salesInvoiceDate;
 			            c4.innerHTML = list[i].extra;
-			            c5.innerHTML = list[i].salesTotalRoundOffAmount;
+			            c5.innerHTML = list[i].extra2;
 			            c6.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/print?ch=sales&printInvoiceNo="+list[i].salesInvoiceNo+"'><button style='color:#191818;' id='bview' class='fa fa-eye' aria-hidden='true' ></button>"; 
-			            c7.innerHTML = "<a id='bedit' href='salesedit.jsp?ivn="+list[i].salesInvoiceNo+"'><i style='color:#191818;' class='fa fa-pencil' aria-hidden='true'></i></a>";
-			            c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/sales?ch=delete&n="+list[i].salesInvoiceNo+"'><button id='bdel' style='color:#191818;' class='fa fa-times' aria-hidden='true' ></button></form>";
+			            c7.innerHTML = "<a href='salesedit.jsp?ivn="+list[i].salesInvoiceNo+"'><i style='color:#191818;' class='fa fa-pencil' aria-hidden='true'></i></a>";
+			            c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/sales?ch=delete&n="+list[i].salesInvoiceNo+"'><button id='bdel' style='color:#191818;' class='fa fa-times' aria-hidden='true' onclick='return dz()'></button></form>";
 			            
 			            id++;
 					}
@@ -59,6 +59,12 @@ $(window).scroll(function() {
          $(".menubar").removeClass('fix');
     }
 });
+function dz(){
+	if (confirm("Are You Sure You Want To Delete ?") == true)
+		return true;
+	else
+		return false;
+}
 </script>
 
 <style type="text/css" >
@@ -75,7 +81,6 @@ a{
 	color:inherit;
 	cursor: pointer;
 }
-
 
 .header{
 	margin:auto;

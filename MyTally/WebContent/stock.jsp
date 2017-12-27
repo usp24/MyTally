@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Stock</title>
+<link rel="icon" type="image/png" href="img/fi1.ico">
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>		
 <script type="text/javascript">
 var list;
@@ -212,6 +213,12 @@ a{
 #tb td:nth-child(2),th:nth-child(2),td:nth-child(3),th:nth-child(3),td:nth-child(4),th:nth-child(4),td:nth-child(5),th:nth-child(5){
 	text-align: left;
 }
+#tb td:LAST-CHILD {
+	font-weight:600;
+	font-size: 18px;
+	letter-spacing: 1px;
+	text-align: left;
+}
 #tb td:LAST-CHILD:HOVER {
 	background-color: #00aba9;
 	text-decoration: underline;
@@ -259,7 +266,7 @@ a{
 <h1 id="rs" ></h1>
 <table id="tb" style="display:none;">
 	<tr id="thead">
-		<td colspan="8"><h3>Items on hand</h3></td>
+		<td colspan="8"><h3 style="text-align:center;">Items on hand</h3></td>
 	</tr>
 	<tr>
 		<th>No.</th>

@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MyTally | Sales-Edit</title>
-
+<title>Sale</title>
+<link rel="icon" type="image/png" href="img/fi1.ico">
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>		
 <script type="text/javascript">
 
@@ -82,14 +82,14 @@ $(document).ready(function(){
 				var c12 = r.insertCell(11);
 				
 				c1.innerHTML = i+1;
-				c2.innerHTML = "<input type='text' list='dl_item' name='ItemName"+cnt+"' id='item"+cnt+"' value='"+list3[i].itemName+"'  class='name'>";
-				c3.innerHTML = "<input type='text' name='ItemDescription"+cnt+"' id='disc"+cnt+"'  value='"+list3[i].itemDescription+"'>";
-				c4.innerHTML = "<input type='text' name='salesItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemQty+"'>";
-				c5.innerHTML = "<input type='text' name='ItemSrNo"+cnt+"1' list='dl_srno' id='srno"+cnt+"1'><div id='srdiv"+cnt+"' style='display:none;'>";
-				c6.innerHTML = "<input type='text' name='ItemHSN"+cnt+"' id='hsn"+cnt+"' value='"+list3[i].itemHSN+"' >";
-				c7.innerHTML = "<input type='text' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='"+list3[i].itemGST+"' ><input type='text' value='%' readonly>";
-				c8.innerHTML = "<input type='text' name='salesItemUnitPrice"+cnt+"' id='p"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemSalesPrice+"' >";
-				c9.innerHTML = "<input type='text' name='salesItemDiscount"+cnt+"' onblur='fn("+cnt+")' id='d"+cnt+"' value='"+list3[i].itemPurchasePrice+"' ><input type='text' value='%' readonly>";
+				c2.innerHTML = "<input type='text' list='dl_item' name='ItemName"+cnt+"' id='item"+cnt+"' value='"+list3[i].itemName+"'  class='name'  autocomplete='off'>";
+				c3.innerHTML = "<input type='text' name='ItemDescription"+cnt+"' id='disc"+cnt+"'  value='"+list3[i].itemDescription+"'  autocomplete='off'>";
+				c4.innerHTML = "<input type='text' name='salesItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemQty+"'  autocomplete='off'>";
+				c5.innerHTML = "<input type='text' name='ItemSrNo"+cnt+"1' list='dl_srno' id='srno"+cnt+"1'  autocomplete='off'><div id='srdiv"+cnt+"' style='display:none;'>";
+				c6.innerHTML = "<input type='text' name='ItemHSN"+cnt+"' id='hsn"+cnt+"' value='"+list3[i].itemHSN+"'   autocomplete='off'>";
+				c7.innerHTML = "<input type='text' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='"+list3[i].itemGST+"'   autocomplete='off'><input type='text' value='%' readonly>";
+				c8.innerHTML = "<input type='text' name='salesItemUnitPrice"+cnt+"' id='p"+cnt+"' onkeyup='fn("+cnt+")' value='"+list3[i].itemSalesPrice+"'  autocomplete='off' >";
+				c9.innerHTML = "<input type='text' name='salesItemDiscount"+cnt+"' onblur='fn("+cnt+")' id='d"+cnt+"' value='"+list3[i].itemPurchasePrice+"'   autocomplete='off'><input type='text' value='%' readonly>";
 				c10.innerHTML = "<input type='text' name='salesItemTotalAmount"+cnt+"' id='amt"+cnt+"' readonly>";
 				c11.innerHTML = "<input type='button' value='+' onclick='fb()'>";
 				c12.innerHTML = "<input type='button' value='x' onclick='fnd(this)'>";
@@ -191,7 +191,7 @@ $(document).ready(function(){
 		var old = document.getElementById("old_ivn");
 		for(var i=0;i<list2.length;i++){
 			if(no.value == list2[i].salesInvoiceNo && no.value!=old.value){
-				alert("Sales Bill With Invoice No : '"+iv.value+"' Is Already Generated, Please Enter Different Invoice No");
+				alert("Please Enter Different Invoice No");
 				iv.value = '';
 				break;
 			}
@@ -236,7 +236,7 @@ function fn2(row){
 	if(qty.value>1){
 		div.style.display = '';
 		for(var i=1;i<qty.value;i++){
-			div.innerHTML = div.innerHTML + "<input type='text' id='srno"+row+""+(i+1)+"' name='ItemSrNo"+row+""+(i+1)+"' list='dl_srno'><br>";
+			div.innerHTML = div.innerHTML + "<input type='text' id='srno"+row+""+(i+1)+"' name='ItemSrNo"+row+""+(i+1)+"' list='dl_srno'  autocomplete='off'><br>";
 		}
 	 }
 	else{
@@ -297,14 +297,14 @@ function fb(){
 	var c12 = r.insertCell(11);
 
 	c1.innerHTML = cnt;
-	c2.innerHTML = "<input type='text' list='dl_item' name='ItemName"+cnt+"' id='item"+cnt+"' onblur='fn3("+cnt+")'  class='name'>";
-	c3.innerHTML = "<input type='text' name='ItemDescription"+cnt+"' id='disc"+cnt+"'>";
-	c4.innerHTML = "<input type='number' name='salesItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' onblur='fn2("+cnt+")'>";
-	c5.innerHTML = "<input type='text' name='ItemSrNo"+cnt+"1' list='dl_srno' id='srno"+cnt+"1'><div id='srdiv"+cnt+"' style='display:none;'>";
-	c6.innerHTML = "<input type='text' name='ItemHSN"+cnt+"' id='hsn"+cnt+"'>";
-	c7.innerHTML = "<input type='number' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='18' ><input type='text' value='%' readonly>";
-	c8.innerHTML = "<input type='number' name='salesItemUnitPrice"+cnt+"' id='p"+cnt+"' onkeyup='fn("+cnt+")' step='any' >";
-	c9.innerHTML = "<input type='number' name='salesItemDiscount"+cnt+"' value='0' onblur='fn("+cnt+")' id='d"+cnt+"' step='any' ><input type='text' value='%' readonly>";
+	c2.innerHTML = "<input type='text' list='dl_item' name='ItemName"+cnt+"' id='item"+cnt+"' onblur='fn3("+cnt+")'  class='name'  autocomplete='off'>";
+	c3.innerHTML = "<input type='text' name='ItemDescription"+cnt+"' id='disc"+cnt+"'  autocomplete='off'>";
+	c4.innerHTML = "<input type='number' name='salesItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' onblur='fn2("+cnt+")'  autocomplete='off'>";
+	c5.innerHTML = "<input type='text' name='ItemSrNo"+cnt+"1' list='dl_srno' id='srno"+cnt+"1'  autocomplete='off'><div id='srdiv"+cnt+"' style='display:none;'>";
+	c6.innerHTML = "<input type='text' name='ItemHSN"+cnt+"' id='hsn"+cnt+"'  autocomplete='off'>";
+	c7.innerHTML = "<input type='number' name='ItemGST"+cnt+"' id='gst"+cnt+"' value='18'   autocomplete='off'><input type='text' value='%' readonly>";
+	c8.innerHTML = "<input type='number' name='salesItemUnitPrice"+cnt+"' id='p"+cnt+"' onkeyup='fn("+cnt+")' step='any'  autocomplete='off' >";
+	c9.innerHTML = "<input type='number' name='salesItemDiscount"+cnt+"' value='0' onblur='fn("+cnt+")' id='d"+cnt+"' step='any'   autocomplete='off'><input type='text' value='%' readonly>";
 	c10.innerHTML = "<input type='number' name='salesItemTotalAmount"+cnt+"' id='amt"+cnt+"' step='any' readonly>";
 	c11.innerHTML = "<input type='button' value='+' onclick='fb()' >";
 	c12.innerHTML = "<input type='button' value='x' onclick='fnd(this)'>";
@@ -714,6 +714,9 @@ text-transform: uppercase;
 </style>
 </head>
 <body>
+<%
+	session.setAttribute("ivn",request.getParameter("ivn"));
+%>
 
 <div class="header">
 	<div id="title" ><h1 id="titleh1" ><a href="menu.jsp" ><span id="u">U</span>Accounting</a></h1></div>
@@ -737,16 +740,16 @@ text-transform: uppercase;
 
 <form action="<%=request.getContextPath()%>/sales" method="post" onsubmit="return sub()">
 <div id="form1" >
-	<div class="boxName" >Sales Invoice Date </div><input type="date" name="salesInvoiceDate" id="date">
-	<div class="boxName" >Sales Invoice Number </div><input type="number" name="salesInvoiceNumber" value="${sessionScope.max}" id="iv">
-	<div class="boxName" >Customer's Name </div><input type="text" name="customerName" list="dl" id="name">
-	<div class="boxName" >Customer's GSTNo. </div><input type="text" name="customerGSTNo" id="gst">
+	<div class="boxName" >Sales Invoice Date </div><input type="date" name="salesInvoiceDate" id="date" autocomplete='off'>
+	<div class="boxName" >Sales Invoice Number </div><input type="number" name="salesInvoiceNumber" value="${param.ivn}" id="iv"  autocomplete="off">
+	<div class="boxName" >Customer's Name </div><input type="text" name="customerName" list="dl" id="name"  autocomplete="off">
+	<div class="boxName" >Customer's GSTNo. </div><input type="text" name="customerGSTNo" id="gst"  autocomplete="off">
 </div>
 <div id="form2" >
-	<div class="boxName" >Customer's Address-1 </div><input type="text" name="customerAddress1" id="add1" >
-	<div class="boxName" >Customer's Address-2 </div><input type="text" name="customerAddress2" id="add2" >
-	<div class="boxName" >Area and City </div><input type="text" name="customerCity" id="city">
-	<div class="boxName" >State & Code </div><input type="text" name="customerStatecode" value="Gujarat, Code : 24" id="statecode">
+	<div class="boxName" >Customer's Address-1 </div><input type="text" name="customerAddress1" id="add1"   autocomplete="off">
+	<div class="boxName" >Customer's Address-2 </div><input type="text" name="customerAddress2" id="add2"   autocomplete="off">
+	<div class="boxName" >Area and City </div><input type="text" name="customerCity" id="city"  autocomplete="off">
+	<div class="boxName" >State & Code </div><input type="text" name="customerStatecode" value="Gujarat, Code : 24" id="statecode"  autocomplete="off">
 </div>
 
 <table id="tb1">
@@ -766,14 +769,14 @@ text-transform: uppercase;
 </tr>
 <tr>
 	<td>1</td>
-	<td><input type="text" list="dl_item" name="ItemName1" id="item1"  class="name"></td>
-	<td><input type="text" name="ItemDescription1" id="disc1"></td>
-	<td><input type="number" name="salesItemQty1" id="q1" onkeyup="fn('1')"></td>
-	<td><input type="text" name="ItemSrNo11" list="dl_srno" id="srno11"><div id="srdiv1" style="display:none;"></div></td>
-	<td><input type="text" name="ItemHSN1" id="hsn1"></td>
-	<td><input type="number" name="ItemGST1" id="gst1" value="18" ><input type="text" value="%" readonly></td>
-	<td><input type="number" name="salesItemUnitPrice1" id="p1" onkeyup="fn('1')" step="any" ></td>
-	<td><input type="number" name="salesItemDiscount1" value="0" onblur="fn('1')" id="d1" step="any" ><input type="text" value="%" readonly></td>
+	<td><input type="text" list="dl_item" name="ItemName1" id="item1"  class="name"  autocomplete="off"></td>
+	<td><input type="text" name="ItemDescription1" id="disc1"  autocomplete="off"></td>
+	<td><input type="number" name="salesItemQty1" id="q1" onkeyup="fn('1')"  autocomplete="off"></td>
+	<td><input type="text" name="ItemSrNo11" list="dl_srno" id="srno11"><div id="srdiv1" style="display:none;"  autocomplete="off"></div></td>
+	<td><input type="text" name="ItemHSN1" id="hsn1"  autocomplete="off"></td>
+	<td><input type="number" name="ItemGST1" id="gst1" value="18"  autocomplete="off" ><input type="text" value="%" readonly></td>
+	<td><input type="number" name="salesItemUnitPrice1" id="p1" onkeyup="fn('1')" step="any"   autocomplete="off"></td>
+	<td><input type="number" name="salesItemDiscount1" value="0" onblur="fn('1')" id="d1" step="any"  autocomplete="off" ><input type="text" value="%" readonly></td>
 	<td><input type="number" name="salesItemTotalAmount1" id="amt1" step="any" readonly></td>
 	<td><input type="button" value="+" onclick="fb()" ></td>
 	<td><input type="button" value="x" onclick="fnd(this)" ></td>

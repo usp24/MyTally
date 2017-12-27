@@ -137,7 +137,8 @@ public List<purchaseVO> getPurchaseBills() throws SQLException{
 			p.setPurchaseInvoiceNo(rs.getString("invoiceNo"));
 			p.setPurchaseInvoiceDate(rs.getString("invoiceDate"));
 			p.setExtra(rs.getString("supplierName"));
-			p.setPurchaseTotalRoundOffAmount(rs.getLong("totalRoundOffAmount"));
+			Long aa = rs.getLong("totalRoundOffAmount");
+			p.setExtra2((String.format(("%,.2f"),Double.parseDouble(aa.toString()))));
 			list.add(p);
 		}
 	}

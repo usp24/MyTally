@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MyTally | Menu</title>
+<title>Home</title>
+<link rel="icon" type="image/png" href="img/fi1.ico">
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>		
 <script type="text/javascript">
 $(window).scroll(function() {
@@ -120,7 +121,7 @@ a{
 	clear:left;
 	margin: auto;
 	overflow: hidden;
-	width:1266px;
+	width:1288px;
 	padding:10px;
 	margin-bottom:30px;
 }
@@ -131,20 +132,30 @@ a{
 	margin-bottom:30px;
 	box-shadow:5px 7px 10px 0px #5E5E5E;	
 }
+.innerBox img{
+	width:150px;
+	padding-top:25px;
+}
 .innerBox .img {
 	border:1px solid black;
-	height:300px;
-	width:350px;
+	height:200px;
+	width:250px;
 	margin: auto;
+	background:#dadada55;
 }
 .innerBox .a {
 	border:1px solid black;
-	width:350px;
+	width:250px;
 	padding-top:10px;
 	padding-bottom:10px;
 	font-size: 23px;
+	background-color:#3b3838;
+	color:white;
 }
-
+.innerBox:HOVER {
+	background-color:#00aba9;
+	color:white;
+}
 </style>
 
 </head>
@@ -168,45 +179,45 @@ a{
 
 <center>
 <div id="mainbox" >
+
 	<div id="box1">
-		<a href="sales.jsp">
-			<div class="innerBox" >
-				<div class="img"><img src="img/ff.png"></div>
-				<div class="a">Sale</div>
-			</div>
-		</a>
-		<a href="purchase.jsp"><div class="innerBox" >
-			<div class="img"><img src="img/ff.png"></div>
-			<div class="a">Purchase </div>
+		<a href="backup.jsp" onclick="alert('BACKUP SUCESSFULLY DONE !!!')" ><div class="innerBox" >
+			<div class="img"><img src="img/backup.png"></div>
+			<div class="a">Backup</div>
 		</div></a>
-		 <a href="item.jsp"><div class="innerBox" >
-			<div class="img"><img src="img/ff.png"></div>
-			<div class="a">Item Master </div>
-		</div></a>
-	</div>
-	<div id="box2" >
-		 <a href="stock.jsp"><div class="innerBox" >
-			<div class="img"><img src="img/ff.png"></div>
-			<div class="a">Stock </div>
-		</div>	</a>
-		 <a href="supplier.jsp"><div class="innerBox" >
-			<div class="img"><img src="img/ff.png"></div>
+	 	<a href="supplier.jsp"><div class="innerBox" >
+			<div class="img"><img src="img/supplier.png"></div>
 			<div class="a">Suppliers </div>
 		</div></a>
 		 <a href="customer.jsp"><div class="innerBox" >
-			<div class="img"><img src="img/ff.png"></div>
+			<div class="img"><img src="img/customer.png"></div>
 			<div class="a">Customers </div>
 		</div></a>
+		<a href="item.jsp"><div class="innerBox" >
+			<div class="img"><img src="img/item.png"></div>
+			<div class="a">Item Master </div>
+		</div></a>	
 	</div>
-	<div id="box3" >
-		 <a href="payment.jsp"><div class="innerBox" >
-			<div class="img"><img src="img/ff.png"></div>
+	
+	<div id="box2" >
+		<a href="sales.jsp"><div class="innerBox" >
+			<div class="img"><img src="img/sale.png"></div>
+			<div class="a">Sale</div>
+		</div></a>
+		<a href="purchase.jsp"><div class="innerBox" >
+			<div class="img"><img src="img/purchase.png"></div>
+			<div class="a">Purchase </div>
+		</div></a>
+		<a href="payment.jsp"><div class="innerBox" >
+			<div class="img"><img src="img/pay.png"></div>
 			<div class="a">Payments </div>
 		</div></a>
-		 <a href="backup.jsp"><div class="innerBox" >
-			<div class="img"><img src="img/ff.png"></div>
-			<div class="a">Backup </div>
-		</div></a>
+		 <a href="stock.jsp"><div class="innerBox" >
+			<div class="img"><img src="img/stock.png"></div>
+			<div class="a">Stock </div>
+		</div></a>	
+	</div>
+	<div id="box3" >  
 <!-- 		 <a href="other.jsp"><div class="innerBox" > -->
 <!-- 			<div class="img"><img src="img/ff.png"></div> -->
 <!-- 			<div class="a">Other </div> -->

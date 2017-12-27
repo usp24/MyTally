@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MyTally | Customer</title>
+<title>Customer</title>
+<link rel="icon" type="image/png" href="img/fi1.ico">
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 var on = "<c:out value='${param.n}' />";
@@ -181,6 +182,7 @@ input[type=submit]{
 	height:45px;
 	width: 210px;
 	font-size: 19px;
+	margin-bottom: 40px;
 }
 input[type=submit]:HOVER{
 	box-shadow: 1px 2px 9px 0px #5E5E5E;

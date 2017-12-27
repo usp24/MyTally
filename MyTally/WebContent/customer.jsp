@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MyTally | Customer</title>
+<title>Customer</title>
+<link rel="icon" type="image/png" href="img/fi1.ico">
 <link rel="stylesheet" href="css/fa.css">
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
@@ -80,7 +81,7 @@ $(document).ready(function(){
 				         c5.innerHTML = list[i].customerMobileNo;
 				         c6.innerHTML = list[i].customerEmail;
 				         c7.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/customer?ch=edit&n="+list[i].customerName+"'><button class='fa fa-pencil' aria-hidden='true'></button></form>";
-				         c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/customer?ch=delete&n="+list[i].customerName+"'><button class='fa fa-times' aria-hidden='true' ></button></form>";
+				         c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/customer?ch=delete&n="+list[i].customerName+"'><button class='fa fa-times' aria-hidden='true' onclick='return dz()'></button></form>";
 			    	}
 				}
 				else{
@@ -124,6 +125,12 @@ $(window).scroll(function() {
          $(".menubar").removeClass('fix');
     }
 });
+function dz(){
+	if (confirm("Are You Sure You Want To Delete ?") == true)
+		return true;
+	else
+		return false;
+}
 </script>
 
 <style type="text/css" >

@@ -38,13 +38,17 @@ public class print extends HttpServlet {
 		
 		salesVO salesVO = new salesVO();
 		salesVO.setSalesInvoiceNo(iv);
-		
+	
 		printDAO printDAO = new printDAO();
 		try{
 			session.setAttribute("bill",printDAO.getSalesBill(salesVO));
 			session.setAttribute("item", printDAO.getSalesItem(salesVO));
 			session.setAttribute("customer",printDAO.getCustomer(salesVO));
-			response.sendRedirect("salesPrint.jsp");
+			int n = printDAO.counts(salesVO);
+			if(n==0)
+				response.sendRedirect("salesPrint.jsp");
+			else
+				response.sendRedirect("salesPrint2.jsp?num="+n);
 		}
 		catch(Exception e){
 			System.out.println("print.java :: salesbill :: "+e);
@@ -64,10 +68,16 @@ public class print extends HttpServlet {
 			session.setAttribute("bill",printDAO.getPurchaseBill(purchaseVO));
 			session.setAttribute("item", printDAO.getPurchaseItem(purchaseVO));
 			session.setAttribute("supplier",printDAO.getSupplier(purchaseVO));
-			response.sendRedirect("purchasePrint.jsp");
+			int n = printDAO.countp(purchaseVO);
+			if(n==0)
+				response.sendRedirect("purchasePrint.jsp");
+			else
+				response.sendRedirect("purchasePrint2.jsp?num="+n);
 		}
 		catch(Exception e){
 			System.out.println("print.java :: purchasebill :: "+e);
 		}
 	}
+	
+	
 }

@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MyTally | Login</title>
+<title>UAccounting</title>
+<link rel="icon" type="image/png" href="img/fi1.ico">
 <link rel="stylesheet" href="css/fa.css">
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" >
@@ -60,11 +61,11 @@ a{
 .header #title #titleh1{
 	color: #4B4B4B;
 	text-transform: uppercase;
-	font-size : 41px;
+	font-size : 50px;
 	margin: 0px;
 }
 .header #title #titleh1 #u{
-	font-size:55px;
+	font-size:65px;
 	color:  #00aba9;
 }
 .header #text #textp{

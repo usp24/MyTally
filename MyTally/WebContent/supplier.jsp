@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MyTally | Supplier</title>
+<title>Supplier</title>
+<link rel="icon" type="image/png" href="img/fi1.ico">
 <link rel="stylesheet" href="css/fa.css">
 <script  type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
@@ -81,7 +82,7 @@ $(document).ready(function(){
 				         c5.innerHTML = list[i].supplierMobileNo;
 				         c6.innerHTML = list[i].supplierEmail;
 				         c7.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/supplier?ch=edit&n="+list[i].supplierName+"'><button class='fa fa-pencil' aria-hidden='true' ></button></form>";
-				         c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/supplier?ch=delete&n="+list[i].supplierName+"'><button class='fa fa-times' aria-hidden='true' ></button></form>";
+				         c8.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/supplier?ch=delete&n="+list[i].supplierName+"'><button class='fa fa-times' aria-hidden='true' onclick='return dz()'></button></form>";
 			    	}
 				}
 				else{
@@ -126,6 +127,12 @@ $(window).scroll(function() {
          $(".menubar").removeClass('fix');
     }
 });
+function dz(){
+	if (confirm("Are You Sure You Want To Delete ?") == true)
+		return true;
+	else
+		return false;
+}
 </script>
 
 <style type="text/css" >
@@ -269,16 +276,19 @@ input[type=submit]:HOVER{
 }
 input[type=text],input[type=number],input[type=email]{
 	width:250px;
-	margin-bottom:17px;
 	padding:3px;
+	margin-top: -26px;
+    margin-bottom: 25px;
+    margin-right: -90px;
 }
 .boxName{
 	width:260px;
 	margin: auto;
 	padding: 0px;
-	text-align: left;
 	font-size:18px;
 	padding-bottom:3px;
+	text-align: right;
+    padding-right: 448px;
 }
 
 

@@ -219,4 +219,92 @@ public class printDAO {
 		}
 		return list;
 	}
+
+	public int counts(salesVO salesVO) throws SQLException {
+		int n=0;
+		int cnt=0;
+		int scnt=0;
+		int gcnt=0;
+		int yy = 1;
+		try{	
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			Statement st2 = con.createStatement();
+			ResultSet rs = st.executeQuery("select name,srno,description,GST from salesitem where salesInvoiceNo='"+salesVO.getSalesInvoiceNo()+"'");
+			while(rs.next()){
+				n++;
+				if(!rs.getString("description").equals(""))
+					cnt++;
+				String s[] = rs.getString("srno").split("\\*");
+				for(int i=0;i<s.length;i=i+2)
+					if(!s[i].equals(""))
+						scnt++;
+				if(rs.getInt("GST")!=18)
+					gcnt=2;
+				
+				if(n + cnt + (scnt) + gcnt > 34){
+					yy=2;
+					break;
+				}
+			}
+			st2.close();
+			if(yy==2)
+				return n;
+			else
+				return 0;
+		}
+		catch(Exception e){
+			System.out.println("printDAO :: getSalesItem :: "+e);
+		}
+		finally{
+			st.close();
+			con.close();
+		}
+		return 0;
+	}
+	
+	public int countp(purchaseVO purchaseVO) throws SQLException {
+		
+		int n=0;
+		int cnt=0;
+		int scnt=0;
+		int gcnt=0;
+		int yy=1;
+		try{	
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
+			st = con.createStatement();
+			Statement st2 = con.createStatement();
+			ResultSet rs = st.executeQuery("select name,srno,description,GST from purchaseitem where purchaseInvoiceNo='"+purchaseVO.getPurchaseInvoiceNo()+"'");
+			while(rs.next()){
+				n++;
+				if(!rs.getString("description").equals(""))
+					cnt++;
+				String s[] = rs.getString("srno").split("\\*");
+				for(int i=0;i<s.length;i=i+2)
+					if(!s[i].equals(""))
+						scnt++;
+				if(rs.getInt("GST")!=18)
+					gcnt=2;
+				if(n + cnt + (scnt) + gcnt > 34){
+					yy=2;
+					break;
+				}
+			}
+			st2.close();
+			if(yy==2)
+				return n;
+			else
+				return 0;
+		}
+		catch(Exception e){
+			System.out.println("printDAO :: getSalesItem :: "+e);
+		}
+		finally{
+			st.close();
+			con.close();
+		}
+		return 0;
+	}
 }

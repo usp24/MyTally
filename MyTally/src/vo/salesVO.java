@@ -14,6 +14,7 @@ public class salesVO {
 	private double salesTotalAmountGST;
 	private long salesTotalRoundOffAmount;
 	private String extra;
+	private String extra2;
 	private double salesItemDiscount;
 	private double salesItemTotalAmount;
 	
@@ -29,6 +30,14 @@ public class salesVO {
 	
 	public String getExtra() {
 		return extra;
+	}
+
+	public String getExtra2() {
+		return extra2;
+	}
+
+	public void setExtra2(String extra2) {
+		this.extra2 = extra2;
 	}
 
 	public void setExtra(String extra) {

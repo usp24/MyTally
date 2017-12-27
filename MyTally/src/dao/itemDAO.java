@@ -405,8 +405,8 @@ public class itemDAO {
 				itemVO.setItemDescription(rs.getString("description"));
 				itemVO.setItemGST(rs.getInt("GST"));
 				itemVO.setItemHSN(rs.getString("HSN"));
-				itemVO.setItemPurchasePrice(rs.getDouble("purchasePrice"));
-				itemVO.setItemSalesPrice(rs.getDouble("salesPrice"));
+				itemVO.setExtra((String.format(("%,.2f"),rs.getDouble("purchasePrice"))));
+				itemVO.setItemSrNo((String.format(("%,.2f"),rs.getDouble("salesPrice"))));
 				list.add(itemVO);
 			}
 		}catch (Exception e) {
