@@ -181,7 +181,7 @@ a{
 <div id="mainbox" >
 
 	<div id="box1">
-		<a href="backup.jsp" onclick="alert('BACKUP SUCESSFULLY DONE !!!')" ><div class="innerBox" >
+		<a href="backup.jsp" onclick="alert('BACKUP SUCCESSFULLY DONE !!!')"><div class="innerBox" >
 			<div class="img"><img src="img/backup.png"></div>
 			<div class="a">Backup</div>
 		</div></a>

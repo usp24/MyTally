@@ -22,6 +22,7 @@ public class BackupDB {
             new Thread(new SyncPipe(p.getInputStream(), System.out)).start();
             
             PrintWriter out = new PrintWriter(p.getOutputStream());
+            out.println("C:");
             out.println("cd "+sqldumpPath);
             out.println("mysqldump -uroot -proot mytally > "+backupPath);
             out.println("exit");
@@ -30,5 +31,5 @@ public class BackupDB {
             p.waitFor(); 
 		} 
         catch (Exception e) {}
-	}	
-}	
+	}
+}

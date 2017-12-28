@@ -56,6 +56,7 @@ $(document).ready(function(){
 			success : function(x){
 				list = $.parseJSON(x);
 				if(list.length>0){
+					var tb = document.getElementById("tb");
 			    	for(var i=0;i<list.length;i++){    
 			    		 var r = tb.insertRow(-1);
 				         var c1 = r.insertCell(0);
@@ -85,7 +86,8 @@ $(document).ready(function(){
 			    	}
 				}
 				else{
-					rs.innerHTML = "No Record Found !!!";
+					var tb = document.getElementById("tb");
+					tb.style.display="none";
 				}
 			}
 	});
