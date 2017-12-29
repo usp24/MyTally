@@ -357,6 +357,14 @@
 			    -moz-appearance: textfield;
 			}
 			
+			input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button {
+			    -webkit-appearance: none;
+			    margin: 0;
+			}
+			input[type="number"] {
+			    -moz-appearance: textfield;
+			}
+			
 			#n{
 				text-transform: uppercase;
 			}
@@ -388,17 +396,17 @@
 
 <form  method="post" action="<%=request.getContextPath()%>/item" onsubmit="return fn()" >
 <div class="boxName" >Name*</div>
-<input type="text" name="itemName" id="n" placeholder1="Enter Name...">
+<input type="text" name="itemName" id="n" placeholder1="Enter Name..." autocomplete='off' >
 <div class="boxName" >Description</div>
-<input type="text" name="itemDescription" placeholder1="Enter Description..." >
+<input type="text" name="itemDescription" placeholder1="Enter Description..."  autocomplete='off' >
 <div class="boxName" >HSN</div>
-<input type="text" name="itemHSN"  placeholder1="Enter HSN...">
+<input type="text" name="itemHSN"  placeholder1="Enter HSN..." autocomplete='off' >
 <div class="boxName" >GST</div>
-<input type="number" name="itemGST" id="g"  placeholder1="Enter GST...">
+<input type="number" name="itemGST" id="g"  placeholder1="Enter GST..." autocomplete='off' >
 <div class="boxName" >Purchase Price</div>
-<input type="number" name="itemPurchasePrice" step='any'  placeholder1="Enter Purchase Price...">
+<input type="number" name="itemPurchasePrice" step='any'  placeholder1="Enter Purchase Price..." autocomplete='off' >
 <div class="boxName" >Sale Price</div>
-<input type="number" name="itemSalesPrice" step='any'  placeholder1="Enter Sale Price..."><br>
+<input type="number" name="itemSalesPrice" step='any'  placeholder1="Enter Sale Price..." autocomplete='off' ><br>
 <input type="submit" value="SAVE ITEM">
 <input type="hidden" name="ch" value="itemEntry">
 </form>

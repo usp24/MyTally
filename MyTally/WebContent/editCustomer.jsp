@@ -203,7 +203,13 @@ input[type=text],input[type=number],input[type=email]{
 	text-align: right;
     padding-right: 448px;
 }
-
+			input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button {
+			    -webkit-appearance: none;
+			    margin: 0;
+			}
+			input[type="number"] {
+			    -moz-appearance: textfield;
+			}
 #n{
 	text-transform: uppercase;
 }
@@ -232,19 +238,19 @@ input[type=text],input[type=number],input[type=email]{
 <h1 style="padding-bottom:20px;" >Update Customer's Details</h1>
 <form method="post" action="<%=request.getContextPath()%>/customer" onsubmit="return fn()" >
 <div class="boxName">Name*</div>
-<input type="text" name="customerName" id="n" value="${param.name}">
+<input type="text" name="customerName" id="n" value="${param.name}" autocomplete='off' >
 <div class="boxName">GST Number*</div>
-<input type="text" name="customerGSTNo" id="g" value="${param.g}" >
+<input type="text" name="customerGSTNo" id="g" value="${param.g}"  autocomplete='off' >
 <div class="boxName">Address-1</div>
-<input type="text" name="customerAddress1" value="${param.a1}">
+<input type="text" name="customerAddress1" value="${param.a1}" autocomplete='off' >
 <div class="boxName">Address-2</div>
-<input type="text" name="customerAddress2"  value="${param.a2}">
+<input type="text" name="customerAddress2"  value="${param.a2}" autocomplete='off' >
 <div class="boxName">City</div>
-<input type="text" name="customerCity"  value="${param.c}">
+<input type="text" name="customerCity"  value="${param.c}" autocomplete='off' >
 <div class="boxName">State & Code</div>	
-<input type="text" name="customerStatecode"  value="${param.s}">
+<input type="text" name="customerStatecode"  value="${param.s}" autocomplete='off' >
 <div class="boxName">Contact Number</div>
-<input type="number" name="customerMobileNo"  value="${param.m}">
+<input type="number" name="customerMobileNo"  value="${param.m}" autocomplete='off' >
 <div class="boxName">Email</div>
 <input type="email" name="customerEmail" value="${param.e}"><br>
 

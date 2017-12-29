@@ -88,7 +88,9 @@ a{
 	color:inherit;
 	cursor: pointer;
 }
-
+h1{
+	color: #5E5E5E;
+}
 
 .header{
 	margin:auto;

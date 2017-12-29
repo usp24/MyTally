@@ -40,7 +40,7 @@ $(document).ready(function(){
 		            c3.innerHTML = list[i].salesInvoiceDate;
 		            c4.innerHTML = list[i].extra;
 		            c5.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/print?ch=sales&printInvoiceNo="+list[i].salesInvoiceNo+"'><button  class='fa fa-eye' aria-hidden='true'  ></button>"; 
-		            c6.innerHTML = "<a href='salesedit.jsp?ivn="+list[i].saleInvoiceNo+"'><i  class='fa fa-pencil' aria-hidden='true'  ></i></a>";
+		            c6.innerHTML = "<a href='salesedit.jsp?ivn="+list[i].salesInvoiceNo+"'><i  class='fa fa-pencil' aria-hidden='true'  ></i></a>";
 		            c7.innerHTML = "<form method='post' action='<%=request.getContextPath()%>/sales?ch=delete&n="+list[i].salesInvoiceNo+"'><button class='fa fa-times' aria-hidden='true' onclick='return dz()' ></button></form>";
 				}
 			}

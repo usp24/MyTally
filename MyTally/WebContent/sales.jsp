@@ -160,16 +160,17 @@ a{
 
 
 #link{
+	border:none;
 	margin:auto;
-	height:30px;
+	height:55px;
 	background: #00aba9;
 	color: white;
 	padding:10px;
-	font-size: 25px;
+	font-size: 23px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	margin-top: 50px;
-	width: 210px;
+	width: 270px;
 }
 #link:HOVER{
 	box-shadow: 1px 2px 9px 0px #5E5E5E;
@@ -270,7 +271,10 @@ a{
 	</ul>
 </div>
 
-<div id="link" ><a href="salesitem.jsp" >New Sales Bill</a></div>
+<form action="<%=request.getContextPath()%>/sales" method="post">
+	<input type="submit" id="link" value="NEW SALES BILL" >
+	<input type="hidden" value="go" name="ch" >
+</form>
 
 <table id="tb" style="display:none;">
 	<tr id="thead">

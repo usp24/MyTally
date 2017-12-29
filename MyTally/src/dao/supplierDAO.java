@@ -213,6 +213,7 @@ public class supplierDAO {
 			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 			st = con.createStatement();
 			Statement st2 = con.createStatement();
+			System.out.println(s.getSupplierName());
 			ResultSet rs = st.executeQuery("select id from purchasebill where supplierName='"+s.getSupplierName()+"'");
 			if(rs.next())
 				return false;

@@ -355,6 +355,13 @@ input[type=text],input[type=number],input[type=email]{
      word-break: break-all;
      white-space: normal;
 }
+input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
 
 #n{
 	text-transform: uppercase;
@@ -387,21 +394,21 @@ input[type=text],input[type=number],input[type=email]{
 
 <form method="post" action="<%=request.getContextPath()%>/customer" onsubmit="return fn()" >
 <div class="boxName">Name*</div>
-<input type="text" name="customerName" id="n">
+<input type="text" name="customerName" id="n" autocomplete='off' >
 <div class="boxName">GST Number*</div>
-<input type="text" name="customerGSTNo" id="g" >	 
+<input type="text" name="customerGSTNo" id="g"  autocomplete='off' >	 
 <div class="boxName">Address-1</div>	 
-<input type="text" name="customerAddress1">
+<input type="text" name="customerAddress1" autocomplete='off' >
 <div class="boxName">Address-2</div>	 
-<input type="text" name="customerAddress2">	 
+<input type="text" name="customerAddress2" autocomplete='off' >	 
 <div class="boxName">City</div>
-<input type="text" name="customerCity">
+<input type="text" name="customerCity" autocomplete='off' >
 <div class="boxName">State & Code</div>	 
-<input type="text" name="customerStatecode" value="Gujarat, Code : 24" >	 
+<input type="text" name="customerStatecode" value="Gujarat, Code : 24" autocomplete='off'  >	 
 <div class="boxName">Contact Number</div>
-<input type="number" name="customerMobileNo">	 
+<input type="number" name="customerMobileNo" autocomplete='off' >	 
 <div class="boxName">Email</div>
-<input type="email" name="customerEmail"><br>	 
+<input type="email" name="customerEmail" autocomplete='off' ><br>	 
 <input type="hidden" name="ch" value="newCustomer" >
 <input type="submit" value="Save" >
 </form>

@@ -181,7 +181,7 @@ function fb(){
 	var c12 = r.insertCell(11);
 	
 	c1.innerHTML = cnt;
-	c2.innerHTML = "<input type='text' list='dl_item' name='ItemName"+cnt+"' id='item"+cnt+"' onblur='fn3("+cnt+")'   autocomplete='off'>";
+	c2.innerHTML = "<input type='text' list='dl_item' name='ItemName"+cnt+"' id='item"+cnt+"' onblur='fn3("+cnt+")' class='name' autocomplete='off'>";
 	c3.innerHTML = "<input type='text' name='ItemDescription"+cnt+"' id='disc"+cnt+"'  autocomplete='off'>";
 	c4.innerHTML = "<input type='number' name='salesItemQty"+cnt+"' id='q"+cnt+"' onkeyup='fn("+cnt+")' onblur='fn2("+cnt+")'  autocomplete='off'>";
 	c5.innerHTML = "<input type='text' name='ItemSrNo"+cnt+"1' list='dl_srno' id='srno"+cnt+"1'  autocomplete='off'><div id='srdiv"+cnt+"' style='display:none;'>";
@@ -291,13 +291,6 @@ function sub(){
 		return false;
 }	
 
-window.onload = function() {
-    if(!window.location.hash) {
-        window.location = window.location + '#loaded';
-        for(var i=0;i<3;i++)
-        	window.location.reload();
-    }
-}
 $(window).scroll(function() {
     if ($(this).scrollTop() > 75) {
          $(".menubar").addClass('fix');
@@ -416,6 +409,7 @@ option{
 	float:left;
 	clear:left;
 	margin-left:50px;
+	posotion:absolute;
 }
 #form2{
 	margin:auto;
@@ -618,7 +612,7 @@ text-transform: uppercase;
 <form action="<%=request.getContextPath()%>/sales" method="post" onsubmit="return sub()">
 <div id="form1" >
 	<div class="boxName" >Sales Invoice Date </div><input type="date" name="salesInvoiceDate" id="date" autocomplete="off" >
-	<div class="boxName" >Sales Invoice Number </div><input type="number" name="salesInvoiceNumber" value="${sessionScope.max}" id="iv" autocomplete="off" >
+	<div class="boxName" >Sales Invoice Number </div><input type="number" name="salesInvoiceNumber" value="${param.max}" id="iv" autocomplete="off" >
 	<div class="boxName" >Customer's Name </div><input type="text" name="customerName" list="dl" id="name" autocomplete="off" >
 	<div class="boxName" >Customer's GSTNo. </div><input type="text" name="customerGSTNo" id="gst" autocomplete="off">
 </div>

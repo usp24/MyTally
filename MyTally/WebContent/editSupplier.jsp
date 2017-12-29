@@ -203,6 +203,13 @@ input[type=text],input[type=number],input[type=email]{
 	text-align: right;
     padding-right: 448px;
 }
+			input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button {
+			    -webkit-appearance: none;
+			    margin: 0;
+			}
+			input[type="number"] {
+			    -moz-appearance: textfield;
+			}
 #n{
 	text-transform: uppercase;
 }
@@ -233,21 +240,21 @@ input[type=text],input[type=number],input[type=email]{
 <h1 style="padding-bottom:20px;">Update Supplier's Details</h1>
 <form method="post" action="<%=request.getContextPath()%>/supplier" onsubmit="return fn()" >
 <div class="boxName">Name*</div>
-<input type="text" name="supplierName" id="n" value="${param.name}">
+<input type="text" name="supplierName" id="n" value="${param.name}" autocomplete='off' >
 <div class="boxName">GST Number*</div>
-<input type="text" name="supplierGSTNo" id="g" value="${param.g}" >
+<input type="text" name="supplierGSTNo" id="g" value="${param.g}"  autocomplete='off' >
 <div class="boxName">Address-1</div>	 
-<input type="text" name="supplierAddress1" value="${param.a1}">
+<input type="text" name="supplierAddress1" value="${param.a1}" autocomplete='off' >
 <div class="boxName">Address-2</div>		
-<input type="text" name="supplierAddress2"  value="${param.a2}">
+<input type="text" name="supplierAddress2"  value="${param.a2}" autocomplete='off' >
 <div class="boxName">City</div>
-<input type="text" name="supplierCity"  value="${param.c}">
+<input type="text" name="supplierCity"  value="${param.c}" autocomplete='off' >
 <div class="boxName">State & Code</div>	 
-<input type="text" name="supplierStatecode"  value="${param.s}">
+<input type="text" name="supplierStatecode"  value="${param.s}" autocomplete='off' >
 <div class="boxName">Contact Number</div>
-<input type="number" name="supplierMobileNo"  value="${param.m}">	
+<input type="number" name="supplierMobileNo"  value="${param.m}" autocomplete='off' >	
 <div class="boxName">Email</div>
-<input type="email" name="supplierEmail" value="${param.e}"><br>
+<input type="email" name="supplierEmail" value="${param.e}" autocomplete='off' ><br>
 
 <input type="hidden" name="on" value="${param.n}">
 <input type="hidden" name="ch" value="editSupplier" >

@@ -35,6 +35,14 @@ public class sales extends HttpServlet {
 		switch(ch)
 		{	
 			
+			case "go" : 
+							try{
+								go(request,response);
+							}catch (Exception e) {
+								e.printStackTrace();
+							}break;
+
+		
 			case "salesBillBefore" : 
 										try {
 												salesBillBefore(request, response);
@@ -112,14 +120,16 @@ public class sales extends HttpServlet {
 	}
 
 	
+	private void go(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		
+		salesDAO salesDAO = new salesDAO();
+		response.sendRedirect("salesitem.jsp?max="+salesDAO.maxInvoiceNo());
+	}
+
 	void salesBillBefore(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException {
 		
 		salesDAO salesDAO = new salesDAO();
 		customerDAO customerDAO = new customerDAO();
-		
-		int max = salesDAO.maxInvoiceNo();
-		HttpSession session = request.getSession();
-		session.setAttribute("max",max);
 		
 		Gson gson = new Gson();
 		PrintWriter out = response.getWriter();

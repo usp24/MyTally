@@ -283,6 +283,14 @@ input[type=text],input[type=number],input[type=email]{
      white-space: normal;
 }
 
+input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 #n{
 	text-transform: uppercase;
 }
@@ -313,17 +321,17 @@ input[type=text],input[type=number],input[type=email]{
 
 <form  method="post" action="<%=request.getContextPath()%>/item" onsubmit="return fn()" >
 <div class="boxName" >Name*</div>
-<input type="text" name="itemName" id="n" value="${param.name}" >
+<input type="text" name="itemName" id="n" value="${param.name}"  autocomplete='off' >
 <div class="boxName" >Description</div>
-<input type="text" name="itemDescription" value="${param.d}">
+<input type="text" name="itemDescription" value="${param.d}" autocomplete='off' >
 <div class="boxName" >HSN</div>
-<input type="text" name="itemHSN"  value="${param.h}" ><br>
+<input type="text" name="itemHSN"  value="${param.h}"  autocomplete='off' >
 <div class="boxName" >GST</div>
-<input type="number" name="itemGST" id="g"  value="${param.g}" ><br>
+<input type="number" name="itemGST" id="g"  value="${param.g}"  autocomplete='off' >
 <div class="boxName" >Purchase Price</div>
-<input type="number" name="itemPurchasePrice" step='any'  value="${param.p}" ><br>
+<input type="number" name="itemPurchasePrice" step='any'  value="${param.p}"  autocomplete='off' >
 <div class="boxName" >Sale Price</div>
-<input type="number" name="itemSalesPrice" step='any'  value="${param.s}" ><br>
+<input type="number" name="itemSalesPrice" step='any'  value="${param.s}"  autocomplete='off' ><br>
 
 <input type="submit" value="UPDATE ITEM">
 <input type="hidden" name="ch" value="editItem">

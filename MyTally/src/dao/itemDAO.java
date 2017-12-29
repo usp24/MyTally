@@ -52,7 +52,7 @@ public class itemDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 			st = con.createStatement();
-			ResultSet rs = st.executeQuery("select name,srno,description,GST,HSN,purchasePrice from item");
+			ResultSet rs = st.executeQuery("select name,srno,description,GST,HSN,purchasePrice from item ORDER BY NAME");
 			while(rs.next()){
 				itemVO itemVO = new itemVO();
 				itemVO.setItemName(rs.getString("name"));
@@ -80,7 +80,7 @@ public class itemDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 			st = con.createStatement();
-			ResultSet rs = st.executeQuery("select name,srno,description,GST,HSN,salesPrice from item");
+			ResultSet rs = st.executeQuery("select name,srno,description,GST,HSN,salesPrice from item ORDER BY NAME");
 			while(rs.next()){
 				itemVO itemVO = new itemVO();
 				itemVO.setItemName(rs.getString("name"));
@@ -158,6 +158,7 @@ public class itemDAO {
 			boolean f = false;
 			while(rs.next()){
 				if(itemVO.getItemName().equals(rs.getString("name"))){
+					
 					if(itemVO.getItemSrNo()!=null){
 						String ari[] = rs.getString("srno").split("\\*");
 					    String arp[] = itemVO.getItemSrNo().split("\\*");
@@ -183,7 +184,7 @@ public class itemDAO {
 				}
 			}
 			if(f==false){
-				st.executeUpdate("insert into item(name,srno,qty,description,HSN,GST,salesPrice) values('"+itemVO.getItemName()+"','"+itemVO.getItemSrNo()+"','"+itemVO.getItemQty()+"','"+itemVO.getItemDescription()+"','"+itemVO.getItemHSN()+"','"+itemVO.getItemGST()+"','"+itemVO.getItemSalesPrice()+"') ");
+				st.executeUpdate("insert into item(name,qty,description,HSN,GST,salesPrice) values('"+itemVO.getItemName()+"','"+(0 - itemVO.getItemQty())+"','"+itemVO.getItemDescription()+"','"+itemVO.getItemHSN()+"','"+itemVO.getItemGST()+"','"+itemVO.getItemSalesPrice()+"') ");
 			}
 		}catch (Exception e) {
 			System.out.println("itemDAO :: updateSalesItem :: "+e);
@@ -497,12 +498,13 @@ public class itemDAO {
 			st = con.createStatement();
 			Statement st2 = con.createStatement();
 			Statement st3 = con.createStatement();
+			System.out.println(itemVO.getItemName());
 			ResultSet rs = st.executeQuery("select id from salesitem where name='"+itemVO.getItemName()+"'");
-			ResultSet rs2 = st.executeQuery("select id from purchaseitem where name='"+itemVO.getItemName()+"'");
+			ResultSet rs2 = st2.executeQuery("select id from purchaseitem where name='"+itemVO.getItemName()+"'");
 			if(rs.next() && rs2.next())
 				return false;
 			else{
-				st2.executeUpdate("delete from item where name='"+itemVO.getItemName()+"'");
+				st3.executeUpdate("delete from item where name='"+itemVO.getItemName()+"'");
 				return true;
 			}
 		}

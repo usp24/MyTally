@@ -111,7 +111,7 @@ public List<salesVO> getSalesBills() throws SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager.getConnection("jdbc:mysql://localhost/mytally","root","root");
 		st = con.createStatement();
-		ResultSet rs = st.executeQuery("SELECT invoiceNo,customerName,DATE_FORMAT(`invoiceDate`, '%d/%m/%Y') AS invoiceDate,totalRoundOffAmount FROM salesbill ORDER BY YEAR(invoiceDate), MONTH(invoiceDate), DAY(invoiceDate)");
+		ResultSet rs = st.executeQuery("SELECT invoiceNo,customerName,DATE_FORMAT(`invoiceDate`, '%d/%m/%Y') AS invoiceDate,totalRoundOffAmount FROM salesbill ORDER BY YEAR(invoiceDate) DESC, MONTH(invoiceDate) DESC, DAY(invoiceDate) desc");
 		while(rs.next()){
 			salesVO p = new salesVO();
 			p.setSalesInvoiceNo(rs.getInt("invoiceNo"));
