@@ -3,7 +3,7 @@ A simple web based software to maintain sale-purchase records and much more for 
 Built using JAVA TECHNOLOGIES (JSP, SERVLET) with MySql Database Services.
 it also follows MVC Architacture.
 
-## How To Clone ?
+## How To Install ?
 
 ### Step-1 (Setup Database)
 1> In your MYSQL server `make database named 'mytally'`.
