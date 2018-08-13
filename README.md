@@ -6,8 +6,9 @@ it also follows MVC Architacture.
 ## How To Install ?
 
 ### Step-1 (Setup Database)
-1> In your MYSQL server `make database named 'mytally'`.<br>
-2> Use `tables.sql` (SQLDUMP file) in order to create tables, which is located at ` UAccounting\Install\tables.sql `.
+1> Install MYSQL server-5.x and run on port `3306` with username `root` and password `root`.
+2> In your MYSQL server `make database named 'mytally'`.<br>
+3> Use `tables.sql` (SQLDUMP file) in order to create tables, which is located at ` UAccounting\Install\tables.sql `.
 
 
 ### Step-2 (Setup Tomcat Server)
